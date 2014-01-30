@@ -6,14 +6,14 @@ more information see: http://pdr.bbaw.de/ae
 
 Installation
 ------------
-Install Eclipse RCP/RAP distribution
-clone git
+1. Install Eclipse RCP/RAP distribution
+2. clone git
 
-go to plugin org.bbaw.pdr.ae.standalone, open product configuration file
+3. go to plugin org.bbaw.pdr.ae.standalone, open product configuration file
 run product
 
 OR
 
-create run configuration and add required plugins and features.
+4. create run configuration and add required plugins and features.
 
 Archiv-Editor will automatically create 2 folders in the parent folder of your workspace, one AEConfig with a default configuration file, and baseXHOME with database files for the local baseX-database.
