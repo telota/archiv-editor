@@ -2,7 +2,7 @@ Archiv-editor
 =============
 The archive-editor is an application-program; it supports the scientific work with biographical data. With a central repository several scientist can work on the same data. A local database holds the information until it will be synchronized with the central repository. 
 
-more information see pdr.bbaw.de/ae
+more information see: http://pdr.bbaw.de/ae
 
 Installation
 ------------
