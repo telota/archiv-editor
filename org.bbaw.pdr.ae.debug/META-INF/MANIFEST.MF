@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Debug
+Bundle-SymbolicName: org.bbaw.pdr.ae.debug;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.debug.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.bbaw.pdr.ae.model;bundle-version="1.0.0",
+ org.bbaw.pdr.ae.metamodel;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.bbaw.pdr.ae.control.facade,
+ org.bbaw.pdr.ae.view.control,
+ org.bbaw.pdr.ae.view.control.orderer,
+ org.bbaw.pdr.ae.view.main.views

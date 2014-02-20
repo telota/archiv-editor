@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+            defaultHandler="org.bbaw.pdr.ae.view.concurrences.commands.OpenConcurrenceViewHandler"
+            id="org.bbaw.pdr.ae.view.concurrences.commands.OpenConcurrenceView"
+            name="OpenConcurrenceView">
+      </command>
+      
+      <command
+            defaultHandler="org.bbaw.pdr.ae.view.concurrences.commands.OpenConcurrencePerspectiveHandler"
+            id="org.bbaw.pdr.ae.view.concurrences.commands.OpenConcurrencePerspective"
+            name="OpenConcurrencePerspective">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.bbaw.pdr.ae.view.concurrences.view.ConcurrencePerspective"
+            icon="platform:/plugin/org.bbaw.pdr.ae.common/src/org/bbaw/pdr/ae/common/icons/concurrence.png"
+            id="org.bbaw.pdr.ae.view.concurrences.view.ConcurrencePerspective"
+            name="ConcurrencePerspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.bbaw.pdr.ae.view.concurrences.view.ConcurrenceHeadView"
+            icon="platform:/plugin/org.bbaw.pdr.ae.common/src/org/bbaw/pdr/ae/common/icons/concurrence.png"
+            id="org.bbaw.pdr.ae.view.concurrences.view.ConcurrenceHeadView"
+            name="ConcurrenceHeadView"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

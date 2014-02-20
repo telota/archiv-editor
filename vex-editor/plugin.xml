@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension-point id="doctypes" name="%extensionPoint.doctypes" schema="schema/doctype.exsd"/>
+   <extension-point id="styles" name="%extensionPoint.styles" schema="schema/style.exsd"/>
+
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            name="%VexEditorContext.name"
+            id="net.sf.vex.editor.VexEditorContext"
+            parentId="org.eclipse.ui.textEditorScope">
+      </context>
+   </extension>
+   <extension
+         id="pluginNature"
+         name="%PluginProjectNature.name"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="net.sf.vex.editor.config.PluginProjectNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         id="pluginBuilder"
+         name="%PluginProjectBuilder.name"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="net.sf.vex.editor.config.PluginProjectBuilder">
+         </run>
+      </builder>
+   </extension>
+   
+
+</plugin>

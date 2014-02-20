@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            class="org.bbaw.pdr.ae.view.network.views.RelationTableView"
+            icon="platform:/plugin/org.bbaw.pdr.ae.common/src/org/bbaw/pdr/ae/common/icons/relation-table.png"
+            id="org.bbaw.pdr.ae.view.relationnetwork.views.RelationTableView"
+            name="%view.name"
+            restorable="true">
+      </view>
+      <view
+            class="org.bbaw.pdr.ae.view.network.views.NetworkBrowserViewPart"
+            id="org.bbaw.pdr.ae.view.network.views.NetworkBrowserViewPart"
+            name="%view.name.0"
+            restorable="true">
+      </view>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.bbaw.pdr.ae.view.main.viewMenu">
+         <command
+               commandId="org.bbaw.pdr.ae.view.network.commands.OpenRelationTableView"
+               icon="platform:/plugin/org.bbaw.pdr.ae.common/src/org/bbaw/pdr/ae/common/icons/relation-table.png"
+               label="%command.label"
+               style="push">
+         </command>
+         <command
+               commandId="org.bbaw.pdr.ae.view.network.OpenBrowserView"
+               label="%command.label.0"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.bbaw.pdr.ae.view.network.commands.OpenRelationTableViewHandler"
+            id="org.bbaw.pdr.ae.view.network.commands.OpenRelationTableView"
+            name="%command.name">
+      </command>
+      <command
+            defaultHandler="org.bbaw.pdr.ae.view.network.commands.OpenBrowserViewHandler"
+            id="org.bbaw.pdr.ae.view.network.OpenBrowserView"
+            name="%command.name.0">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.equinox.http.registry.resources">
+         <resource
+      alias="/files"
+      base-name="/web_files"/>
+   </extension>
+   <extension point="org.eclipse.equinox.http.registry.servlets">
+    <servlet
+      alias="/test"
+      class="org.bbaw.pdr.ae.view.network.test.MyServlet"/>
+  </extension>
+
+</plugin>

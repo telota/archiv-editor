@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://pdr.bbaw.de/namespaces/aodl/"
+    xmlns:aodl="http://pdr.bbaw.de/namespaces/aodl/">
+
+    <!-- TODO: Benutzerfreundliche Beschreibung und Anleitung erstellen -->
+    
+    <!-- ELEMENTS -->
+    
+    <xs:element name="aspect">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Das root-Element einer Aspektdatei. Enthält den gesamten Inhalt eines Aspektes. Die Verwendung des aspect-Elements ist erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The root Element of the Aspect File describes the Content as an Aspect and is required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="aodl:record" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="aodl:timeDim" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="aodl:spatialDim" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="aodl:relationDim" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="aodl:semanticDim" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="aodl:notification" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="aodl:validation" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="id" type="aodl:pattern.pdrid" use="required">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        Beinhaltet die im Repositorium verwendete Identifikationsnummer für den Aspekt. Die Verwendung des id-Attributes ist obligatorisch und muss dem weiter unten beschriebenem aodl:pattern.prid-Schema folgen. Um die Einhaltung des Schemas zu gewährleisten, können nur die letzten neun Nummer der ID vom Benutzer festgelegt werden. Liegt keine ID vor, so wird eine neue, noch nicht verwendete durch das Repositorium erzeugt. Ist erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="date">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-De">
+                Beinhaltet ein im notification-Element vertaggtes Datum. Der Datumstyp, genauer: die verwendete Attribute folgen dabei dem in der Attributgruppe attr.grp.date festgelegten Schema. Die Verwendung des date-Elements ist innerhalb des notification-Elemnts optional. 
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:choice>
+                <xs:element ref="aodl:lb" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+            <xs:attributeGroup ref="aodl:attr.grp.date" />
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="interpretation">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Kann eine kurze Anmerkung zur Interpretaion der Quelle(n) beinhalten, welche sich für die im Aspekt gemachten Angaben verantwortlich zeichnen. Die Verwendung des interpretation-Elements ist innerhalb eines validationStm-Elements optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:string"/>
+        </xs:simpleType>
+    </xs:element>
+    
+    <xs:element name="name">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet eine Wortgruppe im Text innerhalb des notification-Elements, welche mit Metadaten ausgezeichnet ist. Dabei wird der Wortgruppe ein Eigenname mittels eines Attributes zugeordnet, welches gemäß dem Schema attr.grp.name Teil einer hierarchisch geordnete Attributgruppe ist. Die Verwendung von name-Elementen ist optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:choice>
+                <xs:element ref="aodl:lb" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+            <xs:attributeGroup ref="aodl:attr.grp.name" />
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="notification">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet den Reintext an Informationen, welche in den zum Aspekt zugehörigen Quellen enthalten sind. Dabei können Wortgruppen mittels eines selbstdefinierten Vokabular von Eigenschaften vertaggt werden, um den Textinhalt zu strukturieren und zu normalisieren. Die Verwendung des notification-Elemnts ist erforderlich. 
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The notification element contains the raw text of the information given in the available aspect as it appeared in the source. It is possible to tag the text wit a selfdefined vocabulary of tags to normalize and reference chosen parts of the information. It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="aodl:date" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="aodl:name" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="aodl:persName" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="aodl:placeName" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="aodl:orgName" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="aodl:lb" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="orgName">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet eine Wortgruppe im Text innerhalb des notification-Elements, welche mit Metadaten ausgezeichnet ist. Dabei bezieht sich die Wortgruppe auf eine Körperschaft, welche mittels eines Attributes so präzise wie möglich einer Klasse zugeordnet wird. Dieses Attribut ist Teil einer gemäß dem Schema attr.grp.name hierarchisch geordneten Attributgruppe. Die Verwendung von orgName-Elementen ist optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:choice>
+                <xs:element ref="aodl:lb" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+            <xs:attributeGroup ref="aodl:attr.grp.name" />
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="persName">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet eine Wortgruppe im Text innerhalb des notification-Elements, welche mit Metadaten ausgezeichnet ist. Dabei bezieht sich die Wortgruppe auf den Namen einer Person, welcher mittels eines Attributes so präzise wie möglich einer Klasse zugeordnet wird. Dieses Attribut ist Teil einer gemäß dem Schema attr.grp.name hierarchisch geordneten Attributgruppe. Die Verwendung von orgName-Elementen ist optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:choice>
+                <xs:element ref="aodl:lb" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+            <xs:attributeGroup ref="aodl:attr.grp.name" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="place">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet eine für den Aspekt relevante Ortsangabe. Der Ortstyp wird mittels Attributen festgehalten. Innerhalb eines spatialStm-Elements ist die Verwendung eines oder mehrerer place-Elemente optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="type" type="xs:string" use="required">
+                        <!-- type gibt es mehrmals -->
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Gibt den Typ der im zugehörigen place-Element definierten Ortsangabe an. Die Auswahlmöglichkeiten ergeben sich dabei aus einem zuvor definierten Vokabular des im provider-Attribut gewählten Vorhabens. Innerhalb eines place-Elements ist Verwendung des type-Attributs erforderlich.
+                                <!-- Nicht ganz richtig, man kann keinen provider auswählen, warum?? -->
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="subtype" type="xs:string" use="optional">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Gibt eine Spezifizierung des im type-Attribut gesetzten Typs der im zugehörigen place-Element gesetzten Ortsangabe an. Die Auswahlmöglichkeiten ergeben sich dabei aus einem zuvor definierten Vokabular des bearbeitenden Vorhabens. Ist optional.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="key" type="xs:string" use="optional">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Was genau ist das Key-Attribut?
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="placeName">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet eine Wortgruppe im Text innerhalb des notification-Elements, welche mit Metadaten ausgezeichnet ist. Dabei bezieht sich die Wortgruppe auf einen Ort, welcher mittels eines Attributes so präzise wie möglich einer Klasse zugeordnet wird. Dieses Attribut ist Teil einer gemäß dem Schema attr.grp.name hierarchisch geordneten Attributgruppe. Die Verwendung von orgName-Elementen ist optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType mixed="true">
+            <xs:choice>
+                <xs:element ref="aodl:lb" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+            <xs:attributeGroup ref="aodl:attr.grp.name" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="record">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet Erstellungs- und Bearbeitungsdaten des beschriebenen Aspektes und die daran beteiligten Benutzer. Die dabei verwendeten Informationsträger, die revision-Elemente, werden automatisch erstellt. Das erste revision-Element beschreibt hierbei das Erstellungsdatum des Aspektes; alle weiteren die Bearbeitungszeitpunkte. Die Verwendung des record-Elements ist erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The recordInfo element contains elements describing the creation and revision of the available person document. It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="aodl:revision" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="reference">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Verweist auf eine Quelle oder Autorität, welche sich für Teile der im Aspekt gemachten Angaben verantwortlich zeichnet. Für jedes validationStm-Element ist zumindest ein reference-Element erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The reference element contains one reference to an authority or a source from which the information given in the available aspect was taken. It is optional.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="aodl:pattern.pdrid">
+                    <xs:attribute name="internal" type="xs:string" use="optional">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Beinhaltet nähere Informationen über den Zugang zum Quellenobjekt, z.B. eine Seitenzahl, Bandnummer oder Zugriffsdaten im Falle einer Website. Ist optional.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="quality" type="aodl:enum.quality" use="optional">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-De">
+                                Beschreibt die Sicherheit, mit der davon ausgegangen werden kann, dass die Information der im zugehörige reference-Element festgehaltenen Quelle der Wahrheit entsprechen. Wird ein reference-Element verwendet, so ist das quality-Attribut erforderlich. Ist erforderlich.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="relation">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet die Art der im relationStm-Element dokumentierten Beziehung zwischen Subjekt und Objekt (s. dazu auch relationStm). Innerhalb eines relationStm-Elements ist die Verwendung mindestens eines relation-Elements erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="object" type="aodl:pattern.pdrid" use="required">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Definiert in der im relationStm-Element gemäß dem Muster "Subjekt - Art der Bezeihung - Objekt" gesetzten Beziehung das Objekt. Dieses muss nach dem im pattern.prid-Typ festgehaltenen Muster eingetragen werden. Ist erforderlich.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="provider" type="xs:NCName" use="required">
+                        <!-- kommt mehrmals vor -->
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Beinhaltet den Namen des Vorhabens, aus dessen Vokabular die Art der im relation-Element festgehaltenen Beziehung stammt. Innerhalb eines relation-Elements ist die Verwendung des provider-Attributs erforderlich.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="context" type="xs:string" use="optional">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Gibt den Typ der im zugehörigen relation-Element definierten Beziehung an. Die Auswahlmöglichkeiten ergeben sich dabei aus einem zuvor definierten Vokabular des im provider-Attribut gewählten Vorhabens. Ist optional.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="class" type="xs:string" use="optional">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Gibt eine Spezifizierung des im context-Attribut gesetzten Typs der im zugehörigen relation-Element gesetzten Beziehungsangabe an. Die Auswahlmöglichkeiten ergeben sich dabei aus einem zuvor definierten Vokabular des im provider-Attribut gewählten Vorhabens. Ist optional. 
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="relationDim">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet relationStm-Elemente, welche auf Basis des Aspektinhalts definierte Beziehungen zwischen Personenobjekten und/oder Aspekten dokumentieren. Die Verwendung des relationDem-Elements ist erforderlich. 
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The relationshipDim element contains elements which connects the aspect to Person objects (podl) or to other aspect objects (aodl) of which the information is related to . It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="aodl:relationStm" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="relationStm">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Dokumentiert eine oder mehrere Beziehungen zwischen Personenobjekten und/oder Aspekten. Das dabei verwendete Muster folgt dem "Subjekt - Art der Beziehung - Objekt"-Schema, wobei das Subjekt als Attribut im relationStm-Element und der Rest im untergeorneten relation-Element beinhaltet sind. Die Verwendung von relationStm-Elementen ist optional.
+            </xs:documentation>
+            <xs:documentation>
+                The relation Element gives one definition of a relation to another object with which the aspect has to do with. It may occure more than one time.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="aodl:relation" />
+            </xs:sequence>
+            <xs:attribute name="subject" type="aodl:pattern.pdrid" use="required">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        Definiert in der im relationStm-Element gemäß dem Muster "Subjekt - Art der Bezeihung - Objekt" gesetzten Beziehung das Subjekt. Dieses muss nach dem im pattern.prid-Typ festgehaltenen Muster eingetragen werden. Ist erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="revision">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet das Erstellungs- oder ein Bearbeitungsdatum des Aspektes. Die daran beteligten Benutzer werden dabei dokumentiert. Das revision-Element wird automatisch erzeugt, wobei es mindestens einmal - zur Dokumentation des Erstellungszeitpunktes - verwendet werden muss. Alle darauf auftretenen revision-Elemente dokumentieren Bearbeitungszeitpunkte des Personenobjektes in der Datei.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The revisionStm element contains elements describing when and by which authority the person file was modified. It may occure more than one time
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="ref" type="xs:unsignedShort" use="required">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        Zählt die Bearbeitungszeitpunkte des beschriebenen Aspektes durch die Benutzer. Dasjenige ref-Attribut mit dem Wert 0 dokumentiert dabei die Erstellung des Personenobjektes in der Datei, alle weiteren in aufsteigender Reihenfolge die Bearbeitungszeitpunkte. Die Verwendung des ref-Attributs ist erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="timestamp" type="xs:dateTime" use="required">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        Beinhaltet das Datum samt exakter Zeitangabe eines Bearbeitungsschrittes des Aspektes gemäß dem xs:dateTime-Format. Die Verwendung des timestamp-Attributs ist erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="authority" use="required">
+                <!-- kommt mehrmals vor -->
+                <xs:annotation>
+                    <xs:documentation>
+                        Beinhaltet die gemäß Schema pattern.prid gesetzte interne im Repositoirm verwendete ID des Bearbeiters oder der Institution, welche sich für die im zugehörigen revision-Element dokumentierte Bearbeitung des Aspekts verantowrtlich zeichnet. Innerhalb eines revision-Elements ist das authority-Attribut erforderlich.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="aodl:pattern.pdrid" />
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="semanticDim">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet die semanticStm-Elemente, welche semantische Kategorisierungen des Aspektes enthalten. Das semanticDim-Element ist erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The semanticDim element contains elements describing the meaning of the information given in the available aspect in form of tags . It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="aodl:semanticStm" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="semanticStm">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet den Namen einer Kategorie, in welche sich der Aspekt semantisch einordnen lässt. Über das zugehörige provider-Attribut ist das Vorhaben bestimmt, aus dessem Vokabular der Kategorisierungsbegriff kommt. Die Verwendung von mindestens einem semanticStm-Element ist dabei innerhalb des semanticDim-Elements erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The label Element contains one tag which gives a categorization of the information given by the available aspect . It is optional.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="provider" type="xs:NCName" use="required">
+                        <!-- taucht mehrmals auf -->
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Beinhaltet den Namen des Vorhabens, aus dessen Vokabular die im semanticStm-Element festgehaltene semantische Kategorie des Aspektes stammt. Innerhalb eines semanticStm-Elements ist die Verwendung des provider-Attributs erforderlich.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="spatialDim">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet alle für den Aspekt relevanten Ortsangaben. Die Verwendung des spatialDim-Elements ist erfolderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The spatialDim element contains elements describing details about the spatial dimension of the information given in the aspect . It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="aodl:spatialStm" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="spatialStm">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet eine für den Aspekt relevanten Ortsangabe. Für innerhalb des Textes im notification-Element ausgewiesene Orte wird dabei automatisch ein entsprechendes spatialStmElement erzeugt. Der Datumstyp und die Genauigkeit der gemachten Angabe wird mittels Attributen festgehalten. Gibt es zu dem Aspekt keine gemachten Ortsangaben, so ist zumindest ein leeres spatialStm-Element vom Typ undefined erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The spatialStm Element gives one spatial definition describing the information given in the available aspect. It may occure more than one time, for example when expressions with differant scales are used like city and country.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="aodl:place" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="type" type="aodl:enum.spatialstm.type" use="required">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        Gibt den Typ der Definiertheit gemäß dem Schema enum.spatialstm.type im zugehörigen spatialStm-Element zu einer Ortsangabe an. Innerhalb eines sptialStm-Elements ist die Verwendung des type-Attributs erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="time">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet einen für den Aspekt relevanten Zeitpunkt oder -raum. Der Datumstyp und die Genauigkeit der gemachten Angabe wird mittels Attributen festgehalten. Innerhalb eines timeStm-Elements ist die Verwendung eines oder mehrerer time-Elemente optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="aodl:pattern.iso8601">
+                    <xs:attribute name="accuracy" type="aodl:enum.time.accuracy" use="required">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Gibt gemäß enum.time.accuracy die Genauigkeit der im zugehörigen time-Element gemachten Datumsangabe an. Ist erforderlich.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="type" type="aodl:enum.time.type" use="required">
+                        <!-- kommt mehrmals vor -->
+                        <xs:annotation>
+                            <xs:documentation xml:lang="de-DE">
+                                Gibt den gemäß dem Schema enum.time.type gesetzten Typ der im zugehörigen time-Element definierten Datumsangabe an. Innerhalb eines time-Elements ist die Verwendung des type-Attributs optional.
+                            </xs:documentation>
+                            <xs:documentation xml:lang="en">
+                                missing
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:attribute>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="timeDim">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet alle für den Aspekt relevanten Datumsangaben. Die Verwendung des timeDim-Elements ist erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The timeDim element contains elements describing details about the temporal dimension of the information given in the aspect . It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="aodl:timeStm" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="timeStm">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Kann ein time-Element enthalten, welches einen für den Aspekt relevanten Zeitpunkt oder -raum dokumentiert. Für innerhalb des Textes im notification-Element ausgewiesene Datumsangaben wird dabei automatisch ein entsprechendes timeStm-Element erzeugt. Gibt es zu dem Aspekt keine gemachten Datumsangaben, so ist zumindest ein leeres timeStm-Element vom Typ undefined erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The timeStm Element gives one temporal definition describing the information given in the available aspect. It may occure more than one time, for example when two differant calender systems are used.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="aodl:time" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="type" type="aodl:enum.timestm.type" use="required">
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        <!-- kommt mehrmals vor -->
+                        Gibt den gemäß dem Schema enum.timestm.type gesetzten Grad der Definiertheit der im zugehörigen time-Element gemachten Datumsangabe an. Innerhalb eines timeStm-Elements ist die Verwendung des type-Attributs erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="validation">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet alle Verweise auf die Quellen, welche die die zum Aspekt zugehörigen Informationen beinhalten. Die Verwendung des validation-Elements ist erforderlich. 
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The validationStm element contains elements describing sources, authorities and references on which the aspect was created. It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                <xs:element ref="aodl:validationStm" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="validationStm">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet einen Verweis auf eine Quellen, welche sich für Teile der Informationen des Aspektes verantowrtlich zeichnen. Die Verwendung des validationStm-Elements ist erforderlich.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                The validationStm element contains elements describing sources, authorities and references on which the aspect was created. It ist required
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="aodl:reference"  minOccurs="1" maxOccurs="unbounded" />
+                <xs:element ref="aodl:interpretation"  minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="authority" type="aodl:pattern.pdrid" use="required">
+                <!-- kommt mehrmals vor -->
+                <xs:annotation>
+                    <xs:documentation xml:lang="de-DE">
+                        Beinhaltet die gemäß Schema pattern.prid gesetzte interne im Repositoirm verwendete ID des Bearbeiters oder der Institution, welche sich für den Verweis auf die im zugehörigen validationStm-Element festgehaltene Quelle zu Angaben des Aspekts verantowrtlich zeichnet. Innerhalb eines validationStm-Elements ist das authority-Attribut erforderlich.
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">
+                        missing
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="lb">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-De">
+                Steht für das Auftauchen eines line break in dem Text, welcher sich im notification-Element befindet. Die Verwendung von lb-Elementen ist optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                Line break. Placeholder: Further thinking about encoding of text structure within notification element is needed!
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType />
+    </xs:element>
+    
+    <!-- TYPES -->
+
+    <xs:simpleType name="enum.quality">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Definiert die im quality-Attribut von identifer-Elementen zu verwendenen Abstufungen der Zuverlässigkeit, mit welcher davon ausgegangen werden kann, dass die Informationen der zugehörigen Quelle der Wahrheit entsprechen.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="certain" />
+            <xs:enumeration value="probable" />
+            <xs:enumeration value="unsure" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="enum.reference.quality">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                wird gar nicht verwendet....
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="certain" />
+            <xs:enumeration value="probable" />
+            <xs:enumeration value="unsure" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="enum.spatialstm.type">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Definiert die im type-Attribut von spatialStm-Elementen zu verwendenen Abstufungen, welche festlegen, ob die zugehörige Ortsangabe einen spezifischen Ort definiert oder nicht.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="placeless" />
+            <xs:enumeration value="undefined" />
+            <xs:enumeration value="defined" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enum.time.accuracy">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Definiert die im accuracy-Attribut von time-Elementen zu verwendenen Abstufungen, welche die Genauigkeit der gemachten Datumsangabe definieren.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="unknown" /> <!--Das ist doch redundant, wenn es im timeDim schon den Wert undefined gibt--> 
+            <xs:enumeration value="exact" />
+            <xs:enumeration value="approximate" />
+            <xs:enumeration value="imprecise" />
+            <xs:enumeration value="speculative" />
+            <xs:enumeration value="exclude" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enum.time.type">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Definiert die im type-Attribut von time-Elementen zu verwendenen Abstufungen, welche den Typ der zugehörigen Datumsangabe definieren.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="when" />
+            <xs:enumeration value="from" />
+            <xs:enumeration value="to" />
+            <xs:enumeration value="notBefore" />
+            <xs:enumeration value="notAfter" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="enum.timestm.type">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Definiert die im type-Attribut von timeStm-Elementen zu verwendenen Abstufungen, welche die Defniertheit der zugehörigen Datumsangabe festlegen. 
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="timeless" />
+            <xs:enumeration value="defined" /> <!-- Niels:ist redundant mit periodOfTime, da an dieser Stelle jede Zeitperiode ein Lebensabschnitt ist,event wäre aber noch ein notwendiger Wert-->
+            <xs:enumeration value="undefined" />
+            <xs:enumeration value="lifelong" />
+            <xs:enumeration value="periodOfLife" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="pattern.iso8601">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Setzt die Einhaltung des Schemas der Datumsangaben gemäß ISO 8601 Standard durch.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                Ensures the compliance of specified dates to the ISO 8601 standard.
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO: Regulärer Ausdruck, der ISO 8601 besser eingrenzt. -->
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9T:\-]+" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="pattern.pdrid">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Setzt die Einhaltung des Schemas der internen IDs durch. Der erste Teil der ID dokumentier hierbei den Typ des Objektes, der zweite die Instanznummer des Repositoriums, der dritte die Nummer des Projektes oder Vorhabens und der vierte Teil die ID des Objektes.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                Enforces the pattern of internal IDs. The first part stores the type, second the instance ID, third the group ID and the forth part contains the object's ID.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="pdr[APRU]o\.\d{3}\.\d{3}\.\d{9}" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- ATTRIBUTE GROUPS -->
+    <xs:attributeGroup name="attr.grp.name">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet alle zulässigen Attribute, mit Hilfe derer auszuzeichnende Wortgruppen in name-, orgName-, persName- oder placeName-Element strukturiert werden können. Beginnend mit dem obligatorischen type-Attribut können mit den optionalen, hierarch absteigend geordneten subytpe- und role-Attributen die Strukturierung klassifiziert werden. Die Attribut-Werte können dabei aus einem je nach Vorhaben abweichend definierten Vokabular gewählt werden. Zusätzlich kann optional ein key-Attribut gesetzt werden, welches auf ein Personen-, Quellen- oder anderes Aspektobjekt im Repositorium referenziert
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="type" type="xs:string" use="required" />
+        <xs:attribute name="subtype" type="xs:string" use="optional" />
+        <xs:attribute name="role" type="xs:string" use="optional" />
+        <xs:attribute name="key" type="xs:string" use="optional" />
+        <xs:attribute name="ana" type="aodl:pattern.pdrid" use="optional" />
+    </xs:attributeGroup>
+    
+    <xs:attributeGroup name="attr.grp.date">
+        <xs:annotation>
+            <xs:documentation xml:lang="de-DE">
+                Beinhaltet alle zulässigen Attribute, mit Hilfe deren der Datumstyp in date-Elementen spezifiziert werden kann. Die gemachten Datumsangaben, d.h. die Werte der Attribute müssen dem iso8601-Schema folgen. Die Verwendung der Attribute ist optional.
+            </xs:documentation>
+            <xs:documentation xml:lang="en">
+                missing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attributeGroup ref="aodl:attr.grp.name"></xs:attributeGroup>
+        <xs:attribute name="when" type="aodl:pattern.iso8601" use="optional" />
+        <xs:attribute name="from" type="aodl:pattern.iso8601" use="optional" />
+        <xs:attribute name="to" type="aodl:pattern.iso8601" use="optional" />
+        <xs:attribute name="notBefore" type="aodl:pattern.iso8601" use="optional" />
+        <xs:attribute name="notAfter" type="aodl:pattern.iso8601" use="optional" />
+    </xs:attributeGroup>
+
+</xs:schema>

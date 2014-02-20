@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: FileSaveAndLoadWeb
+Bundle-SymbolicName: org.bbaw.pdr.ae.view.fileSaveAndLoad.web;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.view.filesaveandload.web.internal.Activator
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.ui;resolution:=optional,
+ org.eclipse.core.runtime,
+ org.eclipse.rap.ui;bundle-version="1.4.0";resolution:=optional,
+ org.bbaw.pdr.ae.common;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: javax.servlet,
+ javax.servlet.http;version="2.5.0"

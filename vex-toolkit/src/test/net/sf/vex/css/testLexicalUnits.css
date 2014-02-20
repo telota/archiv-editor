@@ -1,0 +1,20 @@
+/* Stylesheet for the testLexicalUnits() test case */
+
+A {
+  background-color: #000;
+  border-bottom: rgb(10%, 20%, 30%);
+  border-left: rgb(15, 25)
+  border-right: 10;
+  border-top: rgb(larry, curly, moe);
+  color: rgb(255, 255, 255);
+  font-name: "Times New Roman", serif;
+  font-size: 10px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+B {
+  background-color: foo;
+  color: 10px;
+}
+

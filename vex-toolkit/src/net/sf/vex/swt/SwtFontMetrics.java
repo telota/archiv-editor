@@ -1,0 +1,54 @@
+/*******************************************************************************
+ * Copyright (c) 2004, 2008 John Krasnay and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     John Krasnay - initial API and implementation
+ *******************************************************************************/
+package net.sf.vex.swt;
+
+import net.sf.vex.core.FontMetrics;
+
+/**
+ * Wrapper for the SWT FontMetrics class.
+ */
+public class SwtFontMetrics implements FontMetrics {
+    
+    private org.eclipse.swt.graphics.FontMetrics swtFontMetrics;
+
+    public SwtFontMetrics(org.eclipse.swt.graphics.FontMetrics swtFontMetrics) {
+        this.swtFontMetrics = swtFontMetrics;
+    }
+    
+    /**
+     * @see net.sf.vex.core.FontMetrics#getAscent()
+     */
+    public int getAscent() {
+		return 14; // this.swtFontMetrics.getAscent();
+    }
+
+    /**
+     * @see net.sf.vex.core.FontMetrics#getDescent()
+     */
+    public int getDescent() {
+		return 7; // this.swtFontMetrics.getDescent();
+    }
+
+    /**
+     * @see net.sf.vex.core.FontMetrics#getHeight()
+     */
+    public int getHeight() {
+        return this.swtFontMetrics.getHeight();
+    }
+
+    /**
+     * @see net.sf.vex.core.FontMetrics#getLeading()
+     */
+    public int getLeading() {
+		return 5;// this.swtFontMetrics.getLeading();
+    }
+
+}

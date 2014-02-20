@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+
+    targetNamespace="http://pdr.bbaw.de/namespaces/podl/"
+
+    xmlns:podl="http://pdr.bbaw.de/namespaces/podl/">
+
+    
+
+    <!-- TODO: Benutzerfreundliche Beschreibung und Anleitung erstellen -->
+
+    
+
+    <!-- ELEMENTS -->
+
+    
+
+    <xs:element name="concurrence">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet Informationen über andere Personenobjekte im Repositorium, welche mit dem beschriebenem übereinstimmen. Wird das concurrences-Element verwendet, so ist mindestens ein concurrence-Elemnt erforderlich. 
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The concurrence element contains information about one other person object in the repository to which the person described in the file concur. If the concurrences element is used in the file at least one concurrence element is obligatory.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:sequence minOccurs="1" maxOccurs="unbounded">
+
+                <xs:element ref="podl:validationStm" minOccurs="1" maxOccurs="unbounded"/>
+
+            </xs:sequence>
+
+            <xs:attribute name="person" type="podl:pattern.pdrid" use="required">
+
+                <xs:annotation>
+
+                    <xs:documentation xml:lang="de-DE">
+
+                        Beinhaltet die ID eines anderen Personenobjektes im Repositorium, welches mit dem beschriebenem übereinstimmt. Wird ein concurrence-Element verwendet, ist das person-Attribut erforderlich. 
+
+                    </xs:documentation>
+
+                    <xs:documentation xml:lang="en">
+
+                        The person attribute mentions the internal id of the person object which concur with the person described in the file. It is required. 
+
+                    </xs:documentation>
+
+                </xs:annotation>
+
+            </xs:attribute>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="concurrences">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet Elemente, welche mögliche Übereinstimmungen des beschriebenen Personenobjektes mit anderen Personenobjekten im Repositorium dokumentieren. Übereinstimmung meint hierbei nicht, dass biographische Beziehungen zwischen zwei oder mehreren Personenobjekten bestehen (das kann in den Aspektobjekten festgehalten werden), sondern dass die aus verschiedenen Quellen oder gar unterschiedlichen Projekten stammenden Personobjekten ein- und dieselbe Identität besitzen. Die Verwendung des concurrences-Elements ist optional.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The concurrences element contains elements to define information about a probable correspondence of the person described in the file with other person objects in the repository. Correspondence does not mean biographical relations between two persons which can be described in aspect objects. It can be used to define the identity of two person objects coming from different sources for example. It is optional.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element ref="podl:concurrence" minOccurs="1" maxOccurs="unbounded" />                
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="identifier">
+
+        <!-- TODO: Element darf nicht leer sein. -->
+
+        <!-- TODO: Aufzählung von Providern ? -->
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet einen durch eine externe Normdatei festgelegten Identifikator für das beschriebene Personenobjekt. Wird das identifiers-Element in der Datei benutzt, so ist mindestens ein identifier-Element erforderlich. 
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The identifier element relates one id of an external norm file to the person described in the file. If the identifiers element is used in the file at least one identifier element is obligatory.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:simpleContent>
+
+                <xs:extension base="xs:string">
+
+                    <xs:attribute name="provider" type="xs:string" use="required">
+
+                        <xs:annotation>
+
+                            <xs:documentation xml:lang="de-DE">
+
+                                Beinhaltet den Namen der Institution, welche den im zugehörigen identifier-Element verwendeten Identifikator für das Personenobjekt liefert. Wird ein identifier-Element verwendet, so ist das provider-Attribut erforderlich.
+
+                            </xs:documentation>
+
+                            <xs:documentation xml:lang="en">
+
+                                The provide attribute contains the name of an institution or another infrastructure which is responsible for the id mentioned in the identifier element. It is required.
+
+                            </xs:documentation>
+
+                        </xs:annotation>
+
+                    </xs:attribute>
+
+                    <!-- quality-Attribute gibt es merhmals -->
+
+                    <xs:attribute name="quality" type="podl:enum.quality" use="required" >
+
+                        <xs:annotation>
+
+                            <xs:documentation xml:lang="de-DE">
+
+                                Beschreibt die Sicherheit, mit der davon ausgegangen werden kann, dass das beschriebene Personenobjekt mit dem durch den externen Identifikator verknüpften Objekt übereinstimmt. Wird ein identifier-Element verwendet, so ist das quality-Attribut erforderlich.
+
+                            </xs:documentation>
+
+                            <xs:documentation xml:lang="en">
+
+                                The quality attribute describes the certainty of relation between person in the available person object and the person identified through the external identifier.
+
+                            </xs:documentation>
+
+                        </xs:annotation>
+
+                    </xs:attribute>
+
+                    <!-- authority gibt es mehrmals; meint immer einen Benutzer, aber bzgl. unterschiedlicher Dinge -->
+
+                    <xs:attribute name="authority" type="podl:pattern.pdrid" use="required" >
+
+                        <xs:annotation>
+
+                            <xs:documentation xml:lang="de-DE">
+
+                                Beinhaltet die interne im Repositoirm verwendete ID des Bearbeiters oder der Institution, welche sich für die im identifier-Element definierte Verknüpfung zwischen dem beschriebenen Personenobjekt und dem durch den externen Identifikator definierten Objekt verantwortlich zeichnet. Wird ein identifier-Element verwendet, so ist das authority-Attribut erforderlich. 
+
+                            </xs:documentation>
+
+                            <xs:documentation xml:lang="en">
+
+                                The provide attribute contains the name of a body or person who is responsible for relating the id mentioned in the identifier element with the person object. It is required.
+
+                            </xs:documentation>
+
+                        </xs:annotation>
+
+                    </xs:attribute>
+
+                </xs:extension>
+
+            </xs:simpleContent>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="identifiers">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet Elemente, welche das beschriebene Personenobjekt mit externen Objekten, Datensätzen oder Normdateien verknüpft. Die Verwendung des identifiers-Elements ist optional.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The identifiers element contains elements relating the person to entries in other person datasets and norm files. The PND or LCCN Number can be given here for example. It is optional.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element ref="podl:identifier" minOccurs="1" maxOccurs="unbounded" />                
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="interpretation">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Kann eine kurze Anmerkung zur Interpretaion der Quelle(n) beinhalten, welche im concurrence-Element die Übereinstimmung des beschriebenen Personenobjektes mit anderen Personenobjekten im Repositorium dokumentiert und stammt von demjenigen Benutzer, welcher ebenjene Verknüpfung eingetragen hat. Die Verwendung des interpretation-Elements ist innerhalb eines validationStm-Elements obligatorisch.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                missing
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:simpleType>
+
+            <xs:restriction base="xs:string"/>
+
+        </xs:simpleType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="person">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Das root-Element der Personenobjektsdatei (podl) beinhaltet interne and externe Identifikatoren, sowie Übereinstimmungen des beschriebenen Personenobjektes mit anderen Personenobjekten im Repositorium. Desweiteren werden alle Überarbeitungszeitpunkte dieser Informationen durch Nutzer im root-Element dokumiert. Sämtliche weitere die Person beschreibenden Informationen sind in den Aspektdateien hinterlegt (aodl). Dadurch kann zwischen der einfachen Existenz einer Person und dem Vorhandensein tatsächlicher biographischer Informationen im Datenmodell des PDR unterschieden werden. Als root-Element, ist seine Verwendung obligatorisch. 
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The root element of the person file (podl) serves as a container for internal and external ids and correspondences to other person objects. All information describing the life of the person are stored in aspect files (aodl). This approach is based on the strict separation between the existence of a person and its attribution of biographical data in the content model of the PDR. As it is the root element its use is required.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element ref="podl:record" minOccurs="1" maxOccurs="1" />
+
+                <xs:element ref="podl:identifiers" minOccurs="0" maxOccurs="1" />
+
+                <xs:element ref="podl:concurrences" minOccurs="0" maxOccurs="1" />
+
+            </xs:sequence>
+
+            <xs:attribute name="id" type="podl:pattern.pdrid" use="required">
+
+                <xs:annotation>
+
+                    <xs:documentation xml:lang="de-DE">
+
+                        Beinhaltet die im Repositorium verwendete Identifikationsnummer für das beschriebene Personenobjekt. Die Verwendung des id-Attributes ist obligatorisch und muss dem weiter unten beschriebenem podl:id.pdr-Schema folgen. Um die Einhaltung des Schemas zu gewährleisten, können nur die letzten neun Nummer der ID vom Benutzer festgelegt werden. Liegt keine ID vor, so wird eine neue, noch nicht verwendete durch das Repositorium erzeugt.
+
+                    </xs:documentation>
+
+                    <xs:documentation xml:lang="en">
+
+                        The id attribute contains the ID of the podl file used inside Persondata-Repositories. It is required and has the podl:id.pdr scheme described below. It's use is obligatory. To secure consistency only the last nine numbers of the id can be chosen by the user. If not given the repository generates a unique id.
+
+                    </xs:documentation>
+
+                </xs:annotation>
+
+            </xs:attribute>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="record">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet Erstellungs- und Bearbeitungsdaten des beschriebenen Personenobjektes und die daran beteiligten Benutzer. Die dabei verwendeten Informationsträger, die revision-Elemente, werden automatisch erstellt. Das erste revision-Element beschreibt hierbei das Erstellungsdatum des Personenobjektes in der Datei; alle weiteren die Bearbeitungszeitpunkte. Die Verwendung des record-Elements ist erforderlich. 
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The record element contains elements describing the creation and revision of the person described in the file. It is required. The content is generated automatically. The first revision element within it describes the creation of the object. Following revision elements describe the editing history.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element ref="podl:revision" minOccurs="1" maxOccurs="unbounded" />
+
+            </xs:sequence>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="reference">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet eine Quelle oder Autorität, welche die Übereinstimmung des beschriebenen Personenobjektes mit der im concurrence-Element beschriebenen Person dokumentiert. Für jedes concurrence-Element ist zumindest ein reference-Element erforderlich.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The reference element contains one reference to an authority or source which mentions the identity of the person described in the file with the person described in the concurrence element. At least on reference element for each concurrence element is required.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:simpleContent>
+
+                <xs:extension base="podl:pattern.pdrid">
+
+                    <xs:attribute name="internal" type="xs:string" use="optional">
+
+                        <xs:annotation>
+
+                            <xs:documentation xml:lang="de-DE">
+
+                                Beinhaltet nähere Informationen über den Zugang zum Quellenobjekt, z.B. eine Seitenzahl, Bandnummer oder Zugriffsdaten im Falle einer Website.                
+
+                            </xs:documentation>
+
+                        </xs:annotation>
+
+                    </xs:attribute>
+
+                    <!-- kommt mehrmals vor! -->
+
+                    <xs:attribute name="quality" type="podl:enum.quality" use="required" >
+
+                        <xs:annotation>
+
+                            <xs:documentation xml:lang="de-DE">
+
+                                Beschreibt die Zuverlässigkeit oder den Wahrheitsgehalt der Quelle aus dem reference-Element, welche die im concurrence-Element beschriebene Übereinstimmung zwischen dem beschriebenen Personenobjekt und einem anderen Personenobjekt im Repositorium dokumentiert.
+
+                            </xs:documentation>
+
+                            <xs:documentation xml:lang="en">
+
+                                The quality attribute describes the certainty of the authority or source contained in the reference element. Possible values are "certain", "probable" and "unsure" as described below in the podl:enum.reference.quality scheme. Its use is required. 
+
+                            </xs:documentation>
+
+                        </xs:annotation>
+
+                    </xs:attribute>
+
+                    <!-- authority gibt es mehrmals; meint immer einen Benutzer, aber bzgl. unterschiedlicher Dinge -->
+
+                    <xs:attribute name="authority" type="podl:pattern.pdrid" use="required" >
+
+                        <xs:annotation>
+
+                            <xs:documentation xml:lang="de-DE">
+
+                                Benennt mittels der im Repositorium verwendeten ID denjenigen Benutzer, welcher sich für die aus dem reference-Element abgeleiteten Interpretationen zur im concurrence-Element festgehalteten Übereinstimmung des beschriebenen Personenobjektes mit einem anderen Personenobjekt im Repositorium verantwortlich zeichnet. Die Verwendung des authority-Attributs ist erforderlich.
+
+                            </xs:documentation>
+
+                            <xs:documentation xml:lang="en">
+
+                                The authority attribute defines a person or body interpreting the reference as valueable for the concurrence. It is obligatory.
+
+                            </xs:documentation>
+
+                        </xs:annotation>
+
+                    </xs:attribute>
+
+                </xs:extension>
+
+            </xs:simpleContent>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="revision">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet das Erstellungs- oder ein Bearbeitungsdatum des Personenobjektes in der Datei. Die daran beteligten Benutzer werden dabei dokumentiert. Das revision-Element wird automatisch erzeugt, wobei es mindestens einmal - zur Dokumentation des Erstellungszeitpunktes - verwendet werden muss. Alle darauf auftretenen revision-Elemente dokumentieren Bearbeitungszeitpunkte des Personenobjektes in der Datei. 
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The revision element contain metadata about one editing step of the podl object. It is generated automatically. 
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:attribute name="ref" type="xs:unsignedShort" use="required">
+
+                <xs:annotation>
+
+                    <xs:documentation xml:lang="de-DE">
+
+                        Zählt die Bearbeitungszeitpunkte des beschriebenen Personenobjektes durch die Benutzer. Dasjenige ref-Attribut mit dem Wert 0 dokumentiert dabei die Erstellung des Personenobjektes in der Datei, alle weiteren in aufsteigender Reihenfolge die Bearbeitungszeitpunkte. Die Verwendung des ref-Attributs ist erforderlich.
+
+                    </xs:documentation>
+
+                    <xs:documentation xml:lang="en">
+
+                        The ref attribute counts the steps in the revision process. The revision element with the number 0 describes the creation of the person object.
+
+                    </xs:documentation>
+
+                </xs:annotation>
+
+            </xs:attribute>
+
+            <xs:attribute name="timestamp" type="xs:dateTime" use="required">
+
+                <xs:annotation>
+
+                    <xs:documentation xml:lang="de-DE">
+
+                        Beinhaltet das Datum samt exakter Zeitangabe eines Bearbeitungsschrittes des beschriebenen Personenobjekts gemäß dem xs:dateTime-Format. Die Verwendung des timestamp-Attributs ist erforderlich.
+
+                    </xs:documentation>
+
+                    <xs:documentation xml:lang="en">
+
+                        The timestamp attribute contain the exact date and time of the revision in xs:dateTime format.
+
+                    </xs:documentation>
+
+                </xs:annotation>
+
+            </xs:attribute>
+
+            <!-- authority gibt es mehrmals; meint immer einen Benutzer, aber bzgl. unterschiedlicher Dinge -->
+
+            <xs:attribute name="authority" use="required">
+
+                <xs:annotation>
+
+                    <xs:documentation xml:lang="de-DE">
+
+                        Beinhaltet die im Repositorium verwendete ID desjenigen Benutzers, welcher sich für einen einzelnen Bearbeitungsschritt verantwortlich zeichnet. Die Verwendung des authority-Attributs ist erforderlich.
+
+                    </xs:documentation>
+
+                    <xs:documentation xml:lang="en">
+
+                        The authority attribute mentions a person or body which took action of the revision process.
+
+                    </xs:documentation>
+
+                </xs:annotation>
+
+                <xs:simpleType>
+
+                    <xs:restriction base="podl:pattern.pdrid" />
+
+                </xs:simpleType>
+
+            </xs:attribute>
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <xs:element name="validationStm">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Beinhaltet Verweise auf die Quellen, welche die Informationen zur Übereinstimmung des beschriebenen Personenobjektes mit anderen Personenobjekten im Repositorium beinhaltet. Die Verwendung des validationStm-Elements ist erforderlich.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                Contains references to sources with remarks about their interpretation, which led to the concurrence information. Required.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element ref="podl:reference" minOccurs="1" maxOccurs="unbounded" />
+
+                <xs:element ref="podl:interpretation" minOccurs="1" maxOccurs="1" />
+
+            </xs:sequence>
+
+            <!-- authority gibt es mehrmals; meint immer einen Benutzer, aber bzgl. unterschiedlicher Dinge -->
+
+            <xs:attribute name="authority" type="podl:pattern.pdrid" use="required" />
+
+        </xs:complexType>
+
+    </xs:element>
+
+    
+
+    <!-- TYPES -->
+
+    
+
+    <xs:simpleType name="enum.quality">
+
+        <!-- TODO: Diskussion (identische enums für quality in aodl und podl) - ggf. enum.identifier.quality und enum.reference.quality rausnehmen. -->
+
+        <xs:restriction base="xs:string">
+
+            <xs:enumeration value="certain" />
+
+            <xs:enumeration value="probable" />
+
+            <xs:enumeration value="unsure" />
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+    
+
+    <xs:simpleType name="enum.identifier.quality">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Definiert die im quality-Attribut von identifer-Elementen zu verwendenen Abstufungen der Zuverlässigkeit, mit welcher davon ausgegangen werden kann, dass das Personenobjekt in der Datei mit dem durch den externen Identifikator verknüpften Objekt übereinstimmt.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The enum.identifier.quality literal type is used in the identifier element to describe the certainty of the relation between the person described in the file and the person identified through the external id.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:restriction base="xs:string">
+
+            <xs:enumeration value="unproofed" />
+
+            <xs:enumeration value="perhaps" />
+
+            <xs:enumeration value="probably" />
+
+            <xs:enumeration value="certain" />
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+    
+
+    <xs:simpleType name="enum.reference.quality">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Definiert die im quality-Attribut von reference-Elementen zu verwendenen Abstufungen des Wahrheitsgehalt der Quelle, welche die im concurrence-Element beschriebene Übereinstimmung zwischen dem beschriebenen Personenobjekt und einem anderen Personenobjekt im Repositorium dokumentiert.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                The enum.reference.quality literal type is used in the reference element to describe the certainty of the authority or source which serves as a proof for the identity of two person objects.
+
+            </xs:documentation>
+
+        </xs:annotation>
+
+        <xs:restriction base="xs:string">
+
+            <xs:enumeration value="certain" />
+
+            <xs:enumeration value="probable" />
+
+            <xs:enumeration value="unsure" />
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+    
+
+    <xs:simpleType name="pattern.pdrid">
+
+        <xs:annotation>
+
+            <xs:documentation xml:lang="de-DE">
+
+                Setzt die Einhaltung des Schemas der internen IDs durch. Der erste Teil der ID dokumentier hierbei den Typ des Objektes, der zweite die Instanznummer des Repositoriums, der dritte die Nummer des Projektes oder Vorhabens und der vierte Teil die ID des Objektes.
+
+            </xs:documentation>
+
+            <xs:documentation xml:lang="en">
+
+                Enforces the pattern of internal IDs. The first part stores the type, second the instance ID, third the group ID and the forth part contains the object's ID.</xs:documentation>
+
+        </xs:annotation>
+
+        <xs:restriction base="xs:string">
+
+            <xs:pattern value="pdr[APRU]o\.\d{3}\.\d{3}\.\d{9}" />
+
+        </xs:restriction>
+
+    </xs:simpleType>
+
+        
+
+</xs:schema>

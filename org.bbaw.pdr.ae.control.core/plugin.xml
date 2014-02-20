@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.bbaw.pdr.ae.control.datahandlingFactory" name="datahandlingFactory" schema="schema/org.bbaw.pdr.ae.control.datahandlingFactory.exsd"/>
+   <extension-point id="org.bbaw.pdr.ae.control.updateManager" name="updateManager" schema="schema/org.bbaw.pdr.ae.control.updateManager.exsd"/>
+   <extension
+         point="org.bbaw.pdr.ae.config.configFacade">
+      <configFacade
+            class="org.bbaw.pdr.ae.control.facade.ConfigFacade">
+      </configFacade>
+   </extension>
+	<extension point="org.eclipse.ui.services">
+	    <sourceProvider provider="org.bbaw.pdr.ae.control.core.UserRoleSourceProvider">
+	        <variable 
+	             name="org.bbaw.pdr.ae.control.userRole"
+	             priorityLevel="workbench">
+	        </variable>
+	        <variable 
+	             name="org.bbaw.pdr.ae.control.userMayDelete"
+	             priorityLevel="workbench">
+	        </variable>
+	    </sourceProvider>
+     <sourceProvider
+           provider="org.bbaw.pdr.ae.control.core.AEVersionProvider">
+                   <variable
+              name="org.bbaw.pdr.ae.repository.canSynchronize"
+              priorityLevel="workbench">
+        </variable>
+        <variable
+              name="org.bbaw.pdr.ae.aeVersion.advanced"
+              priorityLevel="workbench">
+        </variable>
+
+     </sourceProvider>
+	</extension>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          category="org.bbaw.pdr.ae.view.main.preferences.GeneralPage"
+          class="org.bbaw.pdr.ae.control.core.preferences.AEVersionPage"
+          id="org.bbaw.pdr.ae.control.core.aeVersion"
+          name="AEVersion">
+    </page>
+ </extension>
+</plugin>

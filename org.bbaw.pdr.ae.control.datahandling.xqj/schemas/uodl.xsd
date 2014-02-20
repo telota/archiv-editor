@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://pdr.bbaw.de/namespaces/uodl/"
+    xmlns:uodl="http://pdr.bbaw.de/namespaces/uodl/">
+
+    <!-- ELEMENTS -->
+    <xs:element name="authentication">
+        <xs:annotation>
+            <xs:documentation>
+                Informations needed for authentication. Required.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="uodl:roles" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="username">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string" />
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="password">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string" />
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="contact">
+        <xs:annotation>
+            <xs:documentation>
+                Contact information. Optional.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="type" type="uodl:enum.contact.type" use="required" />
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="fullname">
+        <xs:annotation>
+            <xs:documentation>
+                User's full name. Optional.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="forename" use="required">
+                <xs:annotation>
+                    <xs:documentation>
+                        User's forename. Required.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string" />
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="surname" use="required">
+                <xs:annotation>
+                    <xs:documentation>
+                        User's surname. Required.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:string" />
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="information">
+        <xs:annotation>
+            <xs:documentation>
+                Further information about the user. Optional.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="uodl:fullname" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="uodl:project" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="uodl:contact" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="project">
+        <xs:annotation>
+            <xs:documentation>
+                Some information about user's project. And his position in it. Optional.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="position" type="xs:string" use="optional" />
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="user">
+        <xs:annotation>
+            <xs:documentation>
+                Root element with user ID.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="uodl:record" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="uodl:authentication" minOccurs="1" maxOccurs="1" />
+                <xs:element ref="uodl:information" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="id" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="uodl:pattern.pdrid" />
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="record">
+        <xs:annotation>
+            <xs:documentation>
+                The record element contains elements describing the creation and revision of the user file. It is required. The content is generated automatically. The first revision element within it describes the creation of the object. Following revision elements describe the editing history.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="uodl:revision" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="revision">
+        <xs:annotation>
+            <xs:documentation>
+                The revision element contain metadata about one editing step of this user file. It is generated automatically. 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:attribute name="ref" use="required">
+                <xs:annotation>
+                    <xs:documentation>
+                        The ref attribute counts the steps in the revision process. The first revision element (with the number 0) describes the creation of the file.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:unsignedShort" />
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="timestamp" use="required">
+                <xs:annotation>
+                    <xs:documentation>
+                        The timestamp attribute contains the exact date and time of the revision in xs:dateTime format.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="xs:dateTime" />
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="authority" use="required">
+                <xs:annotation>
+                    <xs:documentation>
+                        The authority attribute contains the ID of an user who changed this file.
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:simpleType>
+                    <xs:restriction base="uodl:pattern.pdrid" />
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="role">
+        <xs:annotation>
+            <xs:documentation>
+                A single specific role assigned to the user. At least one role has to be assigned.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:string" />
+        </xs:simpleType>
+    </xs:element>
+    
+    <xs:element name="roles">
+        <xs:annotation>
+            <xs:documentation>
+                Contains all roles assigned to the user. Required.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="uodl:role" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- TYPES -->
+
+    <xs:simpleType name="pattern.pdrid">
+        <xs:annotation>
+            <xs:documentation>Enforces the pattern of internal IDs. The first part stores the type, second the instance ID, third the group ID and the forth part contains the object's ID.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="pdr[APRU]o\.\d{3}\.\d{3}\.\d{9}" />
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="enum.contact.type">
+	<!-- TODO: Vervollständigen ? weitere gängige kontaktarten ? -->
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="phone" />
+            <xs:enumeration value="mobile" />
+            <xs:enumeration value="email" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

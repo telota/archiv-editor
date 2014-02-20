@@ -1,0 +1,253 @@
+<?xml version='1.0'?>
+<testcases css="linebreaks.css">
+
+
+  <test id="LF" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>newline&#xa;end</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="newline&#10;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="end" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Two LFs" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>newline&#xa;&#xa;end</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="newline&#10;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="&#10;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="end" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Newline w/ Surrounding Space" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>newline &#xa; end</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="newline &#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text=" " />
+                <box class="DocumentTextBox" text="end" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Carriage Return" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>line1&#xd;line2</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line1&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line2" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Two CRs" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>line1&#xd;&#xd;line2</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line1&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line2" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="CRLF" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>line1&#xd;&#xa;line2</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line1&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line2" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="CRCRLF" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>line1&#xd;&#xd;&#xa;line2</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line1&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line2" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="CRLFCRLF" layoutWidth="100">
+    <doc><![CDATA[ <root><pre>line1&#xd;&#xa;&#xd;&#xa;line2</pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line1&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="&#xa;" />
+              </box>
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="line2" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Newline Inside Inline" layoutWidth="100">
+    <doc><![CDATA[ <root><pre><b>newline
+end</b></pre></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="pre">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="PlaceholderBox"/>
+                <box class="InlineElementBox" element="b">
+                  <box class="DrawableBox"/>
+                  <box class="DocumentTextBox" text="newline&#10;" />
+                </box>
+              </box>
+              <box class="LineBox">
+                <box class="InlineElementBox" element="b">
+                  <box class="DocumentTextBox" text="end" />
+                  <box class="PlaceholderBox"/>
+                  <box class="DrawableBox"/>
+                </box>
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  
+</testcases>

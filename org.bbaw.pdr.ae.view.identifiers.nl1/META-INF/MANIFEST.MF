@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.bbaw.pdr.ae.view.identifiers.nl1 Fragment
+Bundle-SymbolicName: org.bbaw.pdr.ae.view.identifiers.nl1
+Bundle-Version: 2.3.6
+Fragment-Host: org.bbaw.pdr.ae.view.identifiers

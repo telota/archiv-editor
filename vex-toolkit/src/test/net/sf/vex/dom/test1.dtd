@@ -1,0 +1,10 @@
+<!ELEMENT any ANY>
+<!ELEMENT empty EMPTY>
+<!ELEMENT section (title?, para+)>
+<!ELEMENT para (#PCDATA | emphasis)*>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT emphasis (#PCDATA)>
+
+<!-- a dummy attribute, just to make sure attribute def serialization is OK -->
+<!ATTLIST section
+	name	CDATA	#IMPLIED>

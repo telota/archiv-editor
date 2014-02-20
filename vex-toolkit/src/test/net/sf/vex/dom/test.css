@@ -1,0 +1,53 @@
+
+html {
+  display: block;
+}
+
+body {
+  display: block;
+}
+
+p {
+  display: block;
+}
+
+block {
+  display: block;
+}
+
+pre {
+  display: block;
+  white-space: pre;
+}
+
+
+/* Styles for positioning tests */
+root {
+  border: 3px 7px 11px 13px;
+  padding: 17px 19px 23px 29px;
+}
+
+small {
+  border-width: 1px 2px 3px 4px;
+  border-style: solid;
+  margin: 100px 200px 300px 400px;
+  padding: 10px 20px 30px 40px;
+  display: block;
+}
+
+medium {
+  border-width: 2px 4px 6px 8px;
+  border-style: solid;
+  margin: 200px 400px 600px 800px;
+  padding: 20px 40px 60px 80px;
+  display: block;
+}
+
+large {
+  border-width: 3px 6px 9px 12px;
+  border-style: solid;
+  margin: 300px 600px 900px 1200px;
+  padding: 30px 60px 90px 120px;
+  display: block;
+}
+

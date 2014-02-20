@@ -1,0 +1,86 @@
+<!-- 
+
+ *******************************************************************************
+ * Copyright (c) 2003, 2008 John Krasnay and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     John Krasnay - initial API and implementation
+ *******************************************************************************
+
+<?xml version='1.0'?>
+<!DOCTYPE doctype PUBLIC 
+  "-//Vex//DTD Vex Configuration 1.0//EN" 
+  "http://vex.sourceforge.net/dtd/vex-config-1.0.dtd">
+
+-->
+
+<!-- 
+
+  doctype
+
+  Defines a document type. The following attributes are supported.
+  
+  publicId - Unique public identifier of the document type. Typically, the
+             the format is  -//(organization)//(name and version//EN
+             
+  dtd      - Absolute or relative URL to the related DTD file.
+  
+
+-->
+
+<!ELEMENT doctype EMPTY>
+<!ATTLIST doctype
+  publicId	CDATA	#REQUIRED
+  systemId	CDATA	#REQUIRED
+  dtd		CDATA	#REQUIRED
+>
+
+
+<!--
+
+  doctypeRef
+  
+  Defines a reference to a document type. The following attributes are
+  supported.
+  
+  publicId - Public ID of the referenced document type.
+  
+-->
+
+<!ELEMENT doctypeRef EMPTY>
+<!ATTLIST doctypeRef
+  publicId	CDATA	#REQUIRED
+>
+
+
+<!-- 
+
+  style
+  
+  Defines a presentation for a document. The following attributes are supported.
+  
+  id        - Unique identifier of the style. This should follow Java
+              package naming conventions, e.g. net.sf.vex.styles.docbook.plain 
+              
+  name      - A brief name for the style.
+   
+  css       - Absolute or relative URL to the related CSS file.
+  
+  This element contains one or more doctypeRef elements indicating the 
+  doctypes supported by this style.
+             
+-->
+
+<!ELEMENT style (doctypeRef+)>
+<!ATTLIST style
+  id		ID			#REQUIRED
+  name		CDATA		#REQUIRED
+  css		CDATA		#REQUIRED
+>
+
+
+

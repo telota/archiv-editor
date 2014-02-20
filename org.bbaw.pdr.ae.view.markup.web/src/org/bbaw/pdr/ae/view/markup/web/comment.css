@@ -1,0 +1,28 @@
+* {
+	font-family: sans-serif;
+	font-size: 10pt;
+}
+
+persName {
+	display: inline;
+	background-color: red;
+}
+orgName {
+	display: inline;
+	background-color: #94B8FF;
+}
+placeName {
+	display: inline;
+	background-color: yellow;
+}
+name {
+	display: inline;
+	background-color: orange;
+}
+date {
+	display: inline;
+	background-color: #80FFE6;
+}
+lb {
+	display: inline;
+}

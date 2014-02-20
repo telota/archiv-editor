@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+    <extension
+    point="org.eclipse.rap.ui.entrypoint">
+  <entrypoint
+        brandingId="org.bbaw.pdr.ae.rap2.branding"
+        class="org.bbaw.pdr.ae.rap2.AEEntryPoint"
+        id="org.bbaw.pdr.ae.rap2"
+        path="/ae"/>
+</extension>
+   <extension
+         point="org.eclipse.rap.ui.branding">
+      <branding
+            defaultEntrypointId="org.bbaw.pdr.ae.rap2"
+            favicon="icons/favicon.ico"
+            id="org.bbaw.pdr.ae.rap2.branding"
+            servletName="ae"
+            themeId="org.eclipse.rap.design.example.fancy.theme"
+            title="Archiv-Editor RAP 2.2.0">
+      </branding>
+   </extension>
+   <extension
+    point="org.eclipse.core.runtime.products"
+    id="help_id">
+  <product
+      application="Archiv-Editor RAP 2.2.0"
+      description="Archiv-Editor RAP 2.2.0 - online version of Archiv-Editor"
+      name="%application.name">
+    <property
+        name="preferenceCustomization"
+        value="product_customization.ini">
+    </property>
+  </product>
+</extension>
+<extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               id="org.bbaw.pdr.ae.view.main.fileMenu"
+               label="%menu.label">
+            <command
+                  commandId="org.bbaw.pdr.ae.rap.launch.commands.Exit"
+                  icon="icons/exit.png"
+                  label="%command.label.6"
+                  style="push"
+                  tooltip="%command.tooltip.6">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="org.bbaw.pdr.commands.toolbar.main">
+            <separator
+                  name="ArchivEditor.separator9"
+                  visible="true">
+            </separator>
+            <control
+                  class="org.bbaw.pdr.ae.rap2.WorkbenchWindowControlContributionUser"
+                  id="org.bbaw.pdr.ae.rap.WorkbenchWindowControlContributionUser">
+            </control>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RAP Perspective"
+            class="org.bbaw.pdr.ae.rap.LoginPerspective"
+            id="org.bbaw.pdr.ae.rap.loginperspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="View"
+            class="org.bbaw.pdr.ae.rap.LoginView"
+            id="org.bbaw.pdr.ae.rap.loginview">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.bbaw.pdr.ae.rap2.commands.ExitHandler"
+            id="org.bbaw.pdr.ae.rap.launch.commands.Exit"
+            name="Exit">
+      </command>
+   </extension>
+</plugin>

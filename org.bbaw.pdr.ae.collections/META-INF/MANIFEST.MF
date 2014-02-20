@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Collections
+Bundle-SymbolicName: org.bbaw.pdr.ae.collections;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.collections.internal.Activator
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.ui;resolution:=optional,
+ org.eclipse.core.runtime,
+ org.bbaw.pdr.ae.common,
+ org.bbaw.pdr.ae.model
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.bbaw.pdr.ae.control.facade,
+ org.bbaw.pdr.ae.metamodel

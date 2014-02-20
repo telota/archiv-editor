@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.bbaw.pdr.ae.export.core">
+      <export
+            class="org.bbaw.pdr.ae.export.xslfo.PdfProvider"
+            id="org.bbaw.pdr.ae.export.xslfo.pdf"
+            name="PDF Export"
+            wizardId="org.bbaw.pdr.ae.export.xslfo.pdfWizard">
+         <filetypes>
+            <output>
+               <filetype
+                     extension="pdf"
+                     format="Portable Document Format">
+               </filetype>
+            </output>
+            <input
+                  set="stylesheets">
+               <filetype format="Extensible Stylesheet Language"
+                     extension="xsl">
+               </filetype>
+               <default
+                     file="resources/xml2fo.xsl"
+                     name="Standard XSLFO stylesheet">
+               </default>
+            </input>
+         </filetypes>
+      </export>
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            category="org.bbaw.pdr.ae.export.category.document"
+            class="org.bbaw.pdr.ae.export.xslfo.PdfExportWizard"
+            icon="resources/document_pdf.png"
+            id="org.bbaw.pdr.ae.export.xslfo.pdfWizard"
+            name="PDF">
+         <description>
+            %wizard.desc
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

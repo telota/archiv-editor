@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.bbaw.pdr.ae.dateparser.DateParserPage"
+            id="org.bbaw.pdr.ae.dateparser.DateParserPage"
+            name="%page.name">
+      </page>
+   </extension>
+   <extension
+         point="org.bbaw.pdr.ae.view.control.dateParser">
+      <dateParser
+            class="org.bbaw.pdr.ae.dateparser.DateParser">
+      </dateParser>
+   </extension>
+
+</plugin>

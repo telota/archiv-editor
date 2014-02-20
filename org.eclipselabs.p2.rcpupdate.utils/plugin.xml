@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="Check for Updates"
+            id="org.eclipselabs.p2.rcpupdate.update">
+      </command>
+      <command
+            name="Install New Software..."
+            id="org.eclipselabs.p2.rcpupdate.install">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.eclipselabs.p2.rcpupdate.update"
+            class="org.eclipselabs.p2.rcpupdate.utils.handler.UpdateHandler">
+      </handler>
+      <handler
+            commandId="org.eclipselabs.p2.rcpupdate.install"
+            class="org.eclipselabs.p2.rcpupdate.utils.handler.InstallNewSoftwareHandler">
+      </handler>
+   </extension>
+</plugin>

@@ -1,0 +1,145 @@
+<?xml version='1.0'?>
+<testcases css="before-after.css">
+
+  <test id="Block with Block Before" layoutWidth="100">
+    <doc><![CDATA[ <root><bbb>wuzzle</bbb></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="bbb">
+
+            <box class="BlockPseudoElementBox">
+              <box class="ParagraphBox">
+                <box class="LineBox">
+                  <box class="StaticTextBox" text="BEFORE" />
+                </box>
+              </box>
+            </box>
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="wuzzle" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  
+  <test id="Block with Block After" layoutWidth="100">
+    <doc><![CDATA[ <root><bba>wuzzle</bba></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="bba">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="wuzzle" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+            <box class="BlockPseudoElementBox">
+              <box class="ParagraphBox">
+                <box class="LineBox">
+                  <box class="StaticTextBox" text="AFTER" />
+                </box>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  <test id="Block with Inline Before" layoutWidth="100">
+    <doc><![CDATA[ <root><bib>wuzzle</bib></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="bib">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="StaticTextBox" text="before" />
+                <box class="DocumentTextBox" text="wuzzle" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Block with Inline After" layoutWidth="100">
+    <doc><![CDATA[ <root><bia>wuzzle</bia></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockElementBox" element="bia">
+
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="wuzzle" />
+                <box class="PlaceholderBox"/>
+                <box class="StaticTextBox" text="after" />
+              </box>
+            </box>
+
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+<!--  
+  <test id="Inline with Block Before" layoutWidth="100">
+    <doc><![CDATA[ <root><ibb>wuzzle</ibb></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+
+          <box class="BlockPseudoElementBox">
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="StaticTextBox" text="BEFORE" />
+              </box>
+            </box>
+          </box>
+
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="InlineElementBox" element="ibb">
+                <box class="DrawableBox" />
+                <box class="DocumentTextBox" text="wuzzle" />
+                <box class="PlaceholderBox"/>
+                <box class="DrawbleBox" />
+              </box>
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+
+        </box>
+      </box>
+    </result>
+  </test>
+-->
+  
+  
+  
+</testcases>

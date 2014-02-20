@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.bbaw.pdr.ae.common.fileSaveAndLoad">
+      <fileSaveAndLoadFactory
+            class="org.bbaw.pdr.ae.view.filesaveandload.web.FileSaveAndLoadFactory">
+      </fileSaveAndLoadFactory>
+   </extension>
+
+</plugin>

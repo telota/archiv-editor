@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.bbaw.pdr.ae.view.main.markup.web.feature"
+      label="MarkupWebFeature"
+      version="2.2.0.qualifier"
+      provider-name="BBAW">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <url>
+      <update url="http://telota.bbaw.de/ArchivEditorupdate/update-2.2/repository/"/>
+   </url>
+
+   <requires>
+      <import plugin="org.bbaw.pdr.ae.common"/>
+      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.bbaw.pdr.ae.config.model"/>
+      <import plugin="org.bbaw.pdr.ae.control.core"/>
+      <import plugin="org.bbaw.pdr.ae.metamodel"/>
+      <import plugin="org.bbaw.pdr.ae.model"/>
+      <import plugin="org.bbaw.pdr.ae.view.control"/>
+      <import plugin="org.bbaw.pdr.ae.view.main"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.core.expressions"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.junit"/>
+   </requires>
+
+   <plugin
+         id="org.bbaw.pdr.ae.view.markup.ckeditor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

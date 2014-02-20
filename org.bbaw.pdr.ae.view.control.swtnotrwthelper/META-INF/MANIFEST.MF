@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Swtnotrwthelper
+Bundle-SymbolicName: org.bbaw.pdr.ae.view.control.swtnotrwthelper;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.view.control.swtnotrwthelper.internal.Activator
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.bbaw.pdr.ae.view.control
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.bbaw.pdr.ae.common,
+ org.bbaw.pdr.ae.model
+Export-Package: org.bbaw.pdr.ae.view.control.swtnotrwthelper

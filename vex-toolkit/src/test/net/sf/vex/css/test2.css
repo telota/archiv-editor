@@ -1,0 +1,277 @@
+/* defaults */
+defaults {
+}
+
+/* extra tokens not covered by "simple" */
+extras {
+    background-color: lime;       /* 0, 255, 0 */
+
+    border-bottom-color: maroon;  /* 128, 0, 0 */
+    border-bottom-style: solid;
+
+    border-left-color: navy;      /* 0, 0, 128 */
+    border-left-style: dashed;
+
+    border-right-color: olive;    /* 128, 128, 0 */
+    border-right-style: dotted;
+
+    border-top-color: purple;     /* 128, 0, 128 */
+    border-top-style: double;
+
+    color: red;                   /* 255, 0, 0 */
+    display: inline;
+}
+
+extras2 {
+    background-color: silver;       /* 192, 192, 192 */
+
+    border-bottom-color: teal;      /* 0, 128, 128 */
+    border-bottom-style: none;
+    border-bottom-width: thin;      /* 0, due to style: none */
+
+    border-left-color: white;       /* 255, 255, 255 */
+    border-left-style: groove;
+
+    border-right-color: yellow;     /* 255, 255, 0 */
+    border-right-style: ridge;
+
+    border-top-style: inset;
+}
+
+xxsmall {
+    font-size: xx-small;
+}
+
+xsmall {
+    font-size: x-small;
+}
+
+small {
+    font-size: small;
+}
+
+medium {
+    font-size: medium;
+}
+
+large {
+    font-size: large;
+}
+
+xlarge {
+    font-size: x-large;
+}
+xxlarge {
+    font-size: xx-large;
+}
+
+smaller {
+    font-size: smaller;
+}
+
+larger {
+    font-size: larger;
+}
+
+font100pct {
+    font-size: 100%;
+}
+
+font80pct {
+    font-size: 80%;
+}
+
+font120pct {
+    font-size: 120%;
+}
+
+inherit {
+    background-color: inherit;
+
+    border-bottom-color: inherit;
+    border-bottom-style: inherit;
+    border-bottom-width: inherit;
+
+    border-left-color: inherit;
+    border-left-style: inherit;
+    border-left-width: inherit;
+
+    border-right-color: inherit;
+    border-right-style: inherit;
+    border-right-width: inherit;
+
+    border-top-color: inherit;
+    border-top-style: inherit;
+    border-top-width: inherit;
+
+    color: inherit;
+    display: inherit;
+
+    margin-bottom: inherit;
+    margin-left: inherit;
+    margin-right: inherit;
+    margin-top: inherit;
+
+    padding-bottom: inherit;
+    padding-left: inherit;
+    padding-right: inherit;
+    padding-top: inherit;
+
+    font-family: inherit;
+    font-size: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+
+/* normal, non-expanded values */
+simple {
+    background-color: aqua;       /* 0, 255, 255 */
+
+    border-bottom-color: black;   /* 0, 0, 0 */
+    border-bottom-style: solid;
+    border-bottom-width: thin;    /* 1px */
+
+    border-left-color: blue;
+    border-left-style: dashed;
+    border-left-width: medium;    /* 3px */
+
+    border-right-color: fuchsia;  /* 255, 0, 255 */
+    border-right-style: dotted;
+    border-right-width: thick;    /* 5px */
+
+    border-top-color: gray;
+    border-top-style: double;
+    border-top-width: 1px;
+
+    color: green;                 /* 0, 128, 0 */
+    display: block;
+
+    margin-bottom: 100cm;         /* 3543px */
+    margin-left: 0;               /* 0 */
+    margin-right: 10em;           /* 120px */
+    margin-top: 10ex;             /* 72px */
+
+    padding-bottom: 5in;          /* 450px */
+    padding-left: 1200mm;         /* 4251px */  
+    padding-right: 8pc;           /* 120px */
+    padding-top: 15pt;            /* 18px */
+
+    font-family: helvetica;
+    font-size: 10pt;              /* 12.5px */
+    font-style: italic;
+    font-weight: bold;
+}
+
+expandBorder {
+  border: 2px solid red;
+}
+
+expandBorderTop {
+  border-top: 2px solid red;
+}
+
+expandBorderLeft {
+  border-left: 2px solid red;
+}
+
+expandBorderBottom {
+  border-bottom: 2px solid red;
+}
+
+expandBorderRight {
+  border-right: 2px solid red;
+}
+
+expandBorder1 {
+  border: 2px solid;
+}
+
+expandBorder2 {
+  border: 2px red;
+}
+
+expandBorder3 {
+  border: 2px;
+}
+
+expandBorder4 {
+  border: solid red;
+}
+
+expandBorder5 {
+  border: solid;
+}
+
+expandBorder6 {
+  border: red;
+}
+
+borderColor1 {
+  border-color: red;
+}
+
+borderColor2 {
+  border-color: red green;
+}
+
+borderColor3 {
+  border-color: red green blue;
+}
+
+borderColor4 {
+  border-color: red green blue white;
+}
+
+borderStyle1 {
+  border-style: solid;
+}
+
+borderStyle2 {
+  border-style: solid dotted;
+}
+
+borderStyle3 {
+  border-style: solid dotted dashed;
+}
+
+borderStyle4 {
+  border-style: solid dotted dashed outset;
+}
+
+borderWidth1 {
+  border-style: solid;
+  border-width: 1px;
+}
+
+borderWidth2 {
+  border-style: solid;
+  border-width: 1px 2px;
+}
+
+borderWidth3 {
+  border-style: solid;
+  border-width: 1px 2px 3px;
+}
+
+borderWidth4 {
+  border-style: solid;
+  border-width: 1px 2px 3px 4px;
+}
+
+margin1 {
+  margin: 10px;
+}
+
+margin2 {
+  margin: 10px 20px;
+}
+
+margin3 {
+  margin: 10px 20px 30px;
+}
+
+margin4 {
+  margin: 10px 20px 30px 40px;
+}
+

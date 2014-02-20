@@ -1,0 +1,22 @@
+<contexts>
+	<context id="objectsTree">
+		<description>
+			The Tree View gives an overview of persons, aspects, and sources. They can be selected in the tree and then opened and edited in editors.		
+		</description>
+		<topic href="html/steps/objectsTree.html" label="Overview of Objects"/>	
+	</context>
+	<context id="tabFolderLeft">
+		<description>
+			The Tree View gives an overview of persons, aspects, and sources.		
+		</description>
+		<topic href="html/steps/tabFolderLeft.html" label="Build Tree"/>	
+	</context>
+	<context id="notificationText">
+		<description>
+			The Notification element contains the main content of one aspect. Here all sorts of texts can be entered and tagged with the tagging system.
+
+Aspects contain only little information and should not be used as containers for long texts.		
+		</description>
+		<topic href="html/steps/tagging.html" label="Exlpanation of Tagging"/>	
+	</context>
+</contexts>

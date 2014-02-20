@@ -1,0 +1,28 @@
+/* Stylesheet for unit testing */
+
+A {
+  name: A;
+}
+
+B {
+  name: B;
+}
+
+/* should take precedence over above, since more elements */
+B, D {
+  name: BorD;
+}
+
+C {
+  name: C;
+}
+
+/* should take precedence over C rule above, since more elements */
+A C {
+  name: AdescendC;
+}
+
+/* Confirm *not* selected. */
+A > C {
+  name: AchildC;
+}

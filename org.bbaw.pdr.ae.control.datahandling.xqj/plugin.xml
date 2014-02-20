@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.bbaw.pdr.ae.control.datahandlingFactory">
+      <datahandlingFactory
+            class="org.bbaw.pdr.ae.control.datahandling.xqj.DataHandlingFactory">
+      </datahandlingFactory>
+   </extension>
+   <extension
+         point="org.bbaw.pdr.ae.config.configManager">
+      <configManager
+            class="org.bbaw.pdr.ae.control.datahandling.xqj.config.ConfigManager">
+      </configManager>
+   </extension>
+   <extension
+         point="org.bbaw.pdr.ae.control.updateManager">
+      <updateManager
+            class="org.bbaw.pdr.ae.control.datahandling.xqj.internal.RepositoryUpdateManager">
+      </updateManager>
+   </extension>
+
+</plugin>

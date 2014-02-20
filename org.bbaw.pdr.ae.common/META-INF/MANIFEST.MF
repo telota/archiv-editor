@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Common
+Bundle-SymbolicName: org.bbaw.pdr.ae.common;singleton:=true
+Bundle-Version: 2.3.2.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.common.CommonActivator
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.ui;resolution:=optional,
+ org.eclipse.core.runtime,
+ org.eclipse.rap.ui;bundle-version="1.5.0";resolution:=optional
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.bbaw.pdr.ae.common,
+ org.bbaw.pdr.ae.common.icons,
+ org.bbaw.pdr.ae.common.interfaces,
+ org.bbaw.pdr.ae.common.utils

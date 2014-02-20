@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.bbaw.pdr.ae.export.core">
+      <export
+            class="org.bbaw.pdr.ae.export.xslt.HtmlProvider"
+            id="org.bbaw.pdr.ae.export.xslt.html"
+            wizardId="org.bbaw.pdr.ae.export.xslt.htmlWizard">
+         <filetypes>
+            <output>
+               <filetype
+                     extension="html" format="HyperText Markup Language">
+               </filetype>
+               <filetype
+                     extension="htm" format="HyperText Markup Language">
+               </filetype>
+            </output>
+            <input
+                  set="stylesheets">
+               <filetype
+                     extension="xsl" format="Extensible Stylesheet Language">
+               </filetype>
+               <default
+                     file="resources/xml2html.xsl"
+                     name="standard XSLT stylesheet"/>
+            </input>
+         </filetypes>
+      </export>
+   </extension>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            category="org.bbaw.pdr.ae.export.category.markup"
+            class="org.bbaw.pdr.ae.export.xslt.wizard.HtmlExportWizard"
+            icon="resources/document_html.png"
+            id="org.bbaw.pdr.ae.export.xslt.htmlWizard"
+            name="HTML">
+         <description>
+            %wizard.desc
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

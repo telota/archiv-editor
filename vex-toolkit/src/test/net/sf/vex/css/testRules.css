@@ -1,0 +1,26 @@
+/*  0 */ c { }
+/*  1 */ b c { }
+/*  2 */ b d { }
+/*  3 */ other b c { }
+/*  4 */ other b d { }
+/*  5 */ a c e { }
+/*  6 */ c a e { }
+/*  7 */ * { }
+/*  8 */ *[color] { }
+/*  9 */ a[color] { }
+/* 10 */ b[color] { }
+/* 11 */ c[color] { }
+/* 12 */ d[color] { }
+/* 13 */ *[color=blue] { }
+/* 14 */ a[color=blue] { }
+/* 15 */ b[color=blue] { }
+/* 16 */ b[color='blue'] { }
+/* 17 */ b[color="blue"] { }
+/* 18 */ c[color=blue] { }
+/* 19 */ a * { }
+/* 20 */ a > * { }
+/* 21 */ a *[color] { }
+/* 22 */ a > *[color] { }
+/* 23 */ *[color~=blue] { }
+/* 24 */ .foo { }
+/* 25 */ .foo.bar { }

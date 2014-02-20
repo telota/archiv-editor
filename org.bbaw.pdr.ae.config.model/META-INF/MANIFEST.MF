@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ConfigModel
+Bundle-SymbolicName: org.bbaw.pdr.ae.config.model
+Bundle-Version: 2.2.2.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.config.model.internal.Activator
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.bbaw.pdr.ae.common,
+ org.bbaw.pdr.ae.metamodel,
+ org.eclipse.jface.fieldassist
+Export-Package: org.bbaw.pdr.ae.config.model

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="L'aide d'ArchivEditor - table des matières " topic="html/toc.html">
+
+   <topic label="Le commencement">
+      <anchor id="gettingstarted"/>
+   </topic>
+   <topic label="Relation">
+      <anchor id="relation"/>
+   </topic>
+   <topic label="L'aide du contexte">
+      <anchor id="context"/>
+   </topic>
+</toc>

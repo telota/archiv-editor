@@ -1,0 +1,10 @@
+instructions.configure=\
+mkdir(path:${installFolder}/dropins);
+
+instructions.configure=\
+  addRepository(type:0,location:http${#58}//telota.bbaw.de/ArchivEditorupdate/update-2.2/repository/ );\
+  addRepository(type:1,location:http${#58}//telota.bbaw.de/ArchivEditorupdate/update-2.2/repository/);
+
+instructions.configure=\
+  addRepository(type:0,location:http${#58}//telota.bbaw.de/ArchivEditorupdate/update-2.2/repository/);\
+  addRepository(type:1,location:http${#58}//telota.bbaw.de/ArchivEditorupdate/update-2.2/repository/);

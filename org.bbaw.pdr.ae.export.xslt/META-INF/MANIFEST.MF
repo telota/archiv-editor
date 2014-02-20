@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: XSLT XML Processing Utilities Plugin for AE Exports
+Bundle-SymbolicName: org.bbaw.pdr.ae.export.xslt;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.export.xslt.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.bbaw.pdr.ae.common,
+ org.bbaw.pdr.ae.export,
+ org.bbaw.pdr.ae.export.xml
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.bbaw.pdr.ae.common,
+ org.bbaw.pdr.ae.control.comparator,
+ org.bbaw.pdr.ae.control.core,
+ org.bbaw.pdr.ae.model,
+ org.bbaw.pdr.ae.model.view,
+ org.bbaw.pdr.ae.view.control
+Export-Package: org.bbaw.pdr.ae.export.xslt.util
+Bundle-Localization: plugin

@@ -1,0 +1,77 @@
+
+iia {
+  display: inline;
+}
+
+iia:after {
+  display: inline;
+  content: 'after';
+}
+
+iib {
+  display: inline;
+}
+
+iib:before {
+  display: inline;
+  content: 'before';
+}
+
+
+iba {
+  display: inline;
+}
+
+iba:after {
+  display: block;
+  content: 'AFTER';
+}
+
+ibb {
+  display: inline;
+}
+
+ibb:before {
+  display: block;
+  content: 'BEFORE';
+}
+
+
+
+bia {
+  display: block;
+}
+
+bia:after {
+  display: inline;
+  content: 'after';
+}
+
+bib {
+  display: block;
+}
+
+bib:before {
+  display: inline;
+  content: 'before';
+}
+
+
+bba {
+  display: block;
+}
+
+bba:after {
+  display: block;
+  content: 'AFTER';
+}
+
+bbb {
+  display: block;
+}
+
+bbb:before {
+  display: block;
+  content: 'BEFORE';
+}
+

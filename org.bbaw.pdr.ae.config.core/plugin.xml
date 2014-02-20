@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.bbaw.pdr.ae.config.configFacade" name="configFacade" schema="schema/org.bbaw.pdr.ae.config.configFacade.exsd"/>
+   <extension-point id="org.bbaw.pdr.ae.config.configRightsChecker" name="configRightsChecker" schema="schema/org.bbaw.pdr.ae.config.configRightsChecker.exsd"/>
+   <extension-point id="org.bbaw.pdr.ae.config.configManager" name="configManager" schema="schema/org.bbaw.pdr.ae.config.configManager.exsd"/>
+   <extension-point id="org.bbaw.pdr.view.control.templates.aspectSemantic.configEditor" name="SemanticTemplateConfigEditor" schema="schema/org.bbaw.pdr.view.control.templates.aspectSemantic.configEditor.exsd"/>
+
+</plugin>

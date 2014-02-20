@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.bbaw.pdr.ae.collections.nl1 Fragment
+Bundle-SymbolicName: org.bbaw.pdr.ae.collections.nl1
+Bundle-Version: 1.0.0
+Fragment-Host: org.bbaw.pdr.ae.collections
+Bundle-Vendor: BBAW

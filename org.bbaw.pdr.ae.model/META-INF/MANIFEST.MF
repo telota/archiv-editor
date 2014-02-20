@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Model
+Bundle-SymbolicName: org.bbaw.pdr.ae.model
+Bundle-Version: 2.3.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.model.internal.Activator
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.bbaw.pdr.ae.model,
+ org.bbaw.pdr.ae.model.search,
+ org.bbaw.pdr.ae.model.view
+Import-Package: org.bbaw.pdr.ae.metamodel,
+ org.eclipse.jface.fieldassist

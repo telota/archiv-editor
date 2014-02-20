@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.bbaw.pdr.ae.view.main.fileMenu">
+         <command
+               commandId="org.bbaw.pdr.ae.debug.open"
+               label="Debug Window"
+               style="push">
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.bbaw.pdr.ae.debug.DebugWindowCommand"
+            id="org.bbaw.pdr.ae.debug.open"
+            name="openDebugWindowCommand">
+      </command>
+   </extension>
+
+</plugin>

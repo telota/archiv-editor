@@ -1,0 +1,343 @@
+<?xml version='1.0'?>
+<testcases css="block-inline.css">
+
+  <test id="Empty Root" layoutWidth="100">
+    <doc><![CDATA[ <root/> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Simple Text" layoutWidth="100">
+    <doc><![CDATA[ <root>Hello, world!</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Hello, "/>
+              <box class="DocumentTextBox" text="world!"/>
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  
+  <!--
+       A simple wrap. 42 = length("Hello, ") * 6
+  -->
+  <test id="Simple Wrap" layoutWidth="42">
+    <doc><![CDATA[ <root>Hello, world!</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Hello, " />
+            </box>
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="world!" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <!-- 
+       Attempts to split the text inside the space after "Hello,".
+       The space should remain with "Hello," and not be split on to its
+       own line
+  -->
+  <test id="Split at First Space" layoutWidth="40">
+    <doc><![CDATA[ <root>Hello, world!</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Hello, " />
+            </box>
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="world!" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Empty Inline" layoutWidth="100">
+    <doc><![CDATA[ <root><b></b></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="PlaceholderBox"/>
+              <box class="InlineElementBox">
+                <box class="DrawableBox"/>
+                <box class="PlaceholderBox"/>
+                <box class="DrawableBox"/>
+              </box>
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+  
+  <test id="Simple Inline" layoutWidth="100">
+    <doc><![CDATA[ <root><b>cat sat</b></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="PlaceholderBox"/>
+              <box class="InlineElementBox">
+                <box class="DrawableBox"/>
+                <box class="DocumentTextBox" text="cat " />
+                <box class="DocumentTextBox" text="sat" />
+                <box class="PlaceholderBox"/>
+                <box class="DrawableBox"/>
+              </box>
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+  
+  <test id="Simple Inline Split 1" layoutWidth="36">
+    <doc><![CDATA[ <root><b>cat sat</b></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="PlaceholderBox"/>
+              <box class="InlineElementBox">
+                <box class="DrawableBox"/>
+                <box class="DocumentTextBox" text="cat " />
+              </box>
+            </box>
+            <box class="LineBox">
+              <box class="InlineElementBox">
+                <box class="DocumentTextBox" text="sat" />
+                <box class="PlaceholderBox"/>
+                <box class="DrawableBox"/>
+              </box>
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Inline With Surrounding Text" layoutWidth="100">
+    <doc><![CDATA[ <root>hat <b>cat sat</b> bat</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="hat " />
+              <box class="PlaceholderBox"/>
+              <box class="InlineElementBox">
+                <box class="DrawableBox"/>
+                <box class="DocumentTextBox" text="cat " />
+                <box class="DocumentTextBox" text="sat" />
+                <box class="PlaceholderBox"/>
+                <box class="DrawableBox"/>
+              </box>
+              <box class="DocumentTextBox" text=" " />
+              <box class="DocumentTextBox" text="bat" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Inline With Surrounding Text Split 1" layoutWidth="76">
+    <doc><![CDATA[ <root>hat <b>cat sat</b> bat</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="hat "/>
+              <box class="PlaceholderBox"/>
+              <box class="InlineElementBox">
+                <box class="DrawableBox"/>
+                <box class="DocumentTextBox" text="cat " />
+                <box class="DocumentTextBox" text="sat" />
+                <box class="PlaceholderBox"/>
+                <box class="DrawableBox"/>
+              </box>
+              <box class="DocumentTextBox" text=" " />
+            </box>
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="bat" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Inline With Surrounding Text Split 2" layoutWidth="75">
+    <doc><![CDATA[ <root>hat <b>cat sat</b> bat</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="hat " />
+              <box class="PlaceholderBox"/>
+              <box class="InlineElementBox">
+                <box class="DrawableBox"/>
+                <box class="DocumentTextBox" text="cat " />
+              </box>
+            </box>
+            <box class="LineBox">
+              <box class="InlineElementBox">
+                <box class="DocumentTextBox" text="sat" />
+                <box class="PlaceholderBox"/>
+                <box class="DrawableBox"/>
+              </box>
+              <box class="DocumentTextBox" text=" " />
+              <box class="DocumentTextBox" text="bat" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  
+  <test id="Block Child w/ Inline Before" layoutWidth="75">
+    <doc><![CDATA[ <root>Paris <p>Garters</p></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+        
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Paris" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+
+          <box class="BlockElementBox">
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="Garters" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+          </box>
+          
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  
+  <test id="Block Child w/ Inline After" layoutWidth="100">
+    <doc><![CDATA[ <root><p>Harris</p> Tweed</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+        
+          <box class="BlockElementBox">
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="Harris" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+          </box>
+          
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Tweed" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  <test id="Block Child w/ Surrounding Inlines" layoutWidth="200">
+    <doc><![CDATA[ <root>Oliver <p>Boliver</p> Butt</root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+        
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Oliver" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+
+          <box class="BlockElementBox">
+            <box class="ParagraphBox">
+              <box class="LineBox">
+                <box class="DocumentTextBox" text="Boliver" />
+                <box class="PlaceholderBox"/>
+              </box>
+            </box>
+          </box>
+          
+          <box class="ParagraphBox">
+            <box class="LineBox">
+              <box class="DocumentTextBox" text="Butt" />
+              <box class="PlaceholderBox"/>
+            </box>
+          </box>
+
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  <!-- TODO test blocks inside inlines -->
+
+  
+</testcases>

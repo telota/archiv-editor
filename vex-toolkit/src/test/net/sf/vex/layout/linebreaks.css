@@ -1,0 +1,17 @@
+
+root {
+  display: block;
+}
+
+p {
+  display: block;
+}
+
+pre {
+  display: block;
+  white-space: pre;
+}
+
+b {
+  display: inline;
+}

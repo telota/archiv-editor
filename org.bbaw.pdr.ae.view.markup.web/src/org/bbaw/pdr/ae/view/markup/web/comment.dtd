@@ -1,0 +1,25 @@
+<!ELEMENT comment ( #PCDATA | bug | b | i | persName | orgName | placeName | name | date)* >
+
+<!ELEMENT bug ( #PCDATA | b | i )* >
+<!ATTLIST bug
+	id CDATA #REQUIRED
+>
+<!ATTLIST persName
+	type | subtype | role | ana | key CDATA
+>
+<!ATTLIST orgName
+	type | subtype | role | ana | key CDATA
+>
+
+<!ATTLIST placeName
+	type | subtype | role | ana | key CDATA
+>
+<!ATTLIST name
+	type | subtype | role | ana | key CDATA
+>
+<!ATTLIST date
+	type | subtype | role | ana | key | from | to | when | notBefore | notAfter CDATA
+>
+<!ELEMENT b ( #PCDATA | b | i )* >
+
+<!ELEMENT i ( #PCDATA | b | i )* >

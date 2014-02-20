@@ -1,0 +1,22 @@
+<contexts>
+	<context id="objectsTree">
+		<description>
+			L'affichage de l'abre donne un apercu des personnes, aspects et sources. Ces objets peuvent être sélectionnées, ouverts et éditées avec les éditeurs specifiques.		
+		</description>
+		<topic href="html/steps/objectsTree.html" label="Apercu des objets"/>	
+	</context>
+	<context id="tabFolderLeft">
+		<description>
+			L'affichage de l'abre donne un apercu des personnes, aspects et sources.
+		</description>
+		<topic href="html/steps/tabFolderLeft.html" label="Créer l'abre"/>	
+	</context>
+	<context id="notificationText">
+		<description>
+			L'element "notification" contiens le texte pricinpal de l'aspect. Les informations et les mot peuvent être marqués par le system de tagging.
+
+Les aspect sont des petites pieces des informations. Il n'est pas conseillé d'entrer des longs textes. 
+		</description>
+		<topic href="html/steps/tagging.html" label="Explication de Tagging"/>	
+	</context>
+</contexts>

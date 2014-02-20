@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="###Anleitung für den Archiv-Editor 2.0" topic="html/coverpage.html">
+	<topic label="##Über den Archiv-Editor">
+		<anchor id="sec_about"/>
+	</topic>
+	<topic label="##Anwendungsziele">
+		<anchor id="sec_purpose"/>
+	</topic>
+	<topic label="##Strukturierung der Datenbank">
+		<anchor id="sec_structure"/>
+	</topic>
+</toc>

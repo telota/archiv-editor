@@ -1,0 +1,15 @@
+
+root {
+  display: block;
+  font: 10pt monospaced;
+}
+
+
+b {
+  display: inline;
+}
+
+p {
+  display: block;
+}
+

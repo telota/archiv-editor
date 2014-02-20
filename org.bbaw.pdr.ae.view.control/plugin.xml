@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.bbaw.pdr.ae.view.control.dateParser" name="dateParser" schema="schema/org.bbaw.pdr.ae.view.control.dateParser.exsd"/>
+   <extension-point id="org.bbaw.pdr.view.control.templates.aspectSemantic.controller" name="AspectSemanticTemplateController" schema="schema/org.bbaw.pdr.view.control.templates.aspectSemantic.controller.exsd"/>
+   <extension-point id="org.bbaw.pdr.ae.view.control.swtnotrwthelper" name="swtnotrwthelper" schema="schema/org.bbaw.pdr.ae.view.control.swtnotrwthelper.exsd"/>
+   <extension-point id="org.bbaw.pdr.ae.view.control.markupFactory" name="markupFactory" schema="schema/org.bbaw.pdr.ae.view.control.markupFactory.exsd"/>
+
+</plugin>

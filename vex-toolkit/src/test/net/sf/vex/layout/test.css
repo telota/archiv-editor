@@ -1,0 +1,46 @@
+/*
+ * Style sheet used for layout unit testing.
+ */
+root {
+  display: block;
+  font: 10pt monospaced;
+}
+
+
+beforeBlock {
+  display: block;
+}
+
+beforeBlock:before {
+  display: block;
+  content: 'Before';
+}
+
+b {
+  display: inline;
+}
+
+p {
+  display: block;
+}
+
+.blockAfter:after {
+  display: block;
+  content: 'AFTER';
+}
+
+.blockBefore:before {
+  display: block;
+  content: 'BEFORE';
+}
+
+.inlineAfter:after {
+  display: inline;
+  content: 'after';
+}
+
+.inlineBefore:before {
+  display: inline;
+  content: 'before';
+}
+

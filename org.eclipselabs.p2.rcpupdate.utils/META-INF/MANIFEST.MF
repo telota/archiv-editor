@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RCP Update Utils
+Bundle-SymbolicName: org.eclipselabs.p2.rcpupdate.utils;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Ralf Ebert
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.equinox.ds,
+ org.eclipse.equinox.p2.operations,
+ org.eclipse.equinox.p2.core,
+ org.eclipse.equinox.p2.ui,
+ org.eclipse.equinox.p2.metadata,
+ org.eclipse.core.runtime,
+ org.eclipse.equinox.p2.metadata.repository,
+ org.eclipse.equinox.p2.artifact.repository,
+ org.eclipse.equinox.p2.extensionlocation,
+ org.eclipse.equinox.p2.updatesite,
+ org.eclipse.equinox.p2.director,
+ org.eclipse.equinox.p2.engine,
+ org.eclipse.equinox.p2.core,
+ org.eclipse.ecf,
+ org.eclipse.ecf.filetransfer,
+ org.eclipse.ecf.identity,
+ org.eclipse.ecf.provider.filetransfer,
+ org.apache.commons.codec,
+ org.apache.commons.httpclient,
+ org.eclipse.equinox.p2.ui.sdk.scheduler,
+ org.eclipse.equinox.simpleconfigurator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipselabs.p2.rcpupdate.utils
+Bundle-Activator: org.eclipselabs.p2.rcpupdate.utils.plugin.Activator

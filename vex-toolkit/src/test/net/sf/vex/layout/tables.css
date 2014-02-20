@@ -1,0 +1,36 @@
+
+root {
+  display: block;
+}
+
+div {
+  display: block;
+}
+
+table {
+  display: table;
+}
+
+tbody {
+  display: table-row-group;
+}
+
+thead {
+  display: table-header-group;
+}
+
+tr {
+  display: table-row;
+}
+
+td {
+  display: table-cell;
+}
+
+b {
+  display: inline;
+}
+
+p {
+  display: block;
+}

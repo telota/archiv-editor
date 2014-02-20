@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.bbaw.pdr.ae.help
+Bundle-SymbolicName: org.bbaw.pdr.ae.help; singleton:=true
+Bundle-Version: 2.0.0
+Bundle-Vendor: BBAW
+Require-Bundle: org.eclipse.help.base;bundle-version="3.4.0",
+ org.eclipse.help.ui;bundle-version="3.4.1",
+ org.eclipse.help.webapp;bundle-version="3.4.1",
+ org.eclipse.ui.forms;bundle-version="3.4.1",
+ org.eclipse.equinox.http.jetty;bundle-version="2.0.100",
+ org.apache.jasper;bundle-version="5.5.17",
+ org.eclipse.rap.help;bundle-version="1.5.1";resolution:=optional
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

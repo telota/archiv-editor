@@ -1,0 +1,124 @@
+<?xml version='1.0'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+
+  <head>
+
+    <title>The Vex Layout Engine</title>
+
+  </head>
+
+  <body>
+
+    <h1>The Vex Layout Engine</h1>
+
+    <p>The purpose of the Vex Layout Engine is to create a visual 
+    representation of a document given a CSS stylesheet. This visual 
+    representation is a nested hierarchy of rectangular boxes, 
+    implemented as a tree of objects each implementing the Box 
+    interface. Each box has the following properties.</p>
+
+    <ul>
+
+      <li>The x- and y-coordinates of the box. These coordinates are 
+      relative to the containing parent box for efficiency: if a 
+      box&apos;s position changes, it need not recalculate the 
+      positions of its children. For boxes corresponding to a document 
+      element, the coordinates match the coordinates of the CSS content 
+      area, which is inside any margins, borders, and padding.</li>
+
+      <li>The height and width of the box. For boxes corresponding to a 
+      document element, this is the height and width of the CSS content 
+      area, that is, the area inside any margins, borders, and 
+      padding.</li>
+
+      <li>The document element associated with the box, if any.</li>
+
+      <li>The child boxes of the box, if any.</li>
+
+      <li>The range of document offsets represented by the box, if 
+      any.</li>
+
+    </ul>
+
+    <p>Additionally, each box supports the following operations.</p>
+
+    <ul>
+
+      <li>Determine a <i>caret</i>, that is, a visual representation of 
+      the current insertion point, for a given document offset.</li>
+
+      <li>Return the document offset closest to a given (x, y) position 
+      relative to the top-left corner of the box.</li>
+
+    </ul>
+
+    <p>There are two main types of box. <i>Block boxes</i> normally 
+    contain other boxes and stack their children vertically (with 
+    TableRowBox being an exception whose children are stacked 
+    horizontally). <i>Inline boxes</i> may contain child boxes or other 
+    content such as text; their children are stacked horizontally and 
+    they may be split to wrap content into a series of lines.</p>
+
+    <p>A box may acquire its children in a number of ways. Boxes 
+    associated with document elements (e.g. BlockElementBox) create 
+    their own children by inspecting the child nodes of the associated 
+    element. This can happen immediately in the box&apos;s constructor, 
+    or may be deferred for performance. In other cases, a box&apos;s 
+    children are created by its parent and passed to its constructor. 
+    Finally, simple boxes such as DocumentTextBox and PlaceholderBox 
+    have no child boxes; they serve simply to display content or to aid 
+    in navigation.</p>
+
+    <h2>Layout Process</h2>
+
+    <p>The layout process begins with a VexWidgetImpl object, which 
+    creates a RootBox containing a BlockElementBox corresponding with 
+    the document&apos;s root element. Each BlockElementBox does not 
+    initially create its children. Instead, it estimates its height 
+    based on the current font size and the number of characters covered 
+    by the element.</p>
+
+    <p>At any one time, the user can only view a particular horizontal 
+    band of the document. To avoid unnecessary work, the VexWidgetImpl 
+    only requests that the RootBox lay out (that is, create and 
+    position children) within that horizontal band. Each 
+    BlockElementBox that is asked to layout a band creates its 
+    children, then propagates the layout call to children that fall 
+    inside the band. Newly created children that fall outside the 
+    visible band are not laid out. Instead, they are left with their 
+    initial size estimates.</p>
+
+    <p>While many BlockElementBoxes contain only other BlockElementBox 
+    children, eventually a BlockElementBox will need to lay out a run 
+    of inline content, that is, text and inline-formatted 
+    elements...</p>
+
+    <h2>Document Changes and Layout Updates</h2>
+
+    <h2>Content Boxes</h2>
+
+    <p>A box is said to <i>have content</i> if it corresponds to a 
+    range of character offsets in the source document. The simplest 
+    type of content box is a DocumentTextBox, which corresponds to a 
+    sequence of characters in the source document. BlockElementBoxes 
+    and InlineElementBoxes also have content. Boxes such as 
+    StaticTextBox and DrawableBox are purely visual and do not 
+    represent document content.</p>
+
+    <h2>Keyboard Navigation</h2>
+
+    <p>The user can change the insertion point by pressing one of the 
+    four arrow keys, the PgUp or PgDn keys, or the Home or End keys. 
+    The challenge of keyboard navigation is to calculate a new document 
+    offset for the insertion point given the current insertion point 
+    and the desired direction of motion. Complicating the situation is 
+    the fact that ranges of offsets may be invisible (e.g. inside a 
+    display:none block); the new offset must be visible.</p>
+
+    <h2>Mouse Navigation</h2>
+
+  </body>
+
+</html>
+

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.bbaw.pdr.ae.dateParser;singleton:=true
+Bundle-Version: 2.2.0.qualifier
+Bundle-Activator: org.bbaw.pdr.ae.dateparser.Activator
+Bundle-Vendor: %Bundle-Vendor
+Require-Bundle: org.eclipse.ui;resolution:=optional,
+ org.eclipse.core.runtime,
+ org.eclipse.rap.ui;resolution:=optional,
+ org.bbaw.pdr.ae.view.control
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.bbaw.pdr.ae.dateparser
+Bundle-Localization: plugin
+Bundle-ClassPath: .
+Import-Package: org.bbaw.pdr.ae.view.main.interfaces

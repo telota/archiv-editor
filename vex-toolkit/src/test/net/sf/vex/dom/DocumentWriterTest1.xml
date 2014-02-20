@@ -1,0 +1,11 @@
+<html>
+  <body style="font: 10pt 'Times New Roman', serif;" foo="bar none" xml:lang="en">
+  
+    <p>This should be a complex document with some <a href="here is a
+    URL">elements with attributes</a>. The more complex, the more
+    thorough the check will be.</p>
+    
+    <img src="http://myhost.com/really/long/path/to/a/jpeg.jpg" alt="&lt;pickin &amp; grinnin&gt;"/>
+    
+  </body>
+</html>

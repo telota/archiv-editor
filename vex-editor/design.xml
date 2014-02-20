@@ -1,0 +1,163 @@
+<?xml version='1.0'?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN" "http://www.oasis-open.org/docbook/xml/4.3b2/docbookx.dtd">
+<article>
+
+  <articleinfo>
+
+    <title>Vex Editor Design</title>
+
+    <author><firstname>John</firstname><surname>Krasnay</surname></author>
+
+    <revhistory>
+
+      <revision><revnumber>0.1</revnumber><date>2005-01-06</date><authorinitials>jk</authorinitials><revdescription><para>Initial 
+      version.</para></revdescription></revision>
+
+    </revhistory>
+
+  </articleinfo>
+
+  <section>
+
+    <title>Introduction</title>
+
+    <para>This document describes the internal design of the Vex XML 
+    Editor. The components described here describe the higher-level UI 
+    implemented on top of the Eclipse Platform. Internals of the 
+    VexWidget are described in the design document for the <literal>
+    vex-toolkit</literal> module.</para>
+
+  </section>
+
+  <section>
+
+    <title>Configuration Items</title>
+
+    <para>Vex is an extensible platform for editing XML-based content. 
+    Because Vex is based on the Eclipse Platform, it leverages the 
+    powerful Eclipse extension point mechanism, and extensions to Vex 
+    are indeed implemented as Eclipse extensions. See 
+    <xref linkend="extensionpoints"/> for a list of the supported 
+    extension points. Typically, Vex plugins consist of declarative 
+    information such as DTD files, CSS files, and data in the <filename>
+    plugin.xml</filename> file, and can usually be implemented with 
+    little or no Java code. Extensions implementing Vex features such 
+    as new document types and styles are hereafter referred to as 
+    "configuration items".</para>
+
+    <para>One problem with Eclipse extensions, however, is that that 
+    they must be installed prior to running the executable. Within the 
+    Eclipse Plug-in Development Environment, plugins are tested by 
+    running another instance of the workbench, the Runtime Workbench. 
+    While this makes sense for Java-based plugins, it is awkward 
+    overkill for the declarative-style plugins used to extend 
+    Vex.</para>
+
+    <para>To solve this problem, we have implemented (as of v1.2) the 
+    concept of Vex Plugin Projects. A Vex Plugin Project is simply a 
+    project with the nature <literal>
+    net.sf.vex.editor.pluginNature</literal> and configured with the 
+    Vex Plugin Project Builder. When asked to build a Vex Plugin 
+    Project, the builder scans the file <filename>
+    vex-plugin.xml</filename> looking for extensions implementing Vex 
+    configuration items. Any related resources, such as a document 
+    type's DTD, are parsed. If all is well, each configuration item is 
+    registered with the VexPlugin and is available for immediate use. 
+    Most Vex configuration items (those that do not involve Java code) 
+    can therefore be created, tested, and modified from within Vex 
+    itself, without deferring to a runtime workbench.</para>
+
+    <sidebar>
+
+      <title>Why vex-plugin.xml?</title>
+
+      <para>In the Eclipse SDK, the resource name 
+      <filename>plugin.xml</filename> is mapped to the Eclipse Plug-in 
+      Manifest Editor. In the future, we would like to provide a 
+      special editor for Vex configuration items. By using a different 
+      filename, we can establish this binding without disturbing the 
+      default binding for <filename>plugin.xml</filename>.</para>
+
+    </sidebar>
+
+    <section>
+
+      <title>Data Model</title>
+
+      <para>Each Eclipse plug-in that defines Vex configuration items, 
+      and each Vex plugin project, is associated with an instance of 
+      <classname>net.sf.vex.editor.config.VexConfiguration</classname>, 
+      which contains all configuration items defined by that plugin or 
+      project. Each Vex configuration has a unique identifier, which 
+      for Eclipse plugins is the plugin identifier. The Vex plugin 
+      class, <classname>net.sf.vex.editor.VexPlugin</classname>, 
+      maintains a registry of <classname>VexConfiguration</classname> 
+      objects.</para>
+
+      <para>Configuration items are defined as subclasses of 
+      <classname>net.sf.vex.editor.ConfigItem</classname>, and are 
+      essentially data objects with properties defining the item, for 
+      example, the name and public ID of a document type. Configuration 
+      items are usually associated with a resource; the 
+      <classname>ConfigItem</classname> class tracks the path of this 
+      resource, relative to the defining project/plugin, in the 
+      <literal>resourceUri</literal> property.</para>
+
+    </section>
+
+    <section>
+
+      <title>Configuration Item Factories</title>
+
+      <para>Each type of configuration item is associated with a 
+      configuration item factory, a class that implements 
+      <classname>net.sf.vex.editor.config.IConfigItemFactory</classname>. 
+      The factory has the following responsibilities.</para>
+
+      <itemizedlist>
+
+        <listitem>
+
+          <para>To instantiate and initialize a new configuration item 
+          given an array of 
+          <classname>org.eclipse.core.runtime.IConfigurationElement</classname> 
+          objects. These objects represent the contents of an extension 
+          in <filename>plugin.xml</filename> or 
+          <filename>vex-plugin.xml</filename>.</para>
+
+        </listitem>
+
+        <listitem>
+
+          <para>To parse the resources associated with the 
+          configuration item.</para>
+
+        </listitem>
+
+        <listitem>
+
+          <para>To list the file extensions associated with resources 
+          associated with that kind of configuration item.</para>
+
+        </listitem>
+
+      </itemizedlist>
+
+      <para>For example, the <classname>DoctypeFactory</classname> 
+      produces instances of the <classname>DocumentType</classname> 
+      class, parses DTD files, and specifies that it handles re</para>
+
+      <para />
+
+    </section>
+
+  </section>
+
+  <section>
+
+    <title id="extensionpoints">Extension Points</title>
+
+  </section>
+
+</article>
+

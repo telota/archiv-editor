@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.bbaw.pdr.ae.export.core" 
+   		name="%extension-point.name" 
+   		schema="schema/org.bbaw.pdr.ae.export.exsd"/>
+   	
+      <extension
+         point="org.eclipse.ui.exportWizards">
+         <category name="%category.name"
+               id="org.bbaw.pdr.ae.export.category.markup">
+         </category>
+         <category name="%category.name.0"
+               id="org.bbaw.pdr.ae.export.category.document">
+         </category>
+   </extension>
+   
+  <extension point="org.eclipse.ui.menus">
+     <menuContribution
+           allPopups="false"
+           locationURI="menu:org.bbaw.pdr.ae.view.main.fileMenu">
+	        <command
+               commandId="org.bbaw.pdr.ae.export.command"
+               icon="icons/document_export.png"
+               label="%command.label"
+               mnemonic="%command.mnemonic"
+               style="push">
+	        </command>
+     </menuContribution>
+  </extension>
+  
+  <extension point="org.eclipse.ui.commands">
+	 <command
+	       defaultHandler="org.bbaw.pdr.ae.export.internal.ExportCommandWrapper"
+	       description="%command.description"
+	       id="org.bbaw.pdr.ae.export.command"
+	       name="%command.name">
+	 </command>
+  </extension>
+   
+   
+</plugin>

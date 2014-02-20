@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.loc.gov/mods/v3" targetNamespace="http://www.loc.gov/mods/v3"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace"
+        schemaLocation="http://www.loc.gov/mods/xml.xsd"/>
+    <xs:import namespace="http://www.w3.org/1999/xlink"
+        schemaLocation="http://www.loc.gov/standards/xlink/xlink.xsd"/>
+
+    <!-- 
+************* Definition of a single MODS record ***********************************************************************************************************
+-->
+
+    <xs:element name="mods" type="modsDefinition"/>
+
+    <xs:complexType name="modsDefinition">
+        <xs:sequence>
+            <xs:element ref="titleInfo" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="name" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="genre" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element ref="originInfo" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="note" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="identifier" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="location" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="accessCondition" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="relatedItem" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="recordInfo" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="ID" type="pattern.pdrid" use="required"/>
+    </xs:complexType>
+
+    <!--
+************* Top Level Elements ***********************************************************************************************************
+	-->
+
+    <xs:complexType name="accessConditionDefinition">
+        <xs:complexContent>
+            <xs:extension base="extensionDefinition">
+                <xs:attribute name="type" type="xs:string"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="extensionDefinition" mixed="true">
+        <xs:sequence>
+            <xs:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="genreDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="authority" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="identifierDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="locationDefinition">
+        <xs:sequence>
+            <xs:element ref="physicalLocation" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="shelfLocator" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="url" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="nameDefinition">
+        <xs:sequence>
+            <xs:element ref="namePart" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element ref="affiliation" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="role" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="description" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="nameTypeAttributeDefinition"/>
+    </xs:complexType>
+
+    <xs:complexType name="noteDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="originInfoDefinition">
+        <xs:sequence>
+            <xs:element ref="dateCreated" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="dateIssued" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="dateCaptured" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="copyrightDate" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="publisher" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="place" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="edition" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="partDefinition">
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="detail"/>
+            <xs:element name="extent" type="extentDefinition"/>
+            <xs:element ref="date"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="recordInfoDefinition">
+        <xs:sequence>
+            <xs:element ref="recordCreationDate" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="recordContentSource" minOccurs="1" maxOccurs="1"/>
+            <xs:element ref="recordChangeDate" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="relatedItemDefinition">
+        <xs:sequence>
+            <xs:element ref="titleInfo" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="part" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="relatedItemTypeAttributeDefinition" use="required"/>
+        <xs:attribute name="ID" type="pattern.pdrid" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="titleInfoDefinition">
+        <xs:sequence>
+            <xs:element ref="title" minOccurs="1" maxOccurs="1"/>
+            <xs:element ref="subTitle" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="partNumber" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="partName" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--
+************************************************************************************************************************
+	-->
+
+    <xs:complexType name="recordCreationDateDefinition">
+        <xs:simpleContent>
+            <xs:restriction base="dateBaseDefinition">
+                <xs:attribute name="encoding" type="dateEncodingAttributeDefinition" use="required"
+                />
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="recordChangeDateDefinition">
+        <xs:simpleContent>
+            <xs:restriction base="dateBaseDefinition">
+                <xs:attribute name="encoding" type="dateEncodingAttributeDefinition" use="required"
+                />
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!--
+************ Subordinate Type Definitions ************************************************************************************************************
+	-->
+
+    <xs:complexType name="dateBaseDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="encoding" type="dateEncodingAttributeDefinition"/>
+                <xs:attribute name="point" type="datePointAttributeDefinition"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="detailDefinition">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element ref="number"/>
+            <xs:element ref="caption"/>
+        </xs:choice>
+        <xs:attribute name="type" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="extentDefinition">
+        <xs:sequence minOccurs="0">
+            <xs:element ref="start" minOccurs="0" maxOccurs="1"/>
+            <xs:element ref="end" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="unit" type="xs:string"/>
+    </xs:complexType>
+
+    <xs:complexType name="namePartDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="namePartTypeAttributeDefinition"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="placeDefinition">
+        <xs:sequence>
+            <xs:element ref="placeTerm" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="placeTermDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="codeOrTextDefinition"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="recordContentSourceDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="authority" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="roleDefinition">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element ref="roleTerm"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="roleTermDefinition">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="authority" type="xs:string"/>
+                <xs:attribute name="type" type="codeOrTextDefinition"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!--
+************ Element Declarations ************************************************************************************************************
+	-->
+
+    <xs:element name="accessCondition" type="accessConditionDefinition"/>
+    <xs:element name="affiliation" type="xs:string"/>
+    <xs:element name="caption" type="xs:string"/>
+    <xs:element name="copyrightDate" type="dateBaseDefinition"/>
+    <xs:element name="date" type="dateBaseDefinition"/>
+    <xs:element name="dateCaptured" type="dateBaseDefinition"/>
+    <xs:element name="dateCreated" type="dateBaseDefinition"/>
+    <xs:element name="dateIssued" type="dateBaseDefinition"/>
+    <xs:element name="description" type="xs:string"/>
+    <xs:element name="detail" type="detailDefinition"/>
+    <xs:element name="edition" type="xs:string"/>
+    <xs:element name="end" type="xs:string"/>
+    <xs:element name="genre" type="genreDefinition"/>
+    <xs:element name="identifier" type="identifierDefinition"/>
+    <xs:element name="location" type="locationDefinition"/>
+    <xs:element name="name" type="nameDefinition"/>
+    <xs:element name="namePart" type="namePartDefinition"/>
+    <xs:element name="note" type="noteDefinition"/>
+    <xs:element name="number" type="xs:string"/>
+    <xs:element name="originInfo" type="originInfoDefinition"/>
+    <xs:element name="part" type="partDefinition"/>
+    <xs:element name="partName" type="xs:string"/>
+    <xs:element name="partNumber" type="xs:string"/>
+    <xs:element name="physicalLocation" type="xs:string"/>
+    <xs:element name="place" type="placeDefinition"/>
+    <xs:element name="placeTerm" type="placeTermDefinition"/>
+    <xs:element name="publisher" type="xs:string"/>
+    <xs:element name="recordChangeDate" type="recordChangeDateDefinition"/>
+    <xs:element name="recordContentSource" type="recordContentSourceDefinition"/>
+    <xs:element name="recordCreationDate" type="recordCreationDateDefinition"/>
+    <xs:element name="recordInfo" type="recordInfoDefinition"/>
+    <xs:element name="relatedItem" type="relatedItemDefinition"/>
+    <xs:element name="role" type="roleDefinition"/>
+    <xs:element name="roleTerm" type="roleTermDefinition"/>
+    <xs:element name="shelfLocator" type="xs:string"/>
+    <xs:element name="start" type="xs:string"/>
+    <xs:element name="subTitle" type="xs:string"/>
+    <xs:element name="title" type="xs:string"/>
+    <xs:element name="titleInfo" type="titleInfoDefinition"/>
+    <xs:element name="url" type="xs:anyURI"/>
+
+    <!--
+*********** Attribute definitions (simpleTypes) *************************************************************************************************************
+	-->
+
+    <xs:simpleType name="codeOrTextDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="code"/>
+            <xs:enumeration value="text"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="dateEncodingAttributeDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="w3cdtf"/>
+            <xs:enumeration value="iso8601"/>
+            <xs:enumeration value="marc"/>
+            <xs:enumeration value="temper"/>
+            <xs:enumeration value="edtf"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="datePointAttributeDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="start"/>
+            <xs:enumeration value="end"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="namePartTypeAttributeDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="date"/>
+            <xs:enumeration value="family"/>
+            <xs:enumeration value="given"/>
+            <xs:enumeration value="termsOfAddress"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nameTypeAttributeDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="personal"/>
+            <xs:enumeration value="corporate"/>
+            <xs:enumeration value="conference"/>
+            <xs:enumeration value="family"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="relatedItemTypeAttributeDefinition">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="preceding"/>
+            <xs:enumeration value="succeeding"/>
+            <xs:enumeration value="original"/>
+            <xs:enumeration value="host"/>
+            <xs:enumeration value="constituent"/>
+            <xs:enumeration value="series"/>
+            <xs:enumeration value="otherVersion"/>
+            <xs:enumeration value="otherFormat"/>
+            <xs:enumeration value="isReferencedBy"/>
+            <xs:enumeration value="references"/>
+            <xs:enumeration value="reviewOf"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!--
+************************************************************************************************************************
+	-->
+
+    <xs:simpleType name="pattern.pdrid">
+        <xs:annotation>
+            <xs:documentation>Enforces the pattern of internal IDs. The first part stores the type, second the instance ID, third the group ID and the forth part contains the object's ID.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:ID">
+            <xs:pattern value="pdr[APRU]o\.\d{3}\.\d{3}\.\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

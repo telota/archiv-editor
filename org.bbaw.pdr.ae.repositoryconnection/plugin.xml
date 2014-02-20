@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.repositoryconnection.commands.UpdateAllDataHandler"
+            id="org.bbaw.pdr.ae.repositoryconnection.commands.UpdateAllData"
+            name="UpdateAllData">
+      </command>
+      <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.repositoryconnection.commands.ModifyRepositoryConnectionHandler"
+            id="org.bbaw.pdr.ae.repositoryconnection.commands.ModifyRepositoryConnection"
+            name="ModifyRepositoryConnection">
+      </command>
+   </extension>
+<extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.bbaw.pdr.ae.view.main.preferences.GeneralPage"
+            class="org.bbaw.pdr.ae.repositoryconnection.preferences.RepositoryPage"
+            id="org.bbaw.pdr.ae.repositoryconnection.preferences.RepositoryPage"
+            name="Repository">
+      </page>
+ </extension>
+</plugin>

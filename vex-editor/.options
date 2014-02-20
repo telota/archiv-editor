@@ -1,0 +1,3 @@
+net.sf.vex.editor/debug=false
+net.sf.vex.editor/debug/config=false
+net.sf.vex.editor/debug/layout=false

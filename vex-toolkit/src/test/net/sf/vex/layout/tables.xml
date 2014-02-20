@@ -1,0 +1,538 @@
+<?xml version='1.0'?>
+<testcases css="tables.css">
+
+  <test id="Table 1R 1C (empty)" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr><td></td></tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+                <box class="TableRowBox" element="tr">
+                  <box class="TableCellBox" element="td">
+                    <box class="ParagraphBox">
+                      <box class="LineBox">
+                        <box class="PlaceholderBox"/>
+                      </box>
+                    </box>
+                  </box>
+                </box>
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Table 1R 1C" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr><td>foo</td></tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+                <box class="TableRowBox" element="tr">
+                  <box class="TableCellBox" element="td">
+                    <box class="ParagraphBox">
+                      <box class="LineBox">
+                        <box class="DocumentTextBox" text="foo"/>
+                        <box class="PlaceholderBox"/>
+                      </box>
+                    </box>
+                  </box>
+                </box>
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Table 1R 2C" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr><td>foo</td><td>bar</td></tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox" element="tr">
+
+              <box class="TableCellBox" element="td">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="foo"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+
+              <box class="TableCellBox" element="td">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Table 1R 1 Anonymous Cell" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr>foo</tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox" element="tr">
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="foo"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+            </box>
+
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Anonymous Cells 2" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr>foo <b>bar</b></tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox" element="tr">
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="foo "/>
+                    <box class="PlaceholderBox"/>
+                    <box class="InlineElementBox" element="b">
+                      <box class="DrawableBox"/>
+                      <box class="DocumentTextBox" text="bar"/>
+                      <box class="PlaceholderBox"/>
+                      <box class="DrawableBox"/>
+                    </box>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+            </box>
+
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Anonymous Cells 3" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr>foo <p>bar</p></tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+          
+          
+            <box class="TableRowBox" element="tr">
+              <box class="TableCellBox">
+                
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="foo"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+                
+                <box class="BlockElementBox" element="p">
+                  <box class="ParagraphBox">
+                    <box class="LineBox">
+                      <box class="DocumentTextBox" text="bar"/>
+                      <box class="PlaceholderBox"/>
+                    </box>
+                  </box>
+                </box>
+                
+              </box>
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Anonymous Cells 4" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr>foo <td>bar</td></tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox" element="tr">
+            
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="foo"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+              
+              <box class="TableCellBox" element="td">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Anonymous Cells 5" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tr><td>bar</td> foo</tr></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox" element="tr">
+            
+              <box class="TableCellBox" element="td">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="foo"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+              
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  <test id="Empty Table" layoutWidth="100">
+    <doc><![CDATA[ <root><table/></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox">
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Anonymous Table and Row - Empty" layoutWidth="100">
+    <doc><![CDATA[ <root><td></td></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox">
+            
+              <box class="TableCellBox" element="td">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Anonymous Table and Row" layoutWidth="100">
+    <doc><![CDATA[ <root><td>bar</td></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox">
+            
+              <box class="TableCellBox" element="td">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  <test id="Anonymous Table and Cell" layoutWidth="100">
+    <doc><![CDATA[ <root><tr>bar</tr></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox" element="tr">
+            
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Anonymous Row and Cell" layoutWidth="100">
+    <doc><![CDATA[ <root><table>bar</table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+            <box class="TableRowBox">
+            
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+  
+  <test id="Empty table-row-group" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tbody/></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox" element="tbody">
+
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  
+  <test id="table-row-group With Content" layoutWidth="100">
+    <doc><![CDATA[ <root><table><tbody>bar</tbody></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox" element="tbody">
+
+            <box class="TableRowBox">
+            
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Empty table-header-group" layoutWidth="100">
+    <doc><![CDATA[ <root><table><thead/></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox" element="thead">
+
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+
+
+  
+  <test id="table-header-group With Content" layoutWidth="100">
+    <doc><![CDATA[ <root><table><thead>bar</thead></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox" element="thead">
+
+            <box class="TableRowBox">
+            
+              <box class="TableCellBox">
+                <box class="ParagraphBox">
+                  <box class="LineBox">
+                    <box class="DocumentTextBox" text="bar"/>
+                    <box class="PlaceholderBox"/>
+                  </box>
+                </box>
+              </box>
+                
+            </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+  <test id="Table inna Table" layoutWidth="100">
+    <doc><![CDATA[ <root><table><table/></table></root> ]]></doc>
+    <result>
+      <box class="RootBox">
+        <box class="BlockElementBox" element="root">
+          <box class="TableBox" element="table">
+            <box class="TableBodyBox">
+              <box class="TableRowGroupBox">
+
+                <box class="TableRowBox">
+            
+                  <box class="TableCellBox">
+                    <box class="TableBox">
+                    </box>
+                  </box>
+                
+                </box>
+            
+              </box>
+            </box>
+          </box>
+        </box>
+      </box>
+    </result>
+  </test>
+  
+  
+</testcases>

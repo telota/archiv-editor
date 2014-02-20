@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.exportWizards">
+      <wizard
+            category="org.bbaw.pdr.ae.export.category.markup"
+            class="org.bbaw.pdr.ae.export.xml.ExportWizard"
+            icon="resources/markup.png"
+            id="org.bbaw.pdr.ae.export.xml.exportwizard"
+            name="XML">
+         <description>
+            %wizard.desc
+            
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.bbaw.pdr.ae.export.core">
+      <export
+            class="org.bbaw.pdr.ae.export.xml.ExportProvider"
+            id="org.bbaw.pdr.ae.export.xml"
+            wizardId="org.bbaw.pdr.ae.export.xml.exportwizard">
+         <filetypes>
+            <output>
+               <filetype format="Extensible Markup Language"
+                     extension="xml">
+               </filetype>
+            </output>
+         </filetypes>
+      </export>
+   </extension>
+
+
+</plugin>

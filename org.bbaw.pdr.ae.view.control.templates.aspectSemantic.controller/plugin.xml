@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.bbaw.pdr.view.control.templates.aspectSemantic.controller">
+      <AspectSemanticTemplateController
+            class="org.bbaw.pdr.ae.view.control.templates.aspectsemantic.controller.AspectSemanticTemplateController">
+      </AspectSemanticTemplateController>
+   </extension>
+   <extension
+         point="org.bbaw.pdr.view.control.templates.aspectSemantic.configEditor">
+      <SemanticTemplateConfigEditor
+            class="org.bbaw.pdr.ae.view.control.templates.aspectsemantic.controller.config.MarkupTemplateConfigEditor">
+      </SemanticTemplateConfigEditor>
+   </extension>
+
+</plugin>

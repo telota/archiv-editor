@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.backup.commands.WriteLocalBackupHandler"
+            id="org.bbaw.pdr.ae.backup.commands.WriteLocalBackup"
+            name="WriteLocalBackup">
+      </command>
+      <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.backup.commands.LoadLocalBackupHandler"
+            id="org.bbaw.pdr.ae.backup.commands.LoadLocalBackup"
+            name="LoadLocalBackup">
+      </command>
+      <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.backup.commands.CreateEmptyDBHandler"
+            id="org.bbaw.pdr.ae.backup.commands.CreateEmptyDB"
+            name="CreateEmptyDB">
+      </command>
+      <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.backup.commands.LoadConfigBackupHandler"
+            id="org.bbaw.pdr.ae.backup.commands.LoadConfigBackup"
+            name="LoadConfigBackup">
+      </command>
+      <command
+            categoryId="org.bbaw.pdr.ae.category.database"
+            defaultHandler="org.bbaw.pdr.ae.backup.commands.WriteConfigBackupHandler"
+            id="org.bbaw.pdr.ae.backup.commands.WriteConfigBackup"
+            name="WriteConfigBackupHandler">
+      </command>
+   </extension>
+
+</plugin>

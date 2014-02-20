@@ -1,0 +1,13 @@
+
+a {
+  background-color: black;
+  color: white;
+  border-top-color: blue !important;
+}
+
+* {
+  background-color: white;
+  color: black !important;
+  border-top-color: red !important;
+}
+

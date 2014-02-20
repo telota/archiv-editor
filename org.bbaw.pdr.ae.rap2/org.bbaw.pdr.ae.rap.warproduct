@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Archiv-Editor RAP" version="2.2.0" useFeatures="false" includeLaunchers="false">
+   <plugins>
+      <plugin id="com.ibm.icu.base"/>
+      <plugin id="javax.servlet.jsp"/>
+      <plugin id="net.sf.vex.editor"/>
+      <plugin id="net.sf.vex.toolkit"/>
+      <plugin id="org.apache.commons.codec"/>
+      <plugin id="org.apache.commons.el"/>
+      <plugin id="org.apache.commons.httpclient"/>
+      <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.jasper"/>
+      <plugin id="org.apache.lucene"/>
+      <plugin id="org.apache.lucene.analysis"/>
+      <plugin id="org.apache.lucene.core"/>
+      <plugin id="org.bbaw.pdr.ae.base"/>
+      <plugin id="org.bbaw.pdr.ae.common"/>
+      <plugin id="org.bbaw.pdr.ae.common.nl1" fragment="true"/>
+      <plugin id="org.bbaw.pdr.ae.config.core"/>
+      <plugin id="org.bbaw.pdr.ae.config.editor"/>
+      <plugin id="org.bbaw.pdr.ae.config.model"/>
+      <plugin id="org.bbaw.pdr.ae.control.core"/>
+      <plugin id="org.bbaw.pdr.ae.control.datahandling.xqj"/>
+      <plugin id="org.bbaw.pdr.ae.dateParser"/>
+      <plugin id="org.bbaw.pdr.ae.dateParser.nl1" fragment="true"/>
+      <plugin id="org.bbaw.pdr.ae.db.basex.711"/>
+      <plugin id="org.bbaw.pdr.ae.errorReport"/>
+      <plugin id="org.bbaw.pdr.ae.errorReport.nl1" fragment="true"/>
+      <plugin id="org.bbaw.pdr.ae.export"/>
+      <plugin id="org.bbaw.pdr.ae.help"/>
+      <plugin id="org.bbaw.pdr.ae.help.nl1" fragment="true"/>
+      <plugin id="org.bbaw.pdr.ae.identifiers.searchService.textGrid"/>
+      <plugin id="org.bbaw.pdr.ae.indentifiers.searchService.concord"/>
+      <plugin id="org.bbaw.pdr.ae.metamodel"/>
+      <plugin id="org.bbaw.pdr.ae.model"/>
+      <plugin id="org.bbaw.pdr.ae.rap2"/>
+      <plugin id="org.bbaw.pdr.ae.repositoryConnection"/>
+      <plugin id="org.bbaw.pdr.ae.view.concurrences"/>
+      <plugin id="org.bbaw.pdr.ae.view.control"/>
+      <plugin id="org.bbaw.pdr.ae.view.control.templates.aspectSemantic.controller"/>
+      <plugin id="org.bbaw.pdr.ae.view.editorLite"/>
+      <plugin id="org.bbaw.pdr.ae.view.fileSaveAndLoad.web"/>
+      <plugin id="org.bbaw.pdr.ae.view.identifiers"/>
+      <plugin id="org.bbaw.pdr.ae.view.identifiers.nl1" fragment="true"/>
+      <plugin id="org.bbaw.pdr.ae.view.main"/>
+      <plugin id="org.bbaw.pdr.ae.view.markup.web"/>
+      <plugin id="org.bbaw.pdr.allies"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.databinding"/>
+      <plugin id="org.eclipse.core.databinding.beans"/>
+      <plugin id="org.eclipse.core.databinding.observable"/>
+      <plugin id="org.eclipse.core.databinding.property"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.equinox.app"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.http.registry"/>
+      <plugin id="org.eclipse.equinox.http.servlet"/>
+      <plugin id="org.eclipse.equinox.http.servletbridge"/>
+      <plugin id="org.eclipse.equinox.jsp.jasper"/>
+      <plugin id="org.eclipse.equinox.jsp.jasper.registry"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.equinox.servletbridge"/>
+      <plugin id="org.eclipse.equinox.servletbridge.extensionbundle" fragment="true"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.help.appserver"/>
+      <plugin id="org.eclipse.help.base"/>
+      <plugin id="org.eclipse.help.webapp"/>
+      <plugin id="org.eclipse.jetty.continuation"/>
+      <plugin id="org.eclipse.jetty.http"/>
+      <plugin id="org.eclipse.jetty.io"/>
+      <plugin id="org.eclipse.jetty.security"/>
+      <plugin id="org.eclipse.jetty.server"/>
+      <plugin id="org.eclipse.jetty.servlet"/>
+      <plugin id="org.eclipse.jetty.util"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.rap.design.example"/>
+      <plugin id="org.eclipse.rap.jface"/>
+      <plugin id="org.eclipse.rap.jface.databinding"/>
+      <plugin id="org.eclipse.rap.rwt"/>
+      <plugin id="org.eclipse.rap.rwt.osgi"/>
+      <plugin id="org.eclipse.rap.ui"/>
+      <plugin id="org.eclipse.rap.ui.forms"/>
+      <plugin id="org.eclipse.rap.ui.views"/>
+      <plugin id="org.eclipse.rap.ui.workbench"/>
+      <plugin id="org.junit"/>
+   </plugins>
+
+   <configurations>
+      <plugin id="com.ibm.icu.base" autoStart="true" startLevel="0" />
+      <plugin id="javax.servlet.jsp" autoStart="true" startLevel="0" />
+      <plugin id="net.sf.vex.editor" autoStart="true" startLevel="0" />
+      <plugin id="net.sf.vex.toolkit" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.commons.codec" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.commons.el" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.commons.httpclient" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.commons.logging" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.jasper" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.lucene" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.lucene.analysis" autoStart="true" startLevel="0" />
+      <plugin id="org.apache.lucene.core" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.base" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.common" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.config.core" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.config.editor" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.config.model" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.control.core" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.control.datahandling.xqj" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.dateParser" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.db.basex.711" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.errorReport" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.export" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.help" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.identifiers.searchService.textGrid" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.indentifiers.searchService.concord" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.metamodel" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.model" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.rap2" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.repositoryConnection" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.concurrences" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.control" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.control.templates.aspectSemantic.controller" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.editorLite" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.fileSaveAndLoad.web" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.identifiers" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.main" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.ae.view.markup.web" autoStart="true" startLevel="0" />
+      <plugin id="org.bbaw.pdr.allies" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.commands" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.contenttype" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.databinding" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.databinding.beans" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.databinding.observable" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.databinding.property" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.expressions" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.filesystem" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.jobs" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.resources" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.http.registry" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.http.servlet" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.http.servletbridge" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.jsp.jasper" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.jsp.jasper.registry" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.preferences" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.registry" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.servletbridge" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.help" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.help.appserver" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.help.base" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.help.webapp" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.continuation" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.http" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.io" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.security" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.server" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.servlet" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.jetty.util" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.osgi.services" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.design.example" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.jface" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.jface.databinding" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.rwt" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.rwt.osgi" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.ui" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.ui.forms" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.ui.views" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.rap.ui.workbench" autoStart="true" startLevel="0" />
+      <plugin id="org.junit" autoStart="true" startLevel="0" />
+   </configurations>
+
+   <warConfiguration webXml="/org.bbaw.pdr.ae.rap2/WEB-INF/web.xml" launchIni="/org.bbaw.pdr.ae.rap2/WEB-INF/launch.ini">
+   <libraries>
+      <library path="org.eclipse.equinox.servletbridge_1.2.100.v20120209-2014.jar" fromTarget="true"/>
+   </libraries>
+   </warConfiguration>
+</product>

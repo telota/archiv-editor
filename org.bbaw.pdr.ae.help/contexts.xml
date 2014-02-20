@@ -1,0 +1,22 @@
+<contexts>
+	<context id="objectsTree">
+		<description>
+			Die Baumansicht bietet einen Überlick über Personen, Aspekte und Quellen. Sie können im Baum ausgewählt und dann in Editoren betrachtet oder bearbeitet werden.		
+		</description>
+		<topic href="html/steps/objectsTree.html" label="Übersicht über die Objekte"/>	
+	</context>
+	<context id="tabFolderLeft">
+		<description>
+			Die Baumansicht bietet einen Überlick über Personen, Aspekte und Quellen.		
+		</description>
+		<topic href="html/steps/tabFolderLeft.html" label="BAum erzeugen"/>	
+	</context>
+	<context id="notificationText">
+		<description>
+			Das Notification-Element nimmt den Haupttext eines Aspektes auf. Hier kann jeder mögliche Text eingetragen und durch Tagging-Elmente markiert werden.
+
+Aspekte sind einzelne Informationen zu einer Person oder einem Aspekte, es sollten hier keine längeren Texte eingegeben werden.		
+		</description>
+		<topic href="html/steps/tagging.html" label="Erläuterungen zum Tagging"/>	
+	</context>
+</contexts>

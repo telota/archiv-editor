@@ -1,0 +1,91 @@
+package org.basex.query.iter;
+
+import org.basex.query.QueryException;
+import org.basex.query.item.Empty;
+import org.basex.query.item.Item;
+import org.basex.query.item.Seq;
+import org.basex.query.item.Value;
+import org.basex.util.Array;
+
+/**
+ * Iterator interface.
+ *
+ * @author BaseX Team 2005-12, BSD License
+ * @author Christian Gruen
+ */
+public abstract class Iter {
+  /**
+   * Returns the next item or {@code null} if no other items are found.
+   * @return resulting item or {@code null}
+   * @throws QueryException query exception
+   */
+  public abstract Item next() throws QueryException;
+
+  /**
+   * Returns the specified item, or an arbitrary item if the index is invalid.
+   * This method needs to be implemented - and should only be called - if
+   * {@link Iter#size} returns the correct number of results. A calling method
+   * should call {@link #reset} after the last items has been retrieved.
+   * @param i value offset
+   * @return specified item
+   * @throws QueryException query exception
+   */
+  @SuppressWarnings("unused")
+  public Item get(final long i) throws QueryException {
+    return null;
+  }
+
+  /**
+   * Returns the iterator size. Note: {@code -1} is returned if the
+   * result size is unknown. If this method is implemented by an iterator,
+   * {@link #get} needs to be implemented as well.
+   * @return number of entries
+   */
+  public long size() {
+    return -1;
+  }
+
+  /**
+   * Resets the iterator and returns {@code true} if operation was successful.
+   * {@code false} is returned if the iterator cannot be reset.
+   * @return true if operator could be reset
+   */
+  public boolean reset() {
+    return false;
+  }
+
+  /**
+   * Returns a sequence with all iterator values.
+   * Must only be called if {@link #next} has not been called before.
+   * @return sequence
+   * @throws QueryException query exception
+   */
+  public Value value() throws QueryException {
+    // check if sequence is empty
+    Item i = next();
+    if(i == null) return Empty.SEQ;
+
+    // if possible, allocate array with final size, and add all single items
+    Item[] item = new Item[Math.max(1, (int) size())];
+    int s = 0;
+    do {
+      if(s == item.length) item = extend(item);
+      item[s++] = i;
+    } while((i = next()) != null);
+
+    // create final value
+    return Seq.get(item, s);
+  }
+
+  /**
+   * Doubles the size of an item array.
+   * @param it item array
+   * @return resulting array
+   */
+  static Item[] extend(final Item[] it) {
+    final int s = it.length;
+    final Item[] tmp = new Item[Array.newSize(s)];
+    System.arraycopy(it, 0, tmp, 0, s);
+    return tmp;
+  }
+}

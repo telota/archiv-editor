@@ -1,0 +1,1 @@
+AspectOrderer nach Places wirft NullPointer
