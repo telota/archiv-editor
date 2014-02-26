@@ -13,21 +13,17 @@ Installation
 
 3. Go to plugin org.bbaw.pdr.ae.standalone, open Product-Configuration file org.bbaw.pdr.ae.featureProduct.product in Product-Editor (PDE-Tools)
 
-4. Overview-Page, click on "Launch an Eclipse application". This will create a Run-Configuration based on the Product-Configuration. Running this Run-Configuration will fail at the first attempt. Then go to Menu>>Run>>Run Configurations... Open the newly created Run-Configuration, select Tab Plug-ins, click "Add Required Plug-ins", then hit Run.
+4. Overview-Page, click on "Launch an Eclipse application". This will create a Run-Configuration based on the Product-Configuration. Running this Run-Configuration will fail at the first attempt. Then go to Menu>>Run>>Run Configurations... Open the newly created Run-Configuration, select Tab Plug-ins, click "Add Required Plug-ins", then hit Run. OR:  Create run configuration and add required plugins and features.
 
-OR
+5. Archiv-Editor will automatically create 2 folders in the parent folder of your workspace, one AEConfig with a default configuration file, and baseXHOME with database files for the local baseX-database.
 
-4. create run configuration and add required plugins and features.
+6. You will see the Installation-Dialog, change settings if needed, click "Save".
 
-Archiv-Editor will automatically create 2 folders in the parent folder of your workspace, one AEConfig with a default configuration file, and baseXHOME with database files for the local baseX-database.
+7. Next you will see the Repository-Connection-Dialog. Click "Cancel", you don't need to enter a valid repository connection. For more, see the manual at pdr.bbaw.de/ae
 
-5. You will see the Installation-Dialog, change settings if needed, click "Save".
+8. Now you'll be requested to enter a username: enter eg. admin/admin, or user/user
 
-6. Next you will see the Repository-Connection-Dialog. Click "Cancel", you don't need to enter a valid repository connection. For more, see the manual at pdr.bbaw.de/ae
-
-7. Now you'll be requested to enter a username: enter eg. admin/admin, or user/user
-
-8. Eventually, the main perspective will show up.
+9. Eventually, the main perspective will show up.
 
 
 Build
