@@ -1,10 +1,7 @@
 
 bin/
 .svn/
-.metadata/
-
-.project
-/org.bbaw.pdr.ae.common/baseXHOME
+.metadata/org.bbaw.pdr.ae.common/baseXHOME
 /org.bbaw.pdr.ae/.settings
 
 /org.bbaw.pdr.ae.aeimport/.settings
