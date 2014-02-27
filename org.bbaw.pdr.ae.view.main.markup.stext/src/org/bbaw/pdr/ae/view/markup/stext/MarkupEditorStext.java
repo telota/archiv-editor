@@ -188,7 +188,7 @@ public class MarkupEditorStext implements IMarkupEditor
 	@Override
 	public final void createEditor()
 	{
-		_stext = new StyledText(_composite, SWT.MULTI | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
+		_stext = new StyledText(_composite, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL | SWT.BORDER);
 		GridData gd = new GridData();
 		gd.grabExcessHorizontalSpace = true;
 		gd.horizontalAlignment = SWT.FILL;

@@ -252,9 +252,9 @@ public class EasyAspectEditor extends Composite implements IAEBasicEditor, ISele
 			loadAspect();
 			setSelected(false, true);
 		}
-		_group.pack();
+//		_group.pack();
 		_group.layout();
-		this.pack();
+//		this.pack();
 		this.layout();
 	}
 
@@ -2081,7 +2081,7 @@ public class EasyAspectEditor extends Composite implements IAEBasicEditor, ISele
 	public void resize()
 	{
 		Point point = EasyAspectEditor.this.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
-		EasyAspectEditor.this.setSize(point.x, point.y);
+		EasyAspectEditor.this.setSize(850, point.y);
 		for (PaintListener l : EasyAspectEditor.this._paintListeners)
 		{
 			Event ee = new Event();
