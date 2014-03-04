@@ -383,6 +383,7 @@ public class XMLContainer
 	 */
 	public final void appendComment(final String text) {
 		appendComment(text, _document.getDocumentElement());
+		appendText("\n");
 	}
 	
 	/**

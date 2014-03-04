@@ -37,8 +37,12 @@ import org.bbaw.pdr.ae.common.NLMessages;
 import org.bbaw.pdr.ae.common.icons.IconsInternal;
 import org.bbaw.pdr.ae.common.interfaces.AEFilter;
 import org.bbaw.pdr.ae.export.pluggable.AeExportCoreProvider;
+import org.bbaw.pdr.ae.export.pluggable.AeExportUtilities;
 import org.bbaw.pdr.ae.export.swt.preview.PdrSelectionFilterPreview;
+import org.bbaw.pdr.ae.model.Aspect;
 import org.bbaw.pdr.ae.model.PdrObject;
+import org.bbaw.pdr.ae.model.Person;
+import org.bbaw.pdr.ae.model.Reference;
 import org.bbaw.pdr.ae.model.view.OrderingHead;
 import org.bbaw.pdr.ae.view.control.PDRObjectsProvider;
 import org.bbaw.pdr.ae.view.control.PDROrdererFactory;
@@ -71,6 +75,17 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
+/**
+ * Widget arrangement for displaying and modifying a selection of PDR objects in a Wizard.
+ * 
+ * Used by export wizards to let users preview and change their selection of PDR objects
+ * they want to export. Selected {@link Person}s, their {@link Aspect}s and the {@link Reference}s of 
+ * those are shown in hierarchical order by a {@link PdrSelectionFilterPreview}, additional
+ * controls for grouping and filtering are made possible with a row of buttons below.
+ * 
+ * @author jakobh
+ *
+ */
 public class PdrObjectsPreview extends Composite implements IPdrWidgetStructure  {
 	
 	private final static String SETTINGS_SECTION = "pdrObjectsPreview";
@@ -123,6 +138,14 @@ public class PdrObjectsPreview extends Composite implements IPdrWidgetStructure 
 		super(parent, style);
 	}
 	
+	/**
+	 * Creates a new {@link PdrObjectsPreview} instance operating on a given {@link WizardPage}. 
+	 * @param pluginId identifier of the plugin using the wizard. Used for restoring dialog settings
+	 * with {@link IDialogSettings}. Can be retrieved with <code>FrameworkUtil.getBundle(getClass()).getSymbolicName();</code>
+	 * or via the plugin's {@link AeExportUtilities} provider.
+	 * @param page the {@link WizardPage} this widget is to work with. Required for disabling wizard controls on invalid input
+	 * @param parent parent {@link Composite} for this widget.
+	 */
 	public PdrObjectsPreview(String pluginId, WizardPage page, Composite parent) {
 		super(parent, SWT.BORDER);
 		this.wizardPage=page;

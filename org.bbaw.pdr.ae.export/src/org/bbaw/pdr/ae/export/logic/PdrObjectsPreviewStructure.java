@@ -549,7 +549,13 @@ public class PdrObjectsPreviewStructure implements ITreeContentProvider, ICheckS
 				"Sorting criteria: "+sortedBy+", ascending: "+asc));
 		if (comp != null) {
 			provider.setComparator(comp);
-			buildTree();
+			// TODO: experiment: rather than rebuilding the entire thing, we just sort 
+			// the structnodes children lists
+			//buildTree(); 
+			Vector<StructNode> nodes = new Vector<StructNode>();
+			//TODO: getselectionheads nachbauen, alle nodes rauskramen, die person enthalten
+			//TODO nodecomparator mit comp erzeugen
+			//TODO: alle nodes sortieren
 			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID, 
 					" > "+comp.getClass().getName()+"\n"+
 					(asc ? "ascending" : "descending")));

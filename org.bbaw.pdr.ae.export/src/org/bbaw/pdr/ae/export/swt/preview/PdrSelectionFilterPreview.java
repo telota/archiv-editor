@@ -33,6 +33,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
+import org.bbaw.pdr.ae.common.AEConstants;
+import org.bbaw.pdr.ae.common.CommonActivator;
 import org.bbaw.pdr.ae.export.logic.PdrObjectsPreviewStructure;
 import org.bbaw.pdr.ae.export.logic.StructNode;
 import org.bbaw.pdr.ae.export.pluggable.AeExportCoreProvider;
@@ -42,6 +44,9 @@ import org.bbaw.pdr.ae.model.PdrObject;
 import org.bbaw.pdr.ae.model.Person;
 import org.bbaw.pdr.ae.model.ReferenceMods;
 import org.bbaw.pdr.ae.view.control.PDRObjectsProvider;
+import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
@@ -229,6 +234,8 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 	 * that choice, possibly via the local export provider.  
 	 */
 	
+	private ILog log = AEConstants.ILOGGER;
+	
 	// PdrSelectionPreview private fields
 	private Tree tree;
 	//ITreeContentProvider contentProvider;
@@ -283,6 +290,7 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 		setInput(previewStructure.getElements(null));
 		// select all
 		for (StructNode root : previewStructure.getElements()) {
+			//FIXME
 			//setChecked(root, true, false);
 			/*for (StructNode chld : root.getChildren()) {
 				collapseToLevel(chld, ALL_LEVELS);
@@ -371,7 +379,7 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 					setValid();
 					return;
 				}
-			setInvalid("Please select at least one Person.");
+			setInvalid("Please select at least one Person."); //TODO nl
 		} else
 			setInvalid("Please select some content to export.");	
 	}
@@ -407,7 +415,8 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 	 */
 	@Override
 	public boolean isValid() {
-		System.out.println("Pdr objects previewer is "+(isvalid ? "valid." : "not valid!"));
+		log.log(new Status(isvalid ? IStatus.INFO : IStatus.OK, CommonActivator.PLUGIN_ID,
+				"Pdr objects previewer is "+(isvalid ? "valid." : "not valid!")));
 		return isvalid;
 	}
 
@@ -417,7 +426,8 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 	 */
 	private void setInvalid(String message) {
 		if (isvalid) if (message != null && !message.equals(this.message)){
-			System.out.println("Mark previewer as invalid");
+			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
+					"Mark previewer as invalid"));
 			isvalid = false;
 			this.message = message;
 			IWizardContainer wizardContainer = this.wizardPage.getWizard().getContainer(); 
@@ -430,7 +440,8 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 	 * Mark this widget valid
 	 */
 	private void setValid() {
-		System.out.println("Preview selection is valid.");
+		log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
+				"Preview selection is valid."));
 		if (!isvalid) {
 			isvalid = true;
 			this.message = null;
@@ -572,7 +583,8 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 		// (inversely, since right now, the entire tree is expanded)
 		// restore expansion situation
 		for (StructNode als : aliases) {
-			System.out.println("Expand node: "+als.getLabel()+" ("+als.getRootCategory()+")");
+			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
+					"Expand node: "+als.getLabel()+" ("+als.getRootCategory()+")"));
 			als.setExpanded(true);
 			collapseToLevel(als, ALL_LEVELS);
 			expandToLevel(als, 1);

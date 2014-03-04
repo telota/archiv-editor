@@ -29,6 +29,8 @@
  */
 package org.bbaw.pdr.ae.export.logic;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Vector;
 
@@ -476,5 +478,13 @@ public class StructNode implements Comparable<StructNode> {
 			pn = copy;
 		}
 		return pn;
+	}
+	
+	/**
+	 * 
+	 * @param comp
+	 */
+	public void sort(NodeComparator ncomp) {
+		Collections.sort(this.children, ncomp);
 	}
 }
