@@ -147,7 +147,7 @@ public class PdrObjectsPreview extends Composite implements IPdrWidgetStructure 
 	 * @param parent parent {@link Composite} for this widget.
 	 */
 	public PdrObjectsPreview(String pluginId, WizardPage page, Composite parent) {
-		super(parent, SWT.BORDER);
+		super(parent, SWT.BORDER | SWT.SHADOW_ETCHED_IN);
 		this.wizardPage=page;
 		//setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		this.pluginId = pluginId;
@@ -218,7 +218,7 @@ public class PdrObjectsPreview extends Composite implements IPdrWidgetStructure 
 						AeExportCoreProvider.getInstance().getPdrObjectsProvider().setOrderer(null);
 					currentOrdererSelection=item;
 					selection = currentOrdererSelection;
-					preview.updateColumnLabel(NLMessages.getString("View_group_by")+": "+groupingCombo.getText());
+					preview.updateColumnLabel(NLMessages.getString("View_group_by")+groupingCombo.getText());
 					preview.update();
 				}
 			}
@@ -232,7 +232,7 @@ public class PdrObjectsPreview extends Composite implements IPdrWidgetStructure 
 				PDROrdererFactory.ORDERER_IDs[currentOrdererSelection]);
 		AeExportCoreProvider.getInstance().getPdrObjectsProvider().setOrderer(
 				PDROrdererFactory.createAspectOrderer(PDROrdererFactory.ORDERER_IDs[currentOrdererSelection]));
-		preview.updateColumnLabel(NLMessages.getString("View_group_by")+": "+groupingCombo.getText());
+		preview.updateColumnLabel(NLMessages.getString("View_group_by")+groupingCombo.getText());
 		preview.update(); // geht vermutlich auch schöner. FIXME: wirft unten im objectsprovider auch nen
 		// nullpointer!
 		

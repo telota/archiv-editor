@@ -381,7 +381,7 @@ public class PdrSelectionFilterPreview extends CheckboxTreeViewer
 				}
 			setInvalid("Please select at least one Person."); //TODO nl
 		} else
-			setInvalid("Please select some content to export.");	
+			setInvalid("Please select some content to export.");	//TODO nl
 	}
 	/**
 	 * returns an array of all objects represented by tree items whose check

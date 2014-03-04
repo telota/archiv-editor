@@ -231,16 +231,8 @@ public abstract class AeExportUtilities {
 		if (!file.exists())
 		{
 			InputStream stream = this.getClass().getClassLoader().getResourceAsStream(path);
-			File dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets");
-			if (!dir.exists())
-			{
-				dir.mkdir();
-			}
-			dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets"+ AEConstants.FS + "resources");
-			if (!dir.exists())
-			{
-				dir.mkdir();
-			}
+			File dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets"+ AEConstants.FS + "resources");
+			if (!dir.exists()) dir.mkdirs();
 			OutputStream out = new FileOutputStream(file);
 
 			// Transfer bytes from in to out

@@ -45,7 +45,9 @@ import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 
 public class IntroPage extends WizardPage {
@@ -104,6 +106,17 @@ public class IntroPage extends WizardPage {
 		provider.styleSelector.init(NLMessages.getString("export.fileselector.stylesheet.caption"), 
 				3, "stylesheets");
 		provider.registerWidget(provider.outputSelector);
+
+		// Options Panel
+		Group optsGrp = new Group(container, SWT.BORDER | SWT.SHADOW_ETCHED_IN);
+		optsGrp.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
+		optsGrp.setLayout(new GridLayout(3, false));
+		optsGrp.setText("Options"); //TODO nl
+		// 'open result in external' checkbox
+		provider.opnExtBtn = new Button(optsGrp, SWT.CHECK);
+		provider.opnExtBtn.setText("Open result in external viewer."); //TODO nl
+		provider.opnExtBtn.setSelection(
+				provider.getSettings().getBoolean("open_ext_viewer"));		
 		
 		container.pack();
 		container.layout(true, true);
