@@ -36,7 +36,7 @@ import org.bbaw.pdr.ae.export.pluggable.AeExportCoreProvider;
 import org.bbaw.pdr.ae.export.pluggable.AeExportUtilities;
 import org.bbaw.pdr.ae.export.swt.FileSelectionGroup;
 import org.bbaw.pdr.ae.export.swt.PdrObjectsPreview;
-import org.bbaw.pdr.ae.export.xml.ExportWizard;
+import org.bbaw.pdr.ae.export.xml.XmlExportWizard;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -55,7 +55,7 @@ import org.osgi.framework.FrameworkUtil;
 public class IntroPage extends WizardPage {
 
 	private Composite container;
-	private ExportWizard wizard;
+	private XmlExportWizard wizard;
 	//TODO; probably just debugging stuff, right?
 	private static int count = 0;
 	//logger
@@ -74,7 +74,7 @@ public class IntroPage extends WizardPage {
 				"Create controls in XML export wizard page instance no. "+count));
 		setControl(parent); // wichtig!
 		// retrieve owning wizard..
-		wizard = (ExportWizard) this.getWizard();
+		wizard = (XmlExportWizard) this.getWizard();
 		// get id of owning plugin..
 		String pluginId = FrameworkUtil.getBundle(getClass()).getSymbolicName();
 		// get util provider for XML plugin based on active wizard

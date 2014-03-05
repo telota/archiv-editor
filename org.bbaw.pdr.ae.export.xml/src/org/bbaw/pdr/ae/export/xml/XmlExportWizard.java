@@ -29,7 +29,9 @@
  */
 package org.bbaw.pdr.ae.export.xml;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 
 import org.bbaw.pdr.ae.common.AEConstants;
 import org.bbaw.pdr.ae.common.CommonActivator;
@@ -39,7 +41,6 @@ import org.bbaw.pdr.ae.export.pluggable.AeExportUtilities;
 import org.bbaw.pdr.ae.export.swt.FileSelectionGroup;
 import org.bbaw.pdr.ae.export.swt.PdrObjectsPreview;
 import org.bbaw.pdr.ae.export.xml.pages.IntroPage;
-import org.bbaw.pdr.ae.export.xml.pages.Options;
 import org.bbaw.pdr.ae.export.xml.utils.XMLContainer;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
@@ -57,7 +58,7 @@ import org.eclipse.ui.IWorkbench;
  * @author jhoeper
  *
  */
-public class ExportWizard extends Wizard implements IExportWizard{
+public class XmlExportWizard extends Wizard implements IExportWizard{
 
 	protected WizardPage introPage;
 	protected WizardPage optionsPage;
@@ -67,34 +68,21 @@ public class ExportWizard extends Wizard implements IExportWizard{
 	
 	private ILog log = AEConstants.ILOGGER; 
 	
-	public ExportWizard() {
+	public XmlExportWizard() {
 		super();
-		//AeExportCoreProvider.getInstance().getWizardProvider(this).setWizard(this);
-		//setNeedsProgressMonitor(true);
-		setWindowTitle(NLMessages.getString("Export_Start")); //TODO: extension point
+		setWindowTitle(NLMessages.getString("Export_Start"));
 	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		AeExportCoreProvider.getInstance().getWizardProvider(this).setWizard(this);
-		//System.out.println(" EXPORT WIZARD INIT() CALL");
-/*		Bundle bundle = FrameworkUtil.getBundle(AeExportCoreProvider.class);
-		ImageDescriptor descriptor = 
-				ImageDescriptor.createFromURL(
-						FileLocator.find(bundle, 
-										new Path("resources"+
-												AEConstants.FS+
-												"header.png"), 
-										null));
-		this.setDefaultPageImageDescriptor(descriptor);*/
 		this.createPageControls(getShell());
 	}
 	
 	@Override
 	public void addPages() {
-		introPage = new IntroPage("XML Export - Output"); 
+		introPage = new IntroPage(""); 
 		addPage(introPage);
-		optionsPage = new Options("XML Export - Options");
 	}
 	
 	@Override
@@ -107,30 +95,17 @@ public class ExportWizard extends Wizard implements IExportWizard{
 		
 		//TODO:	getContainer().run(true, true, new IRunnableWithProgress() 
 		
-		/*ITreeSelection selection = (ITreeSelection)preViewer.getSelection();
-		System.out.println("Selection:");
-		for (Object o : selection.toArray()) {
-			PdrId pdrId = ((PdrObject)o).getPdrId();			
-			PdrObject pdrO = (PdrObject)o;
-			System.out.println(pdrO.getDisplayNameWithID());
-		}*/
-		
 		AeExportUtilities provider = AeExportCoreProvider.getInstance().getWizardProvider(this);
-		
-/*		IDialogSettings settings = provider.getSettings();
-		String filename = settings.get("filename");
-		String dir = settings.get(AeExportCoreProvider.DEF_DIR);*/
-		
 		File file = outputFileSelect.getFile();
 		if (file == null) return false;
-		
 		String filename = file.getAbsolutePath();
 		//TODO: test!
 		//XMLContainer xml = new XMLContainer(preview.getSelectedObjects());
 		
 		XMLContainer xml = new XMLContainer(preview.getSelectionHeads());
 		try	{
-			xml.saveToFile(filename);
+			xml.saveToFile(filename);		
+
 			provider.terminateWidgets();
 			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
 				"Succesfully saved XML to file " + filename));			
@@ -142,6 +117,13 @@ public class ExportWizard extends Wizard implements IExportWizard{
 			return false;
 		}
 		//AeExportCoreProvider.getInstance().saveSettings();
+		// open result in external application
+		/*
+		try {
+			Desktop.getDesktop().open(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
 		return true;
 	}
 	
