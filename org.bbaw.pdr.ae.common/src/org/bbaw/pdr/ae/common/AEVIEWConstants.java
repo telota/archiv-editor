@@ -33,6 +33,9 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Monitor;
 
 /**
  * Zentrale Ablage fuer Konstanten des Archiv-Editors.
@@ -52,10 +55,23 @@ public final class AEVIEWConstants
 	public static final Color VIEW_FOREGROUND_DESELECTED_COLOR = _resources.createColor(new RGB(128, 128, 128));
 	public static final Color VIEW_TEXT_SELECTED_COLOR = _resources.createColor(new RGB(0, 0, 0));
 	public static final Color VIEW_TEXT_DESELECTED_COLOR = _resources.createColor(new RGB(163, 163, 163));
+	
+	public static final boolean IS_SMALL_MONITOR_DIMENSION;
 
 	/* Initialisierung */
 	static
 	{
+	final Display display = Display.getDefault();  
+	   final Monitor monitor = display.getPrimaryMonitor();
+	   final Rectangle rect;
+	   if (monitor != null) {
+	      rect = monitor.getClientArea();
+	   } else {
+	      // In case we cannot find the primary monitor get the entire display rectangle
+	      // Note that it may include the dimensions of multiple monitors. 
+	      rect = display.getBounds();
+	   }
+	   IS_SMALL_MONITOR_DIMENSION = (rect.height < 650);
 	}
 
 }

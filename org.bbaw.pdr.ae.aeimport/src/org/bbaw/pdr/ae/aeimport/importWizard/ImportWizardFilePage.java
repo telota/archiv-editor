@@ -229,7 +229,8 @@ public class ImportWizardFilePage extends WizardPage
          _composite.redraw();
          _composite.layout();
     }
-	protected void loadFile() {if (_importWizard.getImportTypeInt() == 0)
+	protected void loadFile() {
+		if (_importWizard.getImportTypeInt() == 0)
 	 {
         _providerLabel.setText(NLMessages.getString("ImportWizard_provider"));
 
@@ -340,7 +341,7 @@ public class ImportWizardFilePage extends WizardPage
    		 }
    		 else
    		 {
-   			 _providerText.setText(NLMessages.getString("ImportWizard_error_message_no_valid_configuration"));
+   			 _providerText.setText(NLMessages.getString("ImportWizard_error_message_no_reference_type"));
    		 }
 		 }
 		 catch (Throwable err)

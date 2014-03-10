@@ -38,6 +38,7 @@ import java.util.Observer;
 import javax.xml.stream.XMLStreamException;
 
 import org.bbaw.pdr.ae.common.AEConstants;
+import org.bbaw.pdr.ae.common.AEVIEWConstants;
 import org.bbaw.pdr.ae.common.CommonActivator;
 import org.bbaw.pdr.ae.common.NLMessages;
 import org.bbaw.pdr.ae.common.icons.IconsInternal;
@@ -273,7 +274,13 @@ public class ConfigEditor extends TitleAreaDialog implements Observer
 		((GridData) _mainSashForm.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _mainSashForm.getLayoutData()).grabExcessVerticalSpace = true;
 		((GridData) _mainSashForm.getLayoutData()).verticalAlignment = SWT.FILL;
-		((GridData) _mainSashForm.getLayoutData()).minimumHeight = 470;
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			((GridData) _mainSashForm.getLayoutData()).minimumHeight = 320;
+		}else
+		{
+			((GridData) _mainSashForm.getLayoutData()).minimumHeight = 470;
+		}
 		((GridData) _mainSashForm.getLayoutData()).minimumWidth = 800;
 
 		_leftComposite = new Composite(_mainSashForm, SWT.NONE);

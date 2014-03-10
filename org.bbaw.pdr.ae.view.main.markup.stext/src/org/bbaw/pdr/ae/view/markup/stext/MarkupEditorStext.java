@@ -857,11 +857,16 @@ public class MarkupEditorStext implements IMarkupEditor
 	{
 		if (selected)
 		{
-			_stext.setForeground(AEVIEWConstants.VIEW_FOREGROUND_SELECTED_COLOR);
+			if (!_stext.isDisposed())
+			{
+				_stext.setForeground(AEVIEWConstants.VIEW_FOREGROUND_SELECTED_COLOR);
+			}
 		}
 		else
 		{
-			_stext.setForeground(AEVIEWConstants.VIEW_FOREGROUND_DESELECTED_COLOR);
+			if (!_stext.isDisposed())
+			{_stext.setForeground(AEVIEWConstants.VIEW_FOREGROUND_DESELECTED_COLOR);
+			}
 		}
 
 	}

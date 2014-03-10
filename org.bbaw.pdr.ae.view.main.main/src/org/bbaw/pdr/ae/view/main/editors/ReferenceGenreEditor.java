@@ -32,6 +32,7 @@ package org.bbaw.pdr.ae.view.main.editors;
 import java.util.HashMap;
 import java.util.Vector;
 
+import org.bbaw.pdr.ae.common.AEVIEWConstants;
 import org.bbaw.pdr.ae.common.CommonActivator;
 import org.bbaw.pdr.ae.common.NLMessages;
 import org.bbaw.pdr.ae.common.icons.IconsInternal;
@@ -242,7 +243,13 @@ public class ReferenceGenreEditor extends TitleAreaDialog
 		_deletedTemplates.clear();
 		SashForm mainSForm = new SashForm(parent, SWT.HORIZONTAL);
 		mainSForm.setLayoutData(new GridData(GridData.FILL_BOTH));
-		((GridData) mainSForm.getLayoutData()).minimumHeight = 600;
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			((GridData) mainSForm.getLayoutData()).minimumHeight = 350;
+		}else
+		{
+			((GridData) mainSForm.getLayoutData()).minimumHeight = 600;
+		}
 		((GridData) mainSForm.getLayoutData()).minimumWidth = 800;
 
 		_mainComposite = new Composite(mainSForm, SWT.NONE);
@@ -746,7 +753,7 @@ public class ReferenceGenreEditor extends TitleAreaDialog
 		((GridData) iconComposite.getLayoutData()).grabExcessVerticalSpace = true;
 		((GridData) iconComposite.getLayoutData()).verticalAlignment = SWT.FILL;
 		iconComposite.setLayout(new GridLayout());
-		((GridLayout) iconComposite.getLayout()).numColumns = 5;
+		((GridLayout) iconComposite.getLayout()).numColumns = 8;
 		((GridLayout) iconComposite.getLayout()).makeColumnsEqualWidth = true;
 		((GridLayout) iconComposite.getLayout()).marginHeight = 12;
 		((GridLayout) iconComposite.getLayout()).marginWidth = 12;
@@ -759,7 +766,7 @@ public class ReferenceGenreEditor extends TitleAreaDialog
 		Label iconLabel = new Label(iconComposite, SWT.NONE);
 		iconLabel.setLayoutData(new GridData());
 		((GridData) iconLabel.getLayoutData()).horizontalAlignment = SWT.LEFT;
-		((GridData) iconLabel.getLayoutData()).horizontalSpan = 5;
+		((GridData) iconLabel.getLayoutData()).horizontalSpan = 8;
 
 		iconLabel.setText(NLMessages.getString("Editor_genre_icon_info"));
 		SelectionListener iconListener = new SelectionAdapter()

@@ -44,6 +44,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.bbaw.pdr.ae.common.AEConstants;
 import org.bbaw.pdr.ae.common.AEPluginIDs;
+import org.bbaw.pdr.ae.common.AEVIEWConstants;
 import org.bbaw.pdr.ae.common.CommonActivator;
 import org.bbaw.pdr.ae.common.NLMessages;
 import org.bbaw.pdr.ae.common.icons.IconsInternal;
@@ -147,6 +148,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -160,6 +162,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbench;
@@ -1119,10 +1122,19 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				}
 			}
 		});
-		// TODO fix layout problem: MarkupEditor grab horizontal space and widens tabfolder
-		Point point = super.getShell().computeSize(870, 650, true);
-		super.getShell().setSize(870, point.y);
-		parent.setSize(860, 550);
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			Point point = super.getShell().computeSize(850, 550, true);
+			super.getShell().setSize(850, point.y);
+			parent.setSize(800, 450);
+		}
+		else
+		{
+			// TODO fix layout problem: MarkupEditor grab horizontal space and widens tabfolder
+			Point point = super.getShell().computeSize(870, 650, true);
+			super.getShell().setSize(870, point.y);
+			parent.setSize(860, 550);
+		}
 	}
 
 	/**
@@ -1181,7 +1193,40 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		}
 		_gridLayout = new GridLayout();
 		_gridLayout.numColumns = 1;
+		Composite comp = parent;
+		ScrolledComposite baseScrolledComp = null;
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			parent.setLayout(new GridLayout(1, false));
+			((GridLayout)parent.getLayout()).marginHeight = 0;
+			((GridLayout)parent.getLayout()).marginWidth = 0;
+			baseScrolledComp = new ScrolledComposite(parent, SWT.NONE | SWT.V_SCROLL);
+			baseScrolledComp.setExpandHorizontal(true);
+			baseScrolledComp.setExpandVertical(true);
+			baseScrolledComp.setMinHeight(400);
+			baseScrolledComp.setMinWidth(750);
 
+			baseScrolledComp.setLayoutData(new GridData());
+			((GridData) baseScrolledComp.getLayoutData()).heightHint = 400;
+			((GridData) baseScrolledComp.getLayoutData()).widthHint = 780;
+			((GridData) baseScrolledComp.getLayoutData()).horizontalSpan = 1;
+
+			((GridData) baseScrolledComp.getLayoutData()).horizontalAlignment = SWT.FILL;
+			((GridData) baseScrolledComp.getLayoutData()).grabExcessHorizontalSpace = true;
+			baseScrolledComp.layout();
+
+			comp = new Composite(baseScrolledComp, SWT.NONE);
+			comp.setLayout(new GridLayout());
+			((GridLayout)comp.getLayout()).marginHeight = 0;
+			((GridLayout)comp.getLayout()).marginWidth = 0;
+			comp.setLayoutData(new GridData());
+			((GridData) comp.getLayoutData()).horizontalSpan = 1;
+			((GridData) comp.getLayoutData()).horizontalAlignment = SWT.FILL;
+			((GridData) comp.getLayoutData()).grabExcessHorizontalSpace = true;
+			((GridData) comp.getLayoutData()).verticalAlignment = SWT.FILL;
+			((GridData) comp.getLayoutData()).grabExcessVerticalSpace = true;
+			baseScrolledComp.setContent(comp);
+		}
 		_gridData = new GridData();
 		_gridData.verticalAlignment = GridData.FILL;
 		_gridData.horizontalAlignment = GridData.FILL;
@@ -1189,7 +1234,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_gridData.grabExcessHorizontalSpace = true;
 		_gridData.grabExcessVerticalSpace = true;
 
-		_mainTabFolder = new CTabFolder(parent, SWT.NONE);
+		_mainTabFolder = new CTabFolder(comp, SWT.NONE);
 		_mainTabFolder.setLayoutData(new GridData());
 		((GridData) _mainTabFolder.getLayoutData()).verticalAlignment = GridData.FILL;
 		((GridData) _mainTabFolder.getLayoutData()).horizontalSpan = 4;
@@ -1294,6 +1339,21 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		validate();
 
 		_markupEditor.setSelected(true);
+		
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			comp.layout();
+	
+			baseScrolledComp.setContent(comp);
+			Point point = comp.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
+			Point mp = _mainTabFolder.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
+			if (point.x > mp.x - 20)
+			{
+				point.x = mp.x - 20;
+			}
+			baseScrolledComp.setMinSize(point);
+			baseScrolledComp.layout();
+		}
 		return parent;
 	}
 
@@ -1699,7 +1759,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 					_rListName = ""; //$NON-NLS-1$
 					_sListName = selection;
 					_textTaggingKey.setText(""); //$NON-NLS-1$
-					_textTaggingKey.setEnabled(_mayWrite);
+					_textTaggingKey.setEnabled(_mayWrite && _selectedTaggingRanges == null);
 					_comboTaggingSubtype.layout();
 					ConfigData input = _facade.getConfigs().get(_markupProvider);
 					if (input != null)
@@ -1915,7 +1975,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		});
 
 		_findAna = new Button(_tagging1Coposite, SWT.PUSH);
-		_findAna.setText(NLMessages.getString("Editor_select_dots"));
+//		_findAna.setText(NLMessages.getString("Editor_select_dots"));
 		_findAna.setToolTipText(NLMessages.getString("Editor_open_selObjDialog_ana_tip"));
 		_findAna.setImage(_imageReg.get(IconsInternal.SEARCH));
 		// findAna.setLayoutData(new GridData());
@@ -2018,7 +2078,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		// bk.setLayoutData(new GridData());
 
 		_findKey = new Button(_tagging1Coposite, SWT.PUSH);
-		_findKey.setText(NLMessages.getString("Editor_select_dots"));
+//		_findKey.setText(NLMessages.getString("Editor_select_dots"));
 		_findKey.setToolTipText(NLMessages.getString("Editor_open_selObjDialog_key_tip"));
 		_findKey.setImage(_imageReg.get(IconsInternal.SEARCH));
 		_findKey.setLayoutData(new GridData());
@@ -3421,6 +3481,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		}
 
 		_textTaggingAna.setEnabled(_mayWrite && !activeTR);
+		_textTaggingKey.setEnabled(_mayWrite && !activeTR);
 		_contentText.setEnabled(_mayWrite && !activeTR);
 
 		_comboTDateRangeFromDay.setEnabled(_mayWrite && !activeTR);
@@ -4028,7 +4089,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompClass.setLayout(new GridLayout());
 		_scrollCompClass.setLayoutData(new GridData());
 		((GridData) _scrollCompClass.getLayoutData()).heightHint = 100;
-		((GridData) _scrollCompClass.getLayoutData()).widthHint = 740;
+		((GridData) _scrollCompClass.getLayoutData()).widthHint = 700;
 		((GridData) _scrollCompClass.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _scrollCompClass.getLayoutData()).grabExcessHorizontalSpace = true;
 
@@ -4364,7 +4425,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompRel.setLayout(new GridLayout());
 		_scrollCompRel.setLayoutData(new GridData());
 		((GridData) _scrollCompRel.getLayoutData()).heightHint = 490;
-		((GridData) _scrollCompRel.getLayoutData()).widthHint = 740;
+		((GridData) _scrollCompRel.getLayoutData()).widthHint = 700;
 		((GridData) _scrollCompRel.getLayoutData()).horizontalSpan = 2;
 
 		((GridData) _scrollCompRel.getLayoutData()).horizontalAlignment = SWT.FILL;
@@ -5748,7 +5809,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompTimePlace.setLayout(new GridLayout());
 		_scrollCompTimePlace.setLayoutData(new GridData());
 		((GridData) _scrollCompTimePlace.getLayoutData()).heightHint = 490;
-		((GridData) _scrollCompTimePlace.getLayoutData()).widthHint = 740;
+		((GridData) _scrollCompTimePlace.getLayoutData()).widthHint = 700;
 		((GridData) _scrollCompTimePlace.getLayoutData()).horizontalSpan = 2;
 
 		((GridData) _scrollCompTimePlace.getLayoutData()).horizontalAlignment = SWT.FILL;
@@ -6591,7 +6652,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompVal.setLayout(new GridLayout());
 		_scrollCompVal.setLayoutData(new GridData());
 		((GridData) _scrollCompVal.getLayoutData()).heightHint = 490;
-		((GridData) _scrollCompVal.getLayoutData()).widthHint = 740;
+		((GridData) _scrollCompVal.getLayoutData()).widthHint = 700;
 
 		((GridData) _scrollCompVal.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _scrollCompVal.getLayoutData()).grabExcessHorizontalSpace = true;

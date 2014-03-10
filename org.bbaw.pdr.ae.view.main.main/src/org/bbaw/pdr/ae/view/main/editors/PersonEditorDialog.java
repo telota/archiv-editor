@@ -370,7 +370,7 @@ public class PersonEditorDialog extends TitleAreaDialog implements Observer
 		//
 		// _gridData.widthHint = 450;
 		gridData.minimumWidth = 700;
-		gridData.minimumHeight = 500;
+		gridData.minimumHeight = 400;
 		_mainTabFolder = new TabFolder(parent, SWT.TOP | SWT.FILL);
 		_mainTabFolder.setLayoutData(gridData);
 		_mainTabFolder.addSelectionListener(new SelectionListener()
@@ -827,7 +827,7 @@ public class PersonEditorDialog extends TitleAreaDialog implements Observer
 
 		_scrollCompCon.setLayout(new GridLayout());
 		_scrollCompCon.setLayoutData(new GridData());
-		((GridData) _scrollCompCon.getLayoutData()).heightHint = 280;
+		((GridData) _scrollCompCon.getLayoutData()).heightHint = 200;
 		((GridData) _scrollCompCon.getLayoutData()).widthHint = 600;
 		// ((GridData) _scrollCompCon.getLayoutData()).verticalAlignment =
 		// SWT.FILL;
@@ -1539,8 +1539,8 @@ public class PersonEditorDialog extends TitleAreaDialog implements Observer
 			}
 
 		}
-		contentCompCon.layout();
 
+		contentCompCon.layout();
 		_scrollCompCon.setContent(contentCompCon);
 		Point point = contentCompCon.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
 		Point mp = _mainTabFolder.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
@@ -1550,8 +1550,8 @@ public class PersonEditorDialog extends TitleAreaDialog implements Observer
 		}
 		_scrollCompCon.setMinSize(point);
 		_scrollCompCon.layout();
-		_conComposite.pack();
-		_conComposite.layout();
+		contentCompCon.pack();
+		contentCompCon.layout();
 		_frontComposite.redraw();
 		_frontComposite.layout();
 
@@ -1573,7 +1573,7 @@ public class PersonEditorDialog extends TitleAreaDialog implements Observer
 		_scrollCompIdentifier.setExpandVertical(true);
 		_scrollCompIdentifier.setMinSize(SWT.DEFAULT, SWT.DEFAULT);
 		_scrollCompIdentifier.setLayoutData(new GridData());
-		((GridData) _scrollCompIdentifier.getLayoutData()).heightHint = 400;
+		((GridData) _scrollCompIdentifier.getLayoutData()).heightHint = 300;
 		((GridData) _scrollCompIdentifier.getLayoutData()).widthHint = 580;
 
 		((GridData) _scrollCompIdentifier.getLayoutData()).horizontalAlignment = SWT.FILL;

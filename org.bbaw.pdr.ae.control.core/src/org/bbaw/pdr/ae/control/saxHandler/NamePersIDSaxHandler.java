@@ -480,10 +480,14 @@ public class NamePersIDSaxHandler implements ContentHandler
 					{
 						lifespan = true;
 					}
-					// else if (a.getValue(i).equals("endOfLife"))
-					// {
-					// end = true;
-					// }
+					else if (a.getValue(i).equals("endOfLife"))
+					{
+						death = true;
+					}
+					else if (a.getValue(i).equals("beginningOfLife"))
+					{
+						birth = true;
+					}
 				}
 				if (a.getQName(i).equals("subtype"))
 				{

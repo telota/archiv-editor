@@ -548,7 +548,7 @@ public class ReferenceSaxHandler extends DefaultHandler // implements
 		{
 			setResultObject(_refTemplate);
 		}
-		if (_ref != null)
+		else if (_ref != null)
 		{
 			setResultObject(_ref);
 		}

@@ -1778,6 +1778,10 @@ public class EasyAspectEditor extends Composite implements IAEBasicEditor, ISele
 
 		this._selected = b;
 		_markupEditor.setSelected(b);
+		if (_addRelation.isDisposed())
+		{
+			return;
+		}
 		_addRelation.setEnabled(b && _editable);
 		if (!b)
 		{

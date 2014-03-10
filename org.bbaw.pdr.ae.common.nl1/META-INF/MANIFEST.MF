@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Nl1
 Bundle-SymbolicName: org.bbaw.pdr.ae.common.nl1
-Bundle-Version: 2.3.7.qualifier
+Bundle-Version: 2.3.8.qualifier
 Bundle-Vendor: BBAW
 Fragment-Host: org.bbaw.pdr.ae.common
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -36,6 +36,7 @@ import java.util.Observer;
 import java.util.Vector;
 
 import org.bbaw.pdr.ae.common.AEConstants;
+import org.bbaw.pdr.ae.common.AEVIEWConstants;
 import org.bbaw.pdr.ae.common.CommonActivator;
 import org.bbaw.pdr.ae.common.NLMessages;
 import org.bbaw.pdr.ae.common.icons.IconsInternal;
@@ -338,7 +339,14 @@ public class SourceEditorDialog extends TitleAreaDialog implements Observer
 		_mainComposite = new Composite(parent, SWT.NONE);
 		_mainComposite.setLayout(new GridLayout());
 		_mainComposite.setLayoutData(new GridData());
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			((GridData) _mainComposite.getLayoutData()).heightHint = 400;
+
+		}else
+		{
 		((GridData) _mainComposite.getLayoutData()).heightHint = 550;
+		}
 		((GridData) _mainComposite.getLayoutData()).widthHint = 650;
 		// The text fields will grow with the size of the dialog
 		_gridData = new GridData();
@@ -521,7 +529,7 @@ public class SourceEditorDialog extends TitleAreaDialog implements Observer
 	@Override
 	protected final boolean isResizable()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -3940,7 +3948,16 @@ public class SourceEditorDialog extends TitleAreaDialog implements Observer
 
 		_scrolledCompositeMain.setLayout(new GridLayout());
 		_scrolledCompositeMain.setLayoutData(new GridData());
-		((GridData) _scrolledCompositeMain.getLayoutData()).heightHint = 385;
+		if (AEVIEWConstants.IS_SMALL_MONITOR_DIMENSION)
+		{
+			((GridData) _scrolledCompositeMain.getLayoutData()).heightHint = 235;
+
+
+		}else
+		{
+			((GridData) _scrolledCompositeMain.getLayoutData()).heightHint = 385;
+
+		}
 		((GridData) _scrolledCompositeMain.getLayoutData()).widthHint = 600;
 
 		((GridData) _scrolledCompositeMain.getLayoutData()).horizontalAlignment = SWT.FILL;
@@ -4131,4 +4148,5 @@ public class SourceEditorDialog extends TitleAreaDialog implements Observer
 		}
 	}
 
+	
 }

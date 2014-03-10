@@ -321,11 +321,10 @@ public class GeneralPage extends FieldEditorPreferencePage implements IWorkbench
 	private boolean checkRestart()
 	{
 
-		String message = "It is requiered to restart the Archiv-Editor in order to activate changes. \n\nDo you want to restart the Archiv-Editor now?";
 
-		MessageDialog messageDialog = new MessageDialog(null, "Restart Archiv-Editor", null, message,
+		MessageDialog messageDialog = new MessageDialog(null, NLMessages.getString("Handler_restart_titel"), null, NLMessages.getString("Handler_restart_message"),
 				MessageDialog.WARNING, new String[]
-				{"Restart", NLMessages.getString("Handler_cancel")}, 0);
+				{NLMessages.getString("Handler_restart"), NLMessages.getString("Handler_cancel")}, 0);
 		if (messageDialog.open() == 0)
 		{
 			IHandlerService handlerService = (IHandlerService) PlatformUI.getWorkbench().getService(
