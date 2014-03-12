@@ -50,11 +50,13 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
@@ -110,6 +112,8 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 	protected boolean _isSelected;
 
 	private boolean _editable = true;
+
+	private Button _activationButton;
 
 	/** The PRESELECTE d_ year. */
 	private static final int PRESELECTED_YEAR = Platform.getPreferencesService().getInt(CommonActivator.PLUGIN_ID,
@@ -182,9 +186,27 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 		_composite.setLayoutData(new GridData());
 		((GridData) _composite.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _composite.getLayoutData()).grabExcessHorizontalSpace = true;
-		_composite.setLayout(new GridLayout(5, false));
+		_composite.setLayout(new GridLayout(6, false));
 		((GridLayout) _composite.getLayout()).marginHeight = 0;
 		((GridLayout) _composite.getLayout()).verticalSpacing = 0;
+		
+		_activationButton = new Button(_composite, SWT.CHECK);
+		_activationButton.setLayoutData(new GridData());
+		_activationButton.setText(NLMessages.getString("Date_Editor_activate"));
+		((GridData) _activationButton.getLayoutData()).horizontalSpan = 1;
+		((GridData) _activationButton.getLayoutData()).horizontalAlignment = SWT.LEFT;
+		((GridData) _activationButton.getLayoutData()).grabExcessHorizontalSpace = false;
+		_activationButton.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				activateDateEditor(_activationButton.getSelection());
+				contentChanged();
+				
+			}
+			
+			
+		});
 
 		
 		_date1TypeCombo = new Combo(_composite, SWT.DROP_DOWN | SWT.READ_ONLY);
@@ -248,6 +270,8 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 				else
 				{
 					_pointOfTime = true;
+					_date2Type = "";
+					_date2TypeComboViewer.setSelection(new StructuredSelection(""));
 				}
 				if (_date2TypeCombo != null)
 				{
@@ -342,6 +366,23 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 	}
 
 
+	private void activateDateEditor(boolean selection) {
+		validateInternal();
+		_date1TypeCombo.setEnabled(selection);
+		if (_date1Editor != null)
+		{
+			_date1Editor.setSelected(selection, _isValid);
+		}
+		if (_date2Editor != null)
+		{
+			_date2Editor.setSelected(selection && !_pointOfTime && _date2Type.trim().length() > 0,  _isValid);
+			_date2TypeCombo.setEnabled(selection && !_pointOfTime);
+
+		}
+
+		
+	}
+
 	@Override
 	public boolean isDirty()
 	{
@@ -363,6 +404,7 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 	{
 		super.setBackground(color);
 		_composite.setBackground(color);
+		_activationButton.setBackground(color);
 		// _date1TypeCombo.setBackground(color);
 		// if (_date2TypeCombo != null)
 		// {
@@ -388,6 +430,7 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 		super.setForeground(color);
 		_date1TypeCombo.setForeground(color);
 		_date2TypeCombo.setForeground(color);
+		_activationButton.setForeground(color);
 
 	}
 
@@ -429,15 +472,8 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 	public void setSelected(boolean selected, boolean contextIsValid)
 	{
 		this._isSelected = selected;
-		if (_date1Editor != null)
-		{
-			_date1Editor.setSelected(selected, contextIsValid);
-		}
-		if (_date2Editor != null)
-		{
-			_date2Editor.setSelected(selected && !_pointOfTime && _date2Type.trim().length() > 0, contextIsValid);
-		}
-
+		_activationButton.setEnabled(_isSelected);
+		
 		if (selected && contextIsValid)
 		{
 			setBackground(AEVIEWConstants.VIEW_BACKGROUND_SELECTED_COLOR);
@@ -491,6 +527,8 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 
 	private void loadInput()
 	{
+		boolean activateDate = false;
+
 		// System.out.println("MarkupDateEditor loadInput");
 		String d1 = null;
 		if (_markupTemplate != null && _markupTemplate.getDate1() != null
@@ -507,6 +545,7 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 		if (_date1.isValid())
 		{
 			_date1Editor.setInput(_date1);
+			activateDate = true;
 		}
 		else 
 		{
@@ -542,6 +581,7 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 				if (_date1.isValid())
 				{
 					_date1Editor.setInput(_date1);
+					activateDate = true;
 				}
 
 			}
@@ -585,9 +625,12 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 				_pointOfTime = true;
 			}
 		}
+		_activationButton.setSelection(activateDate);
+
 		_date1TypeComboViewer.setSelection(new StructuredSelection(_date1Type));
 		_date2TypeComboViewer.setSelection(new StructuredSelection(_date2Type));
 		setPointOfTime(_date2Type.trim().length() == 0 && _pointOfTime);
+		activateDateEditor(activateDate);
 
 	}
 
@@ -606,7 +649,7 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 	public void saveInput()
 	{
 		// System.out.println("MarkupDateEditorLine saveInput");
-		if (_inputElement != null)
+		if (_activationButton.getSelection() && _inputElement != null)
 		{
 			_date1 = _date1Editor.getDate();
 			_date2 = _date2Editor.getDate();
@@ -625,31 +668,55 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 					_inputElement.setAttribute(_date2Type, _date2.toString());
 				}
 			}
-			if (_date1 != null && _date1.isValid() && _date2 != null && _date2.isValid()
+			if (!_pointOfTime && _date1 != null && _date1.isValid() && _date2 != null && _date2.isValid()
 					&& _date2Type.trim().length() > 0)
 			{
-				if ((_inputElement.getTextContent() == null || _inputElement.getTextContent().trim().length() == 0)
-						|| _date1Editor.isDirty() || _date2Editor.isDirty())
-				{
-					_inputElement.setTextContent(_date1.toString() + " - " + _date2.toString());
-				}
+				_inputElement.setTextContent(_date1.toString() + " - " + _date2.toString());
 			}
-			else if (_date1 != null && _date1.isValid())
+			else if (_pointOfTime && _date1 != null && _date1.isValid())
 			{
-				if ((_inputElement.getTextContent() == null || _inputElement.getTextContent().trim().length() == 0)
-						|| _date1Editor.isDirty())
-				{
-					_inputElement.setTextContent(_date1.toString());
-				}
+				_inputElement.setTextContent(_date1.toString());
 			}
-			else if (_date2 != null && _date2.isValid() && _date2Type.trim().length() > 0)
+//			else if (_date2 != null && _date2.isValid() && _date2Type.trim().length() > 0)
+//			{
+//				_inputElement.setTextContent(_date2.toString());
+//			}
+			// clear old attributes
+			if (!_date1Type.endsWith("when"))
 			{
-				if ((_inputElement.getTextContent() == null || _inputElement.getTextContent().trim().length() == 0)
-						|| _date2Editor.isDirty())
-				{
-					_inputElement.setTextContent(_date2.toString());
-				}
+				_inputElement.removeAttribute("when");
 			}
+			if (!_date1Type.endsWith("from"))
+			{
+				_inputElement.removeAttribute("from");
+			}
+			if (!_date1Type.endsWith("notBefore"))
+			{
+				_inputElement.removeAttribute("notBefore");
+			}
+			if (!_date1Type.endsWith("notAfter") && !_date2Type.endsWith("notAfter"))
+			{
+				_inputElement.removeAttribute("notAfter");
+			}
+			if (!_date1Type.endsWith("to") && !_date2Type.endsWith("to"))
+			{
+				_inputElement.removeAttribute("to");
+			}
+			setDirty(true);
+			if (isValid() && !_loading)
+			{
+				_parentEditor.saveInput();
+			}
+		}
+		else if (!_activationButton.getSelection() && _inputElement != null)
+		{
+			_inputElement.removeAttribute("when");
+			_inputElement.removeAttribute("from");
+			_inputElement.removeAttribute("to");
+			_inputElement.removeAttribute("notBefore");
+			_inputElement.removeAttribute("notAfter");
+			_inputElement.setTextContent(null);
+//			_inputElement.getParentNode().removeChild(_inputElement);
 			setDirty(true);
 			if (isValid() && !_loading)
 			{

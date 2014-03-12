@@ -95,7 +95,6 @@ import org.bbaw.pdr.ae.view.control.provider.MarkupContentProvider;
 import org.bbaw.pdr.ae.view.control.provider.MarkupLabelProvider;
 import org.bbaw.pdr.ae.view.control.provider.MarkupListContentProposalProvider;
 import org.bbaw.pdr.ae.view.control.provider.MarkupListLabelProvider;
-import org.bbaw.pdr.ae.view.main.commands.CreatePersonFromNameStringHandler;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IParameter;
@@ -1020,7 +1019,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		((GridData) _pdrID.getLayoutData()).horizontalSpan = 3;
 		((GridData) pdrIdGroup.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) pdrIdGroup.getLayoutData()).grabExcessHorizontalSpace = true;
-		_pdrID.pack();
+//		_pdrID.pack();
 
 		Label blancL = new Label(pdrIdGroup, SWT.NONE);
 		blancL.setLayoutData(new GridData());
@@ -1120,6 +1119,10 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				}
 			}
 		});
+		// TODO fix layout problem: MarkupEditor grab horizontal space and widens tabfolder
+		Point point = super.getShell().computeSize(870, 650, true);
+		super.getShell().setSize(870, point.y);
+		parent.setSize(860, 550);
 	}
 
 	/**
@@ -1161,10 +1164,10 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				validate();
 			}
 		});
-		_addFurtherClassifier.pack();
+//		_addFurtherClassifier.pack();
 		// classificationGroup.pack();
 		// classificationComposite.pack();
-		_classificationComposite.pack();
+		_classificationComposite.layout();
 	}
 
 	
@@ -1291,8 +1294,6 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		validate();
 
 		_markupEditor.setSelected(true);
-		_mainTabFolder.pack();
-		parent.pack();
 		return parent;
 	}
 
@@ -1325,7 +1326,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				validate();
 			}
 		});
-		_addTimeStmButton.pack();
+//		_addTimeStmButton.pack();
 
 		_addSpatialStmButton = new Button(_dimensionComposite, SWT.PUSH);
 		_addSpatialStmButton.setText(NLMessages.getString("Editor_addSpatialDim"));
@@ -1344,7 +1345,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				validate();
 			}
 		});
-		_addSpatialStmButton.pack();
+//		_addSpatialStmButton.pack();
 
 	}
 
@@ -1406,7 +1407,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 		// classificationGroup.pack();
 		// classificationComposite.pack();
-		_classificationComposite.pack();
+		_classificationComposite.layout();
 
 		// Tagging
 		_taggingGroup = new Group(_frontComposite, SWT.NONE);
@@ -2362,7 +2363,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_compositeTaggingPlace.setLayout(new RowLayout());
 		Label testLabel = new Label(_compositeTaggingPlace, SWT.NONE);
 		testLabel.setText(""); //$NON-NLS-1$
-		testLabel.pack();
+//		testLabel.pack();
 		// compositeTaggingPlace
 
 		// Composite Tagging Buttons
@@ -2855,7 +2856,6 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_markupEditor.setTitle(NLMessages.getString("Editor_notificationOfAspect"));
 
 		_markupEditor.createEditor();
-		
 		_symbolButton = new Button(_editorComposite, SWT.PUSH);
 		_symbolButton.setImage(_imageReg.get(IconsInternal.EDIT_SYMBOL));
 		_symbolButton.setLayoutData(new GridData());
@@ -3542,7 +3542,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				validate();
 			}
 		});
-		_addRelationsButton.pack();
+//		_addRelationsButton.pack();
 		_egg = "Congratulations! You have found the Easter-Egg!"; //$NON-NLS-1$
 
 		_addBelongsToButton = new Button(_relationComposite, SWT.PUSH);
@@ -3562,9 +3562,9 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				validate();
 			}
 		});
-		_addBelongsToButton.pack();
+//		_addBelongsToButton.layout();
 
-		_relationComposite.pack();
+		_relationComposite.layout();
 	} // relationComposite
 
 	/**
@@ -3708,7 +3708,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_rightsAWCheckbox.setLayoutData(new GridData());
 		_rightsAWCheckbox.setEnabled(false);
 
-		_rightsTableComposite.pack();
+		_rightsTableComposite.layout();
 	}
 
 	/**
@@ -3740,8 +3740,8 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				validate();
 			}
 		});
-		_addReferencesButton.pack();
-		_sourceComposite.pack();
+//		_addReferencesButton.pack();
+		_sourceComposite.layout();
 
 	}
 
@@ -4280,7 +4280,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 					}
 				});
-				delSemanticStm.pack();
+//				delSemanticStm.pack();
 				if (i == 0)
 				{
 					Button addFurtherClassifier = new Button(contentCompClass, SWT.PUSH);
@@ -4298,7 +4298,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 							validate();
 						}
 					});
-					addFurtherClassifier.pack();
+//					addFurtherClassifier.pack();
 				}
 				else
 				{
@@ -4313,7 +4313,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		// classificationGroup.redraw();
 		// classificationGroup.layout();
 		// classificationGroup.pack();
-		contentCompClass.pack();
+		contentCompClass.layout();
 		contentCompClass.layout();
 		_scrollCompClass.setContent(contentCompClass);
 		Point point = contentCompClass.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
@@ -4328,10 +4328,10 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 		_classificationComposite.redraw();
 		_classificationComposite.layout();
-		_classificationComposite.pack();
-		_mainTabFolder.redraw();
+//		_classificationComposite.pack();
+//		_mainTabFolder.redraw();
 		_mainTabFolder.layout();
-		_mainTabFolder.pack();
+//		_mainTabFolder.pack();
 
 	}
 
@@ -4369,7 +4369,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 		((GridData) _scrollCompRel.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _scrollCompRel.getLayoutData()).grabExcessHorizontalSpace = true;
-		_scrollCompRel.pack();
+		_scrollCompRel.layout();
 
 		Composite contentCompRel = new Composite(_scrollCompRel, SWT.NONE);
 		contentCompRel.setLayout(new GridLayout());
@@ -4722,7 +4722,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 						validate();
 					}
 				});
-				belongstoObjectButton.pack();
+//				belongstoObjectButton.pack();
 
 				final Button delRelationStm = new Button(_relGroup, SWT.PUSH);
 				delRelationStm.setImage(_imageReg.get(IconsInternal.BELONGING_REMOVE));
@@ -5068,7 +5068,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 					}
 				});
-				relateSubjectButton.pack();
+//				relateSubjectButton.pack();
 
 				final Button delRelationStm = new Button(_relGroup, SWT.PUSH);
 				delRelationStm.setText(NLMessages.getString("Editor_delete"));
@@ -5415,7 +5415,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 							}
 						});
-						relateObjectButton.pack();
+//						relateObjectButton.pack();
 
 						Label relationClassificationLabel = new Label(relComposite, SWT.NONE);
 						relationClassificationLabel.setText(NLMessages.getString("Editor_provider"));
@@ -5522,9 +5522,9 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 										.getChildren().get("aodl:relation").getChildren());
 							}
 						});
-						relationProviderCombo.pack();
+//						relationProviderCombo.pack();
 
-						relValue.pack();
+//						relValue.pack();
 
 						// control for relationClassCombo
 						// ArrayList<String> list = cListPro
@@ -5568,7 +5568,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 						});
 
-						relationContextCombo.pack();
+//						relationContextCombo.pack();
 
 						// control for relationContextCombo
 						if (relation.getRClass() != null)
@@ -5617,7 +5617,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 								}
 							}
 						});
-						relationClassCombo.pack();
+//						relationClassCombo.pack();
 						if (relation.getRelation() != null)
 						{
 							if (relation.getRClass() != null
@@ -5685,11 +5685,11 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 						});
 						delRelation.setLayoutData(new GridData());
 
-						relComposite.pack();
+						relComposite.layout();
 					}
 				}
 			}
-			_relGroup.pack();
+			_relGroup.layout();
 
 		}
 		contentCompRel.layout();
@@ -5705,10 +5705,10 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompRel.layout();
 		_relationComposite.redraw();
 		_relationComposite.layout();
-		_relationComposite.pack();
-		_mainTabFolder.redraw();
+//		_relationComposite.pack();
+//		_mainTabFolder.redraw();
 		_mainTabFolder.layout();
-		_mainTabFolder.pack();
+//		_mainTabFolder.pack();
 	}
 
 	/**
@@ -5753,7 +5753,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 
 		((GridData) _scrollCompTimePlace.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _scrollCompTimePlace.getLayoutData()).grabExcessHorizontalSpace = true;
-		_scrollCompTimePlace.pack();
+		_scrollCompTimePlace.layout();
 
 		Composite contentCompTimePlace = new Composite(_scrollCompTimePlace, SWT.NONE);
 		contentCompTimePlace.setLayout(new GridLayout());
@@ -6168,7 +6168,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 						});
 						delTime.setLayoutData(new GridData());
 						delTime.pack();
-						compositeTime.pack();
+						compositeTime.layout();
 					} // compositeTime
 				}
 				// timeGroup
@@ -6545,12 +6545,12 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 						delPlace.setLayoutData(new GridData());
 						delPlace.pack();
 
-						compositePlace.pack(); // compositePlace
+						compositePlace.layout(); // compositePlace
 					}
 				}
-				_timeGroup.pack();
+				_timeGroup.layout();
 
-				_placeGroup.pack(); // placeGroup
+				_placeGroup.layout(); // placeGroup
 			}
 		}
 		contentCompTimePlace.layout();
@@ -6566,10 +6566,10 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompTimePlace.layout();
 		_dimensionComposite.redraw();
 		_dimensionComposite.layout();
-		_dimensionComposite.pack();
-		_mainTabFolder.redraw();
+//		_dimensionComposite.pack();
+//		_mainTabFolder.redraw();
 		_mainTabFolder.layout();
-		_mainTabFolder.pack();
+//		_mainTabFolder.pack();
 	}
 
 	/**
@@ -6597,7 +6597,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		((GridData) _scrollCompVal.getLayoutData()).grabExcessHorizontalSpace = true;
 		_scrollCompVal.setMinHeight(1);
 		_scrollCompVal.setMinWidth(1);
-		_scrollCompVal.pack();
+		_scrollCompVal.layout();
 
 		Composite contentCompVal = new Composite(_scrollCompVal, SWT.NONE);
 		contentCompVal.setLayout(new GridLayout());
@@ -6680,7 +6680,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				relateRefButton.setLayoutData(new GridData());
 				relateRefButton.setToolTipText(NLMessages.getString("Editor_linkWithSource")); //$NON-NLS-1$
 
-				relateRefButton.pack();
+//				relateRefButton.pack();
 
 				Button newRefButton = new Button(sourceComposite, SWT.PUSH);
 				newRefButton.setText(NLMessages.getString("Editor_create_new_ref"));
@@ -6689,7 +6689,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				newRefButton.setEnabled(_mayWrite);
 				newRefButton.setLayoutData(new GridData());
 
-				newRefButton.pack();
+//				newRefButton.pack();
 
 				Button editRefButton = new Button(sourceComposite, SWT.PUSH);
 				editRefButton.setImage(_imageReg.get(IconsInternal.REFERENCE_EDIT));
@@ -6697,7 +6697,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 				editRefButton.setLayoutData(new GridData());
 				editRefButton.setToolTipText(NLMessages.getString("Editor_edit_reference_tooltip")); //$NON-NLS-1$
 
-				editRefButton.pack();
+//				editRefButton.pack();
 
 				if (vs.getReference().getSourceId() != null) //$NON-NLS-1$
 				{
@@ -7117,9 +7117,9 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 					}
 				});
 				delReference.setLayoutData(new GridData());
-				delReference.pack();
-				sourceComposite.pack();
-				valGroup.pack();
+//				delReference.pack();
+//				sourceComposite.pack();
+//				valGroup.pack();
 
 			}
 
@@ -7137,10 +7137,10 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 		_scrollCompVal.layout();
 		_sourceComposite.redraw();
 		_sourceComposite.layout();
-		_sourceComposite.pack();
-		_mainTabFolder.redraw();
+//		_sourceComposite.pack();
+//		_mainTabFolder.redraw();
 		_mainTabFolder.layout();
-		_mainTabFolder.pack();
+//		_mainTabFolder.pack();
 	}
 
 	/**
@@ -7301,6 +7301,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 			}
 
 			_markupEditor.setAspect(_currentAspect);
+
 			_markupEditor.setEditable(_mayWrite);
 
 			if (_currentAspect.getRelationDim() != null)
@@ -7374,7 +7375,7 @@ public class AspectEditorDialog extends TitleAreaDialog implements ISelectionPro
 //		_mainTabFolder.pack();
 //		_mainTabFolder.layout();
 //		_mainTabFolder.update();
-
+		_frontComposite.layout();
 	}
 
 	/**

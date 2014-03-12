@@ -1345,22 +1345,24 @@ public class EasyAspectTemplateEditor extends Composite implements IAEBasicEdito
 //			_template.redraw();
 //			_template.update();
 //		}
-		_group.layout();
+//		_group.layout();
 //		_group.redraw();
 //		_group.update();
 //		Point point = _group.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
 //
 //		_group.setSize(point.x, point.y);
-		_markupControl.layout();
+//		_markupControl.layout();
 		_markupControl.redraw();
 		_markupControl.update();
 		// _markupControl.pack();
-		_markupControl.getParent().redraw();
+//		_markupControl.getParent().redraw();
 		_markupControl.getParent().update();
 		_markupControl.getParent().layout();
 		point = EasyAspectTemplateEditor.this.computeSize(SWT.DEFAULT, SWT.DEFAULT, true);
 
-		EasyAspectTemplateEditor.this.setSize(point.x, point.y);
+		int x = point.x > 970 ? 970 : point.x;
+		
+		EasyAspectTemplateEditor.this.setSize(970, point.y);
 		// EasyAspectTemplateEditor.this.redraw();
 		for (PaintListener l : _paintListeners)
 		{

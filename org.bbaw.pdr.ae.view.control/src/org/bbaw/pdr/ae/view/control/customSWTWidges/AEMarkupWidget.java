@@ -168,7 +168,15 @@ public class AEMarkupWidget extends Composite implements IAEBasicEditor
 		_parentComposite.setLayoutData(new GridData());
 		((GridData) _parentComposite.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _parentComposite.getLayoutData()).grabExcessHorizontalSpace = true;
-		_parentComposite.setLayout(new GridLayout(3, false));
+		if (Platform.getPreferencesService().getBoolean(CommonActivator.PLUGIN_ID, "ASPECT_LITE_EDIT_ANA_KEY",
+				AEConstants.ASPECT_LITE_EDIT_ANA_KEY, null))
+		{
+			_parentComposite.setLayout(new GridLayout(3, false));
+		}
+		else
+		{
+			_parentComposite.setLayout(new GridLayout(2, false));
+		}
 		((GridLayout) _parentComposite.getLayout()).marginHeight = 0;
 		((GridLayout) _parentComposite.getLayout()).verticalSpacing = 0;
 		((GridLayout) _parentComposite.getLayout()).marginWidth = 0;
@@ -275,7 +283,7 @@ public class AEMarkupWidget extends Composite implements IAEBasicEditor
 		_markupText = new Text(_parentComposite, SWT.BORDER);
 		_markupText.setBackground(AEVIEWConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		_markupText.setLayoutData(new GridData());
-		((GridData) _markupText.getLayoutData()).horizontalSpan = 1;
+		((GridData) _markupText.getLayoutData()).horizontalSpan = 2;
 		((GridData) _markupText.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _markupText.getLayoutData()).grabExcessHorizontalSpace = true;
 		_markupText.setEnabled(_mayWrite);
@@ -393,6 +401,8 @@ public class AEMarkupWidget extends Composite implements IAEBasicEditor
 		((GridData) _comboTagging.getLayoutData()).horizontalAlignment = GridData.FILL;
 		((GridData) _comboTagging.getLayoutData()).grabExcessHorizontalSpace = true;
 		((GridData) _comboTagging.getLayoutData()).verticalAlignment = GridData.BEGINNING;
+		((GridData) _comboTagging.getLayoutData()).horizontalSpan = 2;
+
 		_comboTaggingViewer = new ComboViewer(_comboTagging);
 		_comboTaggingViewer.setContentProvider(new MarkupContentProvider());
 		_comboTaggingViewer.setLabelProvider(new MarkupLabelProvider());
@@ -627,7 +637,7 @@ public class AEMarkupWidget extends Composite implements IAEBasicEditor
 	{
 		_dateEditor = new MarkupDateEditorLine(AEMarkupWidget.this, _markupTemplate, _parentComposite, SWT.None);
 		_dateEditor.setLayoutData(new GridData());
-		((GridData) _dateEditor.getLayoutData()).horizontalAlignment = SWT.LEFT;
+		((GridData) _dateEditor.getLayoutData()).horizontalAlignment = SWT.FILL;
 		((GridData) _dateEditor.getLayoutData()).grabExcessHorizontalSpace = true;
 		((GridData) _dateEditor.getLayoutData()).horizontalSpan = 2;
 		_dateEditor.setSelected(false, true);
