@@ -145,7 +145,9 @@
  
  
  
- 
+ <!-- PdrEntity -->
+ <!-- PdrEntity -->
+ <!-- PdrEntity -->
  <!-- PdrEntity -->
  <xsl:template match="pdrEntity">
   <fo:block text-align="left" margin-bottom="9pt" margin-top="10pt">
@@ -163,13 +165,15 @@
  
  
  <!-- PERSON -->
+ <!-- PERSON -->
  <xsl:template match="podl:person">
   <fo:block>
    
   </fo:block>
  </xsl:template>
- 
- <!-- OrdereredHead -->
+
+ <!-- OrdererdHead -->
+ <!-- OrdererdHead -->
  <xsl:template match="pdrAspectsGroup">
   <fo:table table-layout="fixed">
    <fo:table-column column-width="180mm"/>
@@ -193,6 +197,7 @@
  
  
  <!-- ASPECT -->
+ <!-- ASPECT -->
  <xsl:template match="aodl:aspect">
   
   <fo:block-container margin-bottom="10pt" margin-left="5pt" block-progression-dimension.minimum="2cm" keep-together.within-page="always">
@@ -215,7 +220,7 @@
        </fo:block>
       </fo:table-cell>
       <fo:table-cell>
-       <fo:block margin-top="0pt">
+       <fo:block margin-top="0pt" color="#999999" font-family="sans-serif">
         <xsl:apply-templates select="aodl:semanticDim"/>
         <xsl:apply-templates select="aodl:spatialDim"/>
         <xsl:apply-templates select="aodl:timeDim"/>
