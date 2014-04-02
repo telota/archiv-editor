@@ -29,9 +29,9 @@
  */
 package org.bbaw.pdr.ae.export.xml;
 
-import java.awt.Desktop;
+//import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
+//import java.io.IOException;
 
 import org.bbaw.pdr.ae.common.AEConstants;
 import org.bbaw.pdr.ae.common.CommonActivator;
@@ -105,7 +105,6 @@ public class XmlExportWizard extends Wizard implements IExportWizard{
 		XMLContainer xml = new XMLContainer(preview.getSelectionHeads());
 		try	{
 			xml.saveToFile(filename);		
-
 			provider.terminateWidgets();
 			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
 				"Succesfully saved XML to file " + filename));			

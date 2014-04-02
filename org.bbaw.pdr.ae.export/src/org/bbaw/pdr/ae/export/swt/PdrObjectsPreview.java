@@ -373,7 +373,13 @@ public class PdrObjectsPreview extends Composite implements IPdrWidgetStructure 
 		return AeExportCoreProvider.getInstance().getPdrObjectsTree().getSelectionHeads();
 	}
 	
-	//TODO doc
+	/**
+	 * Used to set up a dialog for filtering {@link Aspect}s for certain
+	 * criteria. Dialog is instantiated and returned as by {@link FilterSelectionDialog},
+	 * but not actually openened.
+	 * @param type One of <code>reference, person, semantic, year, user</code>.
+	 * @return {@link FilterSelectionDialog}
+	 */
 	private FilterSelectionDialog createDialog(String type) {
 		IWorkbench workbench = PlatformUI.getWorkbench();
 		Display display = workbench.getDisplay();

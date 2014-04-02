@@ -227,13 +227,22 @@ public abstract class AeExportUtilities {
 		// http://www.eclipse.org/forums/index.php/mv/msg/45047/146049/#msg_146049
 		//TODO: test
 		String extendedPath = AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets" + AEConstants.FS +path;
+		logger.log(new Status(IStatus.INFO, pluginId(), 
+				"export stylesheet location: "+extendedPath));
 		File file = new File(extendedPath);
-		if (!file.exists())
-		{
+		if (!file.exists())	{
+			logger.log(new Status(IStatus.INFO, pluginId(), 
+					"stylesheet not present at expected location"));
 			InputStream stream = this.getClass().getClassLoader().getResourceAsStream(path);
 			File dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets"+ AEConstants.FS + "resources");
-			if (!dir.exists()) dir.mkdirs();
+			if (!dir.exists()) {
+				logger.log(new Status(IStatus.INFO, pluginId(), 
+						"create stylesheet directory "+dir));
+				dir.mkdirs();
+			}
 			OutputStream out = new FileOutputStream(file);
+			logger.log(new Status(IStatus.INFO, pluginId(), 
+					"copy file "+path+"from plugin scope to stylesheet directory."));
 
 			// Transfer bytes from in to out
 			byte[] buf = new byte[1024];

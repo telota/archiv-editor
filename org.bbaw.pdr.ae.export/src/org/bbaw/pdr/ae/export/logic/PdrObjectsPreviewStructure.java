@@ -553,9 +553,13 @@ public class PdrObjectsPreviewStructure implements ITreeContentProvider, ICheckS
 			// the structnodes children lists
 			//buildTree(); 
 			Vector<StructNode> nodes = new Vector<StructNode>();
-			//TODO: getselectionheads nachbauen, alle nodes rauskramen, die person enthalten
-			//TODO nodecomparator mit comp erzeugen
-			//TODO: alle nodes sortieren
+			NodeComparator ncomp = new NodeComparator(comp);
+			nodes = this.getExpandableNodes();
+			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID, 
+					"Nodes to sort: "+nodes.size()));
+			for (StructNode n : nodes)
+				n.sort(ncomp);
+			
 			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID, 
 					" > "+comp.getClass().getName()+"\n"+
 					(asc ? "ascending" : "descending")));
@@ -668,6 +672,15 @@ public class PdrObjectsPreviewStructure implements ITreeContentProvider, ICheckS
 		}
 		return res;
 	}
+	
+	
+	public Vector<StructNode> getExpandableNodes() {
+		HashSet<StructNode> res = new HashSet<StructNode>();
+		for (Vector<StructNode> nds : this.nodes.values())
+			res.addAll(nds);
+		return new Vector<StructNode>(res);
+	}
+
 	
 	/**
 	 * When given a {@link StructNode} whose content is an {@link OrderingHead}, return a list
