@@ -243,15 +243,18 @@ public abstract class AeExportUtilities {
 			OutputStream out = new FileOutputStream(file);
 			logger.log(new Status(IStatus.INFO, pluginId(), 
 					"copy file "+path+"from plugin scope to stylesheet directory."));
-
 			// Transfer bytes from in to out
 			byte[] buf = new byte[1024];
 			int len;
+			int total = 0;
 			while ((len = stream.read(buf)) > 0) {
 				out.write(buf, 0, len);
+				total += len;
 			}
 			stream.close();
 			out.close();
+			logger.log(new Status(IStatus.INFO, pluginId(),
+					"copied "+total+" bytes into export stylesheet directory."));
 		}
 		
 //		Bundle bundle = Platform.getBundle(pluginId());
