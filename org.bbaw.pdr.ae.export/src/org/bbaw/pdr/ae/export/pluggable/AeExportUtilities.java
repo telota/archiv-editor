@@ -234,8 +234,6 @@ public abstract class AeExportUtilities {
 		//// hilfe evtl unter:
 		//// http://stackoverflow.com/questions/4720214/how-to-get-the-eclipse-installation-plugins-directory-or-path
 		//// http://stackoverflow.com/questions/5622789/how-to-refer-a-file-from-jar-file-in-eclipse-plugin/5660242#5660242
-		// change slashes in case of running on windows
-		path.replaceAll("/", AEConstants.FS);
 		// villeicht ueber getBundle und FileLocator.openStream?
 		// http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IPluginDescriptor.html
 		// https://wiki.eclipse.org/Eclipse_Plug-in_Development_FAQ#How_do_I_read_from_a_file_that_I.27ve_included_in_my_bundle.2Fplug-in.3F
@@ -250,14 +248,19 @@ public abstract class AeExportUtilities {
 		try { log(IStatus.INFO, "Bundle rel uri: "+url.toURI()); } 
 		catch (URISyntaxException e){}
 		log(IStatus.INFO, "Bundle rel url ext: "+url.toExternalForm());
+		// create inputstream from bundle internal resource
 		InputStream stm = FileLocator.openStream(bundle, new Path(path), false);
-		// TODO: stream stm irgendwo hinkopieren
+		// change slashes in case of running on windows fs
+		path.replaceAll("/", AEConstants.FS);
+		// assemble file local location for bundle resource [e.g. style sheet] installation
 		String extendedPath = AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets" 
 				+ AEConstants.FS +path;
 		logger.log(new Status(IStatus.INFO, pluginId(), 
 				"export stylesheet location: "+extendedPath));
+		// look at installation location for bundle resource in question
 		File file = new File(extendedPath);
 		if (!file.exists())	{
+			// prepare for resource installation in case it's not present at local path
 			logger.log(new Status(IStatus.INFO, pluginId(), 
 					"stylesheet not present at expected location"));
 			InputStream stream = this.getClass().getClassLoader().getResourceAsStream(path);
@@ -267,6 +270,7 @@ public abstract class AeExportUtilities {
 						"create stylesheet directory "+dir));
 				dir.mkdirs();
 			}
+			// set up stream to local file
 			OutputStream out = new FileOutputStream(file);
 			logger.log(new Status(IStatus.INFO, pluginId(), 
 					"copy file "+path+" from plugin scope to stylesheet directory."));
