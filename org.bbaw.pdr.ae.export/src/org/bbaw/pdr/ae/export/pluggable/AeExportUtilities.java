@@ -34,6 +34,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Vector;
 
 import org.bbaw.pdr.ae.common.AEConstants;
@@ -243,6 +245,12 @@ public abstract class AeExportUtilities {
 		log(IStatus.INFO, "Bundle rel stylesheet: "+bundle.getEntry(path)
 				+" == "+bundle.getEntry(path).getFile());
 		log(IStatus.INFO, "Bundle rel resource: "+bundle.getResource(path));
+		URL url = FileLocator.find(bundle, 
+				new Path(path), null);
+		log(IStatus.INFO, "Bundle rel url: "+url);
+		try { log(IStatus.INFO, "Bundle rel uri: "+url.toURI()); } 
+		catch (URISyntaxException e){}
+		log(IStatus.INFO, "Bundle rel url ext: "+url.toExternalForm());
 		InputStream stm = FileLocator.openStream(bundle, new Path(path), false);
 		// TODO: stream stm irgendwo hinkopieren
 		String extendedPath = AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets" 
@@ -267,7 +275,7 @@ public abstract class AeExportUtilities {
 			byte[] buf = new byte[1024];
 			int len;
 			int total = 0;
-			while ((len = stream.read(buf)) > 0) {
+			while ((len = stm.read(buf)) > 0) {
 				out.write(buf, 0, len);
 				total += len;
 			}
