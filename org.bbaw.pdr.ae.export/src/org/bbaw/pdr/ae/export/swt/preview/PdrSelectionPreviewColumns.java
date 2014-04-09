@@ -301,7 +301,7 @@ public class PdrSelectionPreviewColumns {
 			col.getColumn().setResizable(resizable);
 			col.getColumn().setMoveable(moveable);
 			// TODO: sortieren reparieren, listener wieder rein
-			col.getColumn().addSelectionListener(new ColumnSelectionListener(columnCount));
+			// col.getColumn().addSelectionListener(new ColumnSelectionListener(columnCount));
 			columnCount++;
 			return col;
 	}
