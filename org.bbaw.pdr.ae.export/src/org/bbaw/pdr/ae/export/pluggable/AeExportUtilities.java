@@ -231,16 +231,15 @@ public abstract class AeExportUtilities {
 	 */
 	public String staticResource(String path) throws IOException {
 		// http://www.eclipse.org/forums/index.php/mv/msg/45047/146049/#msg_146049
-		//TODO: test
-		// FIXME: im installierten AE wird die datei bei 'path' nicht aus der .jar gezogen
-		// oder jedenfalls nicht kopiert.
-		// hilfe evtl unter:
-		// http://stackoverflow.com/questions/4720214/how-to-get-the-eclipse-installation-plugins-directory-or-path
-		// http://stackoverflow.com/questions/5622789/how-to-refer-a-file-from-jar-file-in-eclipse-plugin/5660242#5660242
-		// FIXME: path enthaelt / als fs, musz plattform independent gemacht werden!
+		//// hilfe evtl unter:
+		//// http://stackoverflow.com/questions/4720214/how-to-get-the-eclipse-installation-plugins-directory-or-path
+		//// http://stackoverflow.com/questions/5622789/how-to-refer-a-file-from-jar-file-in-eclipse-plugin/5660242#5660242
+		// change slashes in case of running on windows
+		path.replaceAll("/", AEConstants.FS);
 		// villeicht ueber getBundle und FileLocator.openStream?
 		// http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IPluginDescriptor.html
 		// https://wiki.eclipse.org/Eclipse_Plug-in_Development_FAQ#How_do_I_read_from_a_file_that_I.27ve_included_in_my_bundle.2Fplug-in.3F
+		// scheint zu klappen!
 		Bundle bundle = Platform.getBundle(pluginId());
 		log(IStatus.INFO, "Bundle rel stylesheet: "+bundle.getEntry(path)
 				+" == "+bundle.getEntry(path).getFile());
