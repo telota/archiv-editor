@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Standaloneproductbuild
+Bundle-SymbolicName: org.bbaw.pdr.ae.standalone.product.build
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BBAW
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

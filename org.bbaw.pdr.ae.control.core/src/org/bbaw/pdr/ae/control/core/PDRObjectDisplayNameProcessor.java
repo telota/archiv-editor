@@ -157,18 +157,20 @@ public class PDRObjectDisplayNameProcessor
 						"PERSON_DISPLAYNAME_LIFESPAN", false, null)
 						|| displayName.trim().length() == 0)
 				{
-					if (basicPersonData.getBeginningOfLife() != null && basicPersonData.getEndOfLife() != null)
+					if (basicPersonData.getBeginningOfLife() != null && basicPersonData.getBeginningOfLife().getYear() != 0 
+							&& basicPersonData.getEndOfLife() != null
+							&& basicPersonData.getEndOfLife().getYear() != 0)
 					{
-						displayName += " (" + basicPersonData.getBeginningOfLife().toString() + " - "
-								+ basicPersonData.getEndOfLife().toString() + ")";
+						displayName += " (" + basicPersonData.getBeginningOfLife().toString(".") + " - "
+								+ basicPersonData.getEndOfLife().toString(".") + ")";
 					}
-					else if (basicPersonData.getBeginningOfLife() != null)
+					else if (basicPersonData.getBeginningOfLife() != null && basicPersonData.getBeginningOfLife().getYear() != 0)
 					{
-						displayName += " (" + basicPersonData.getBeginningOfLife().toString() + " - ????)";
+						displayName += " (" + basicPersonData.getBeginningOfLife().toString(".") + " - )";
 					}
-					else if (basicPersonData.getEndOfLife() != null)
+					else if (basicPersonData.getEndOfLife() != null && basicPersonData.getEndOfLife().getYear() != 0)
 					{
-						displayName += " (???? - " + basicPersonData.getEndOfLife().toString() + ")";
+						displayName += " (- " + basicPersonData.getEndOfLife().toString(".") + ")";
 					}
 				}
 				if (Platform.getPreferencesService().getBoolean(CommonActivator.PLUGIN_ID,

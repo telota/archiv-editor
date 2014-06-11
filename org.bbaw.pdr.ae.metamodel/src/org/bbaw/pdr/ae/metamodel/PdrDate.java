@@ -336,11 +336,11 @@ public class PdrDate implements Cloneable, Comparable<PdrDate>
 		String date = String.format("%04d", _year);
 		if (_month > 0)
 		{
-			date += "." + String.format("%02d", _month);
+			date += "-" + String.format("%02d", _month);
 		}
 		if (_day > 0)
 		{
-			date += "." + String.format("%02d", _day);
+			date += "-" + String.format("%02d", _day);
 		}
 		return date;
 	}
@@ -365,5 +365,19 @@ public class PdrDate implements Cloneable, Comparable<PdrDate>
 		/*if (arg0._value == this._value) return 0;
 		return arg0._value > this._value ? 1 : -1;*/
 		return this.compare(arg0);
+	}
+
+	public String toString(String separator) {
+
+		String date = String.format("%04d", _year);
+		if (_month > 0)
+		{
+			date += separator + String.format("%02d", _month);
+		}
+		if (_day > 0)
+		{
+			date += separator + String.format("%02d", _day);
+		}
+		return date;
 	}
 }

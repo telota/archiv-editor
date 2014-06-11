@@ -418,7 +418,7 @@ public class DBManager implements IDBManager
 	@Override
 	public final void writeToLocalBackup(String dir) throws Exception
 	{
-		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		dir = dir + AEConstants.FS + "AEBackup-" + dateFormate.format(Facade.getInstanz().getCurrentDate());
 
 		File f;
@@ -496,7 +496,7 @@ public class DBManager implements IDBManager
 	public final void writeToLocalConfigBackup(String dir) throws BaseXException
 	{
 		// config
-		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		dir = dir + AEConstants.FS + "AEConfig-" + dateFormate.format(Facade.getInstanz().getCurrentDate());
 		File f;
 		f = new File(dir);
@@ -524,7 +524,7 @@ public class DBManager implements IDBManager
 	@Override
 	public final void writeToLocalReferenceTemplateBackup(String dir) throws BaseXException
 	{
-		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 		dir = dir + AEConstants.FS + "AEReferenceTemplate-" + dateFormate.format(Facade.getInstanz().getCurrentDate());
 		File f;
 		f = new File(dir);

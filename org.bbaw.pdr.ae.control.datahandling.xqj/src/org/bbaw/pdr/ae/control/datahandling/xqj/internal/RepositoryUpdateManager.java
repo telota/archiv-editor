@@ -2467,11 +2467,14 @@ public class RepositoryUpdateManager implements IUpdateManager
 			// System.out.println("renameobject xml " + xml);
 			if (xml != null && xml.trim().length() > 0)
 			{
-				System.out.println("delete " + oldId.toString());
+				log = new Status(IStatus.INFO, Activator.PLUGIN_ID, "renameObject delete " + oldId.toString());
+				iLogger.log(log);
 				_dbCon.delete(oldId.toString(), col);
-				System.out.println("store newid " + newID.toString());
+				log = new Status(IStatus.INFO, Activator.PLUGIN_ID, "renameObject store newid " + newID.toString());
+				iLogger.log(log);
 				_dbCon.store2DB(xml, col, newID.toString() + ".xml", true);
-				System.out.println("done");
+				log = new Status(IStatus.INFO, Activator.PLUGIN_ID, "renameObject renaming done " + newID.toString());
+				iLogger.log(log);
 			}
 
 		}

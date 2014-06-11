@@ -29,6 +29,12 @@
  */
 package org.bbaw.pdr.ae.config.editor.internal;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.bbaw.pdr.ae.config.core.ConfigDataComparator;
 import org.bbaw.pdr.ae.config.model.AspectConfigTemplate;
 import org.bbaw.pdr.ae.config.model.ComplexSemanticTemplate;
 import org.bbaw.pdr.ae.config.model.ConfigData;
@@ -106,13 +112,9 @@ public class ConfigDropListner extends ViewerDropAdapter
         switch (_location) {
 		case 1: // before target
 		{
-//			if (data instanceof ConfigItem && !(_target instanceof ComplexSemanticTemplate || _target instanceof SemanticTemplate || _target instanceof AspectConfigTemplate))
-//            {
-//				ConfigItem dataItem = (ConfigItem) data;
 				if (_target.getParent().equals(data.getParent()))
 				{
-					data.setPriority(_target.getPriority());
-					_target.setPriority(_target.getPriority() + 1);
+					insertElementAndCalculatePriorities(_target.getParent(), data, _target.getPriority());
 				}
 				else
 				{
@@ -120,9 +122,7 @@ public class ConfigDropListner extends ViewerDropAdapter
 					data.setParent(_target.getParent());
 					resetItemType(data.getParent(), data);
 					data.getParent().getChildren().put(data.getValue(), data);
-					data.setPriority(_target.getPriority());
-					_target.setPriority(_target.getPriority() + 1);
-//					System.out.println("inserting a other level");
+					insertElementAndCalculatePriorities(_target.getParent(), data, _target.getPriority());
 					if (data.getChildren() != null)
 					{
 						for (String key : data.getChildren().keySet())
@@ -131,26 +131,14 @@ public class ConfigDropListner extends ViewerDropAdapter
 						}
 					}
 				}
-            	
-//            }
-//			else if (data instanceof SemanticTemplate && data.getParent() instanceof ComplexSemanticTemplate && _target.getParent() instanceof ComplexSemanticTemplate)
-//			{
-//				return true;
-//			}
-//			else if (data instanceof AspectConfigTemplate  && _target instanceof AspectConfigTemplate)
-//			{
-//				return true;
-//			}
 		}
 			break;
 		case 2: // after _targetget
 		{
-//			if (data instanceof ConfigItem && !(_target instanceof ComplexSemanticTemplate || _target instanceof SemanticTemplate || _target instanceof AspectConfigTemplate))
-//            {
-//				ConfigItem dataItem = (ConfigItem) data;
 				if (_target.getParent().equals(data.getParent()))
 				{
-					data.setPriority(_target.getPriority() + 1);
+					insertElementAndCalculatePriorities(_target.getParent(), data, _target.getPriority() + 1);
+
 				}
 				else
 				{
@@ -158,8 +146,9 @@ public class ConfigDropListner extends ViewerDropAdapter
 					data.setParent(_target.getParent());
 					resetItemType(data.getParent(), data);
 					data.getParent().getChildren().put(data.getValue(), data);
-					data.setPriority(_target.getPriority() + 1);
-//					System.out.println("inserting a other level");
+
+					insertElementAndCalculatePriorities(_target.getParent(), data, _target.getPriority() + 1);
+
 					if (data.getChildren() != null)
 					{
 						for (String key : data.getChildren().keySet())
@@ -169,22 +158,10 @@ public class ConfigDropListner extends ViewerDropAdapter
 					}
 				}
             	
-//            }
-//			else if (data instanceof SemanticTemplate && data.getParent() instanceof ComplexSemanticTemplate && _target.getParent() instanceof ComplexSemanticTemplate)
-//			{
-//				return true;
-//			}
-//			else if (data instanceof AspectConfigTemplate  && _target instanceof AspectConfigTemplate)
-//			{
-//				return true;
-//			}
 		}
 			break;
 		case 3: // on _targetget
 		{
-//			if (data instanceof ConfigItem && !(_target instanceof ComplexSemanticTemplate || _target instanceof SemanticTemplate || _target instanceof AspectConfigTemplate))
-//            {
-//				ConfigItem dataItem = (ConfigItem) data;
 				if (_target.equals(data) || (_target instanceof ConfigItem && !_target.isMyHaveChildren()))
 				{
 					return false;
@@ -200,17 +177,7 @@ public class ConfigDropListner extends ViewerDropAdapter
 						resetItemType(data, data.getChildren().get(key));
 					}
 				}
-				data.setPriority(0);
-            	
-//            }
-//			else if (data instanceof SemanticTemplate && data.getParent() instanceof ComplexSemanticTemplate && _target instanceof ComplexSemanticTemplate)
-//			{
-//				return true;
-//			}
-//			else if (data instanceof AspectConfigTemplate  && _target instanceof SemanticTemplate)
-//			{
-//				return true;
-//			}
+				insertElementAndCalculatePriorities(_target, data, 0);
 		}	
 			break;
 		case 4: // into _targetget
@@ -230,18 +197,13 @@ public class ConfigDropListner extends ViewerDropAdapter
 					resetItemType(data, data.getChildren().get(key));
 				}
 			}
-			data.setPriority(0);
+			insertElementAndCalculatePriorities(_target, data, 0);
+
 		}	
 			break;
 		default:
 			break;
 		}
-        
-        
-        
-        
-        
-        
 
 		if (_target instanceof ConfigItem)
 		{
@@ -262,6 +224,35 @@ public class ConfigDropListner extends ViewerDropAdapter
 		}
 		_viewer.setSelection(_viewer.getSelection());
 		return false;
+	}
+
+	/** Set the priority of data object to priority and makes sure that the priority of 
+	 * all other siblings that formerly had the same priority is incremented.
+	 * @param parent parent of which children are to be processed as siblings of data object.
+	 * @param data data object
+	 * @param priority new priority of data object
+	 */
+	private void insertElementAndCalculatePriorities(ConfigData parent,
+			ConfigData data, int priority) {
+		data.setPriority(priority);
+		List<ConfigData> children = new ArrayList<ConfigData>(parent.getChildren().values());
+		Collections.sort(children);
+		int i = 0;
+		ConfigData last = null;
+		for (ConfigData child : children)
+		{
+			if (child.getPriority() >= priority)
+			{
+				if (!child.equals(data) && (last == null || child.getPriority() == last.getPriority()))
+				{
+					i++;
+					child.setPriority(child.getPriority() + i);
+				}
+				last = child;
+			}
+			
+		}
+		
 	}
 
 	/** ajusts the type of the droped item to its new type if it has been put up to another

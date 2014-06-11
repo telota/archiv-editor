@@ -1,0 +1,66 @@
+# Property File.
+# You can set additional options at the end of the file.
+
+FONT = SansSerif
+MONOFONT = Monospaced
+FONTTYPE = 0
+FONTSIZE = 13
+COLORRED = 20
+COLORGREEN = 17
+COLORBLUE = 7
+GRADIENT = true
+GUISIZE0 = 1004
+GUISIZE1 = 947
+GUILOC0 = 305
+GUILOC1 = 50
+MAXSTATE = false
+SHOWBUTTONS = true
+SHOWINPUT = true
+SHOWSTATUS = true
+VIEWS = V H editor folder map plot - H text info table tree explore - - 
+SHOWINFO = true
+SHOWMAP = true
+SHOWTABLE = false
+SHOWTEXT = true
+SHOWFOLDER = false
+SHOWEXPLORE = false
+SHOWPLOT = false
+SHOWEDITOR = true
+SHOWTREE = false
+JAVALOOK = false
+SHOWNAME = true
+MOUSEFOCUS = false
+SIMPLEFD = false
+SEARCHMODE = 0
+FILTERRT = false
+EXECRT = false
+MAPATTS = false
+MAPOFFSETS = 3
+MAPALGO = 0
+MAPWEIGHT = 0
+TREESLIM = true
+TREEATTS = false
+PLOTDOTS = 0
+PLOTXLOG = false
+PLOTYLOG = false
+MAPLAYOUTLOC0 = 790
+MAPLAYOUTLOC1 = 520
+FONTSLOC0 = 10
+FONTSLOC1 = 530
+COLORSLOC0 = 530
+COLORSLOC1 = 620
+CREATEPATH = C:/Datenbestaende/MEGA04/AEBackup-2012-10-02-12-00-00/reference
+SAVEPATH = C:\IT\baseXHOME\
+XQPATH = C:\IT\baseXHOME\
+STOPPATH = C:\IT\baseXHOME\
+CREATENAME = reference
+LASTINSERT = 1
+COMMANDS = 0
+SEARCH = 0
+XQUERY = 0
+QUERIES = 0
+UPDATEVERSION = 7.5
+SERVERUSER = admin
+MAXTEXT = 2097152
+
+# User defined section

@@ -1052,59 +1052,69 @@ public class ConfigEditor extends TitleAreaDialog implements Observer
 				}
 			}
 		}
-
-		Label base = new Label(_rightComposite, SWT.NONE);
-		base.setText(NLMessages.getString("Config_priority"));
-		base.setLayoutData(new GridData());
-		((GridData) base.getLayoutData()).horizontalSpan = 1;
-		((GridData) base.getLayoutData()).grabExcessHorizontalSpace = true;
-		((GridData) base.getLayoutData()).horizontalAlignment = SWT.FILL;
-		base.pack();
-
-		_baseSpinner = new Spinner(_rightComposite, SWT.NONE);
-		_baseSpinner.setLayoutData(new GridData());
-		_baseSpinner.setEnabled(_userRichtsChecker.mayEditConfig());
-		((GridData) _baseSpinner.getLayoutData()).horizontalSpan = 1;
-		((GridData) _baseSpinner.getLayoutData()).grabExcessHorizontalSpace = true;
-		((GridData) _baseSpinner.getLayoutData()).horizontalAlignment = SWT.FILL;
-
-		_baseSpinner.setMinimum(0);
-		_baseSpinner.setMaximum(999);
-
 		if (c instanceof ConfigItem)
 		{
+			Label base = new Label(_rightComposite, SWT.NONE);
+			base.setText(NLMessages.getString("Config_priority"));
+			base.setLayoutData(new GridData());
+			((GridData) base.getLayoutData()).horizontalSpan = 1;
+			((GridData) base.getLayoutData()).grabExcessHorizontalSpace = true;
+			((GridData) base.getLayoutData()).horizontalAlignment = SWT.FILL;
+			base.pack();
+
+			_baseSpinner = new Spinner(_rightComposite, SWT.NONE);
+			_baseSpinner.setLayoutData(new GridData());
+			_baseSpinner.setEnabled(_userRichtsChecker.mayEditConfig());
+			((GridData) _baseSpinner.getLayoutData()).horizontalSpan = 1;
+			((GridData) _baseSpinner.getLayoutData()).grabExcessHorizontalSpace = true;
+			((GridData) _baseSpinner.getLayoutData()).horizontalAlignment = SWT.FILL;
+
+			_baseSpinner.setMinimum(0);
+			_baseSpinner.setMaximum(999);
+
 			ConfigItem ci = (ConfigItem) c;
-			if (ci.getPos() != null)
-			{
+			if (ci.getPos() != null) {
 				_posText.setText(ci.getPos());
 			}
 			_baseSpinner.setSelection(ci.getPriority());
 
-		}
-		_baseSpinner.addSelectionListener(new SelectionAdapter()
-		{
-			@Override
-			public void widgetSelected(final SelectionEvent se)
-			{
+			_baseSpinner.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(final SelectionEvent se) {
 
-				c.setPriority(_baseSpinner.getSelection());
-				if (((ConfigItem) c).getParent().getValue().equals("aodl:semanticStm"))
-				{
-					if (_datatypeDesc.getUsage().getTemplates() != null
-							&& _datatypeDesc.getUsage().getTemplates().getChildren().containsKey("aspectTemplates")
-							&& _datatypeDesc.getUsage().getTemplates().getChildren().get("aspectTemplates")
-									.getChildren().containsKey("semanticTemplates")
-							&& _datatypeDesc.getUsage().getTemplates().getChildren().get("aspectTemplates")
-									.getChildren().get("semanticTemplates").getChildren().containsKey(c.getValue()))
-					{
-						ConfigData ci = _datatypeDesc.getUsage().getTemplates().getChildren().get("aspectTemplates")
-								.getChildren().get("semanticTemplates").getChildren().get(c.getValue());
-						ci.setPriority(_baseSpinner.getSelection());
+					c.setPriority(_baseSpinner.getSelection());
+					if (((ConfigItem) c).getParent().getValue()
+							.equals("aodl:semanticStm")) {
+						if (_datatypeDesc.getUsage().getTemplates() != null
+								&& _datatypeDesc.getUsage().getTemplates()
+										.getChildren()
+										.containsKey("aspectTemplates")
+								&& _datatypeDesc.getUsage().getTemplates()
+										.getChildren().get("aspectTemplates")
+										.getChildren()
+										.containsKey("semanticTemplates")
+								&& _datatypeDesc.getUsage().getTemplates()
+										.getChildren().get("aspectTemplates")
+										.getChildren().get("semanticTemplates")
+										.getChildren()
+										.containsKey(c.getValue())) {
+							ConfigData ci = _datatypeDesc.getUsage()
+									.getTemplates().getChildren()
+									.get("aspectTemplates").getChildren()
+									.get("semanticTemplates").getChildren()
+									.get(c.getValue());
+							ci.setPriority(_baseSpinner.getSelection());
+						}
 					}
 				}
-			}
-		}); // SelectionListener
+			}); // SelectionListener
 
+		}
+		else
+		{
+			new Label(_rightComposite, SWT.NONE);
+			new Label(_rightComposite, SWT.NONE);
+		}
 		Button sortButton = new Button(_rightComposite, SWT.PUSH);
 		sortButton.setLayoutData(new GridData());
 		sortButton.setText("Sort Children");
@@ -1385,6 +1395,17 @@ public class ConfigEditor extends TitleAreaDialog implements Observer
 		else
 		{
 			_langCombo.select(_langCombo.indexOf((_systemLang)));
+			String doc = c.getDocumentation().get((_systemLang));
+			if (doc != null)
+			{
+				_docuText.setText(doc);
+			}
+			else
+			{
+				_docuText.setText("");
+
+			}
+
 		}
 
 		_langCombo.addSelectionListener(new SelectionAdapter()
@@ -1413,14 +1434,6 @@ public class ConfigEditor extends TitleAreaDialog implements Observer
 
 		//
 
-		if (c.getDocumentation() != null && c.getDocumentation().containsKey("de")) //$NON-NLS-1$
-		{
-			_docuText.setText(c.getDocumentation().get(("de"))); //$NON-NLS-1$
-		}
-		else
-		{
-			_docuText.setText(""); //$NON-NLS-1$
-		}
 		_docuText.addFocusListener(new FocusAdapter()
 		{
 			@Override

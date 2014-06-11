@@ -65,7 +65,7 @@ public class BrowserViewPart extends ViewPart
 	/** Browser. */
 	private Browser _browser;
 	/** urls for searching external person identifier. */
-	private static final String PND_SEARCH = "http://toolserver.org/~apper/pd/"; //$NON-NLS-1$
+	private static final String PND_SEARCH = "http://tools.wmflabs.org/persondata/"; //$NON-NLS-1$
 
 	/** The LCC n_ search. */
 	private static final String LCCN_SEARCH = "http://catalog.loc.gov/webvoy.htm"; //$NON-NLS-1$

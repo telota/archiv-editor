@@ -890,6 +890,8 @@ public class Treeview extends ViewPart implements ISelectionListener, ISelection
 				_addAspectButton.setToolTipText(NLMessages.getString("View_add_new_aspect_tooltip")); //$NON-NLS-1$
 				_addAspectButton.setLayoutData(new GridData());
 				((GridData) _addAspectButton.getLayoutData()).horizontalAlignment = SWT.LEFT;
+				((GridData) _addAspectButton.getLayoutData()).horizontalSpan = 2;
+
 				_addAspectButton.setEnabled(false);
 				_addAspectButton.setImage(_imageReg.get(IconsInternal.ASPECT_ADD_SAME_PERSON));
 				_addAspectButton.addSelectionListener(new SelectionAdapter()
@@ -926,7 +928,9 @@ public class Treeview extends ViewPart implements ISelectionListener, ISelection
 				_addSimilarAspectButton.setText(NLMessages.getString("View_add_similar_aspect"));
 				_addSimilarAspectButton.setToolTipText(NLMessages.getString("View_add_similar_aspect_tooltip")); //$NON-NLS-1$
 				_addSimilarAspectButton.setLayoutData(new GridData());
-				((GridData) _addSimilarAspectButton.getLayoutData()).horizontalAlignment = SWT.RIGHT;
+				((GridData) _addSimilarAspectButton.getLayoutData()).horizontalSpan = 2;
+
+				((GridData) _addSimilarAspectButton.getLayoutData()).horizontalAlignment = SWT.LEFT;
 				_addSimilarAspectButton.setEnabled(false);
 				_addSimilarAspectButton.setImage(_imageReg.get(IconsInternal.ASPECT_ADD_SAME_SOURCE));
 				_addSimilarAspectButton.addSelectionListener(new SelectionAdapter()
@@ -2650,18 +2654,22 @@ public class Treeview extends ViewPart implements ISelectionListener, ISelection
 					if (!Platform.getPreferencesService().getBoolean(CommonActivator.PLUGIN_ID,
 							"PERSON_DISPLAYNAME_LIFESPAN", false, null))
 					{
-						if (basicPersonData.getBeginningOfLife() != null && basicPersonData.getEndOfLife() != null)
+						if (basicPersonData.getBeginningOfLife() != null && 
+								basicPersonData.getBeginningOfLife().getYear() != 0 
+								&& basicPersonData.getEndOfLife() != null
+								&& basicPersonData.getEndOfLife().getYear() != 0 )
 						{
-							label += " (" + basicPersonData.getBeginningOfLife().toString() + "-"
-									+ basicPersonData.getEndOfLife().toString() + ")";
+							label += " (" + basicPersonData.getBeginningOfLife().toString(".") + " - "
+									+ basicPersonData.getEndOfLife().toString(".") + ")";
 						}
-						else if (basicPersonData.getBeginningOfLife() != null)
+						else if (basicPersonData.getBeginningOfLife() != null && 
+								basicPersonData.getBeginningOfLife().getYear() != 0 )
 						{
-							label += " (" + basicPersonData.getBeginningOfLife().toString() + "-????)";
+							label += " (" + basicPersonData.getBeginningOfLife().toString(".") + "-)";
 						}
-						else if (basicPersonData.getEndOfLife() != null)
+						else if (basicPersonData.getEndOfLife() != null && basicPersonData.getEndOfLife().getYear() != 0 )
 						{
-							label += " (????-" + basicPersonData.getEndOfLife().toString() + ")";
+							label += " (-" + basicPersonData.getEndOfLife().toString(".") + ")";
 						}
 					}
 					if (cp.getPdrId() != null)
