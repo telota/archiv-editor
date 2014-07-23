@@ -3,14 +3,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.bbaw.pdr.ae</groupId>
-  <artifactId>github-ae2</artifactId>
+  <artifactId>org.bbaw.pdr.ae</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
     <module>org.bbaw.pdr.ae</module>
     <module>org.bbaw.pdr.ae.aeimport</module>
     <module>org.bbaw.pdr.ae.backup</module>
-    <module>org.bbaw.pdr.ae.base.feature</module>
+  	  <module>org.bbaw.pdr.ae.base.feature</module>
+
     <module>org.bbaw.pdr.ae.collections</module>
     <module>org.bbaw.pdr.ae.collections.nl1</module>
     <module>org.bbaw.pdr.ae.common</module>
@@ -53,19 +54,18 @@
     <module>org.bbaw.pdr.ae.view.control.templates.aspectSemantic.controller</module>
     <module>org.bbaw.pdr.ae.view.editorLite</module>
     <module>org.bbaw.pdr.ae.view.fileSaveAndLoad.local</module>
-    <module>org.bbaw.pdr.ae.view.fileSaveAndLoad.web</module>
     <module>org.bbaw.pdr.ae.view.identifiers</module>
     <module>org.bbaw.pdr.ae.view.identifiers.nl1</module>
     <module>org.bbaw.pdr.ae.view.main.main</module>
     <module>org.bbaw.pdr.ae.view.main.markup.stext</module>
     <module>org.bbaw.pdr.ae.view.main.markup.stext.feature</module>
     <module>org.bbaw.pdr.ae.view.network</module>
-    <module>org.bbaw.pdr.ae.view.relationnetwork.feature</module>
     <module>org.bbaw.pdr.allies</module>
     <module>org.eclipselabs.p2.rcpupdate</module>
     <module>org.eclipselabs.p2.rcpupdate.utils</module>
-    <module>vex-editor</module>
-    <module>vex-toolkit</module>
+	
+	<module>org.bbaw.pdr.ae.view.relationnetwork.feature</module>
+
   </modules>
   
   <properties>
@@ -81,10 +81,18 @@
 	<repository>
       <id>ae-repository</id>
       <name>AE Rep</name>
-      <url>http://telota.bbaw.de/ArchivEditorupdate/update-2.2</url>
+      <url>http://telota.bbaw.de/ArchivEditorupdate/update-2.2/repository</url>
+	  <layout>p2</layout>
+    </repository>
+	
+	<repository>
+      <id>rap-repository</id>
+      <name>RAP Rep</name>
+      <url>http://download.eclipse.org/rt/rap/2.2 </url>
 	  <layout>p2</layout>
     </repository>
   </repositories>
+  
   <build>
     <plugins>
       <plugin>
@@ -92,6 +100,11 @@
         <artifactId>tycho-maven-plugin</artifactId>
         <version>0.20.0</version>
         <extensions>true</extensions>
+		<configuration>
+			<dependency-resolution>
+				<optionalDependencies> </optionalDependencies>
+			</dependency-resolution>
+		</configuration>
       </plugin>
 	  
 	  <plugin>

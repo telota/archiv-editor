@@ -236,7 +236,7 @@ public class DataDescSaxHandler extends DefaultHandler // implements
 		else if (name.equals("aspectTemplates") || name.equals("dtdl:aspectTemplates")
 				|| qn.equals("dtdl:aspectTemplates"))
 		{
-			_aspectTemplates = new ConfigData();
+			_aspectTemplates = new DataType();
 			_aspectTemplates.setValue("aspectTemplates");
 			_aspectTemplates.setLabel("Aspect Templates");
 			_templates.getChildren().put("aspectTemplates", _aspectTemplates);
@@ -454,7 +454,7 @@ public class DataDescSaxHandler extends DefaultHandler // implements
 		else if (name.equals("personIdentifiers") || name.equals("dtdl:personIdentifiers")
 				|| qn.equals("dtdl:personIdentifiers"))
 		{
-			_personIdentifiers = new ConfigData();
+			_personIdentifiers = new DataType();
 			_personIdentifiers.setValue("personIdentifiers");
 			_personIdentifiers.setLabel("Person Identifiers");
 			_personIdentifiers.setMyHaveChildren(true);

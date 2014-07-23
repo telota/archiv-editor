@@ -31,7 +31,7 @@ package org.bbaw.pdr.allies;
 
 import org.bbaw.pdr.allies.client.Configuration;
 import org.bbaw.pdr.allies.client.Repository;
-import org.bbaw.pdr.allies.client.error.PDRAlliesClientException;
+import org.bbaw.pdr.allies.error.PDRAlliesClientException;
 
 public class Tester
 {

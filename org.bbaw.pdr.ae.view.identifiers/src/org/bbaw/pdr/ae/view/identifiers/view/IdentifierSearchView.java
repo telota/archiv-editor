@@ -73,6 +73,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -215,6 +216,30 @@ public class IdentifierSearchView extends ViewPart implements Observer, ISizePro
 
 			}
 		});
+		
+		Object in = comboViewer.getInput();
+		if (in instanceof Map<?, ?>)
+		{
+			Map<String, IConcurrenceSearchService> map = (Map<String, IConcurrenceSearchService>) in;
+			String pdrKey = null;
+			for (String s : map.keySet())
+			{
+				if (s.toLowerCase().contains("pdr"))
+				{
+					pdrKey = s;
+					break;
+				}
+			}
+			if (pdrKey != null)
+			{
+				IConcurrenceSearchService service = map.get(pdrKey);
+				comboViewer.setSelection(new StructuredSelection(service));
+			}
+			else if (comboViewer.getElementAt(0) != null)
+			{
+				comboViewer.setSelection(new StructuredSelection(comboViewer.getElementAt(0)));
+			}
+		}
 
 		Button btnGo = new Button(composite_2, SWT.NONE);
 		btnGo.setText("GO");

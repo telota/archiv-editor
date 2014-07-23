@@ -64,4 +64,6 @@ public interface IUpdateManager
 	 */
 	String getUserId(String userName, int projectID) throws Exception;
 
+	void loadInitialUsers(String _userID, String _userPassword, IProgressMonitor monitor) throws Exception;
+
 }

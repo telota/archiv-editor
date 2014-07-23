@@ -65,7 +65,7 @@ public class LoadConfigBackupHandler extends AbstractHandler implements
 		if (_urChecker.mayEditConfig())
 		{
 			String message = NLMessages.getString("Commands_load_config_backup_warning1");
-			message += NLMessages.getString("Commands_load_config_backup_warning2");
+			message += "\n\n" + NLMessages.getString("Commands_load_config_backup_warning2");
 			MessageDialog messageDialog = new MessageDialog(HandlerUtil.getActiveWorkbenchWindow(
 					event).getShell(), NLMessages.getString("Commands_load_config_backup_warning3"), null,
 			        message, MessageDialog.WARNING,
@@ -82,13 +82,14 @@ public class LoadConfigBackupHandler extends AbstractHandler implements
 				{
 	//			    System.out.println(selectedDirectory + " was selected."); //$NON-NLS-1$
 					_configFacade.loadLocalConfigBackup(selectedDirectory);
+					String info = NLMessages.getString("Commands_message_load_config_backup_success");
+					MessageDialog infoDialog = new MessageDialog(HandlerUtil.getActiveWorkbenchWindow(
+							event).getShell(), NLMessages.getString("Commands_load_config_backup_successful_title"), null,
+					        info, MessageDialog.INFORMATION,
+					        new String[] {NLMessages.getString("Handler_ok") }, 0); //$NON-NLS-1$
+					infoDialog.open();
 				}
-				String info = NLMessages.getString("Commands_message_load_config_backup_success");
-				MessageDialog infoDialog = new MessageDialog(HandlerUtil.getActiveWorkbenchWindow(
-						event).getShell(), NLMessages.getString("Commands_load_config_backup_successful_title"), null,
-				        info, MessageDialog.INFORMATION,
-				        new String[] {NLMessages.getString("Handler_ok") }, 0); //$NON-NLS-1$
-				infoDialog.open();
+				
 			}
 		}
         else

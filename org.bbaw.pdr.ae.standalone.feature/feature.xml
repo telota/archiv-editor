@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.pdr.ae.standalone.feature"
       label="AE StandaloneFeature"
-      version="2.3.5.qualifier"
+      version="2.3.10.qualifier"
       provider-name="BBAW"
       plugin="org.bbaw.pdr.ae.standalone">
 
@@ -869,10 +869,6 @@ Public License instead of this License.  But first, please read
          version="0.0.0"/>
 
    <includes
-         id="org.bbaw.pdr.ae.base.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.bbaw.pdr.ae.datacleaning.feature"
          version="0.0.0"/>
 
@@ -906,6 +902,10 @@ Public License instead of this License.  But first, please read
 
    <includes
          id="org.bbaw.pdr.ae.view.relationnetwork.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.bbaw.pdr.ae.base.feature"
          version="0.0.0"/>
 
    <requires>

@@ -12,16 +12,16 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/axiom.jar,
- lib/commons-codec-1.6.jar,
  lib/commons-io-2.4.jar,
- lib/commons-logging-1.1.1.jar,
- lib/commons-logging-adapters-1.1.1.jar,
- lib/httpclient-4.2.jar,
- lib/httpcore-4.2.jar,
- lib/httpmime-4.2.jar,
- lib/commons-httpclient-3.1.jar,
- lib/lib-pdr-allies-1.0.0.jar
+ lib/lib-pdr-allies-1.1.0.jar,
+ lib/commons-codec-1.8.jar,
+ lib/commons-logging-1.1.3.jar,
+ lib/commons-logging-adapters-1.1.3.jar,
+ lib/httpclient-4.3.jar,
+ lib/httpcore-4.3.jar,
+ lib/httpmime-4.3.jar,
+ lib/commons-httpclient-3.1.jar
 Import-Package: org.bbaw.pdr.allies.client
 Export-Package: org.bbaw.pdr.allies,
  org.bbaw.pdr.allies.client,
- org.bbaw.pdr.allies.client.error
+ org.bbaw.pdr.allies.error

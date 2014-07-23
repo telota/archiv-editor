@@ -270,7 +270,18 @@ public class XMLProcessor implements XMLProcessorInterface
 			eventWriter.add(eventFactory.createEndElement(prefix, uri, "namePart"));
 
 		}
+		if (nameMods.getAffiliation() != null)
+		{
+			StartElement sE = eventFactory.createStartElement(prefix, uri, "affiliation");
 
+			eventWriter.add(sE);
+
+			Characters characters = eventFactory.createCharacters(nameMods.getAffiliation());
+			eventWriter.add(characters);
+
+			eventWriter.add(eventFactory.createEndElement(prefix, uri, "affiliation"));
+
+		}
 		if (nameMods.getRoleMods() != null)
 		{
 			StartElement sE = eventFactory.createStartElement(prefix, uri, "role");
@@ -305,18 +316,7 @@ public class XMLProcessor implements XMLProcessorInterface
 
 		}
 
-		if (nameMods.getAffiliation() != null)
-		{
-			StartElement sE = eventFactory.createStartElement(prefix, uri, "affiliation");
-
-			eventWriter.add(sE);
-
-			Characters characters = eventFactory.createCharacters(nameMods.getAffiliation());
-			eventWriter.add(characters);
-
-			eventWriter.add(eventFactory.createEndElement(prefix, uri, "affiliation"));
-
-		}
+		
 
 		if (nameMods.getDescription() != null)
 		{
@@ -1578,10 +1578,12 @@ public class XMLProcessor implements XMLProcessorInterface
 
 		if (subText.contains("\n") || subText.contains("\r"))
 		{
-			String[] subs = subText.split("\\s");
+			String[] subs = subText.split("\\n|\\r");
 			for (int i = 0; i < subs.length; i++)
 			{
-				Characters characters = eventFactory.createCharacters(subs[i]);
+				String removeLB = subs[i].replace("\n", "");
+				removeLB =  subs[i].replace("\r", "");
+				Characters characters = eventFactory.createCharacters(removeLB);
 				eventWriter.add(characters);
 
 				if (i < subs.length - 1)

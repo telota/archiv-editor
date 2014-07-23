@@ -224,6 +224,8 @@ public class AspectSaxHandler extends DefaultHandler
 
 	private int _counter;
 
+	private boolean lb_start;
+
 	// /**
 	// * Instantiates a new aspect sax handler.
 	// * @param pdrObject the pdr object
@@ -861,8 +863,16 @@ public class AspectSaxHandler extends DefaultHandler
 		}
 		else if (name.equals("lb") || name.equals("aodl:lb") || qn.equals("lb") || qn.equals("aodl:lb"))
 		{
+//			if (!lb_start)
+//			{
+//				_sb.append("\n");
+//				lb_start = false;
+//			} else
+//			{
+//				lb_start = false;
+//			}
 			_sb.append("\n");
-			// _notiTextB = true;
+			 _notiTextB = true;
 		}
 		else if (name.equals("persName") || name.equals("aodl:persName") || qn.equals("persName")
 				|| qn.equals("aodl:persName"))

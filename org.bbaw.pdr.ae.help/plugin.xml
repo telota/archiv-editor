@@ -9,9 +9,6 @@
             primary="true">
       </toc>
    </extension>
-   <extension point="org.eclipse.help.index">
-    <index file="index.xml"/>
-   </extension>
    <extension
          point="org.eclipse.help.contexts">
       <contexts

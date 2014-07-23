@@ -133,12 +133,12 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 		{
 			configurer.setShowPerspectiveBar(false);
 
-			configurer.setTitle("Archiv-Editor 2.3.9");
+			configurer.setTitle("Archiv-Editor 2.3.10");
 		}
 		else
 		{
 			configurer.setShowPerspectiveBar(false);
-			configurer.setTitle("Archiv-Editor 2.3.9 lite");
+			configurer.setTitle("Archiv-Editor 2.3.10 lite");
 
 		}
 

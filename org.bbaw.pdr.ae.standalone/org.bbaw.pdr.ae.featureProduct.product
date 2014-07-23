@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Archiv-Editor" id="org.bbaw.pdr.ae.standalone.product2" application="org.bbaw.pdr.ae.standalone.application" version="2.3.9" useFeatures="true" includeLaunchers="true">
+<product name="Archiv-Editor" id="org.bbaw.pdr.ae.standalone.product2" application="org.bbaw.pdr.ae.standalone.application" version="2.3.10" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/org.bbaw.pdr.ae.standalone/icons/logo_bbaw.gif"/>
@@ -980,7 +980,7 @@ Public License instead of this License.  But first, please read
    </plugins>
 
    <features>
-      <feature id="org.bbaw.pdr.ae.standalone.feature" version="2.3.5.qualifier"/>
+      <feature id="org.bbaw.pdr.ae.standalone.feature" version="2.3.10.qualifier"/>
    </features>
 
    <configurations>

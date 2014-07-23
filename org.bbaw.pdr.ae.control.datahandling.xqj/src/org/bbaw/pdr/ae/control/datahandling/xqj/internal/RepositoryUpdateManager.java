@@ -48,6 +48,7 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -80,6 +81,7 @@ import org.bbaw.pdr.ae.common.utils.CopyDirectory;
 import org.bbaw.pdr.ae.config.core.ConfigXMLProcessor;
 import org.bbaw.pdr.ae.config.core.DataDescSaxHandler;
 import org.bbaw.pdr.ae.config.model.DatatypeDesc;
+import org.bbaw.pdr.ae.control.core.PDRObjectDisplayNameProcessor;
 import org.bbaw.pdr.ae.control.core.UserXMLProcessor;
 import org.bbaw.pdr.ae.control.core.XMLProcessor;
 import org.bbaw.pdr.ae.control.datahandling.xqj.config.ConfigManager;
@@ -103,8 +105,8 @@ import org.bbaw.pdr.allies.client.Identifier;
 import org.bbaw.pdr.allies.client.PDRType;
 import org.bbaw.pdr.allies.client.Repository;
 import org.bbaw.pdr.allies.client.Utilities;
-import org.bbaw.pdr.allies.client.error.InvalidIdentifierException;
-import org.bbaw.pdr.allies.client.error.PDRAlliesClientException;
+import org.bbaw.pdr.allies.error.InvalidIdentifierException;
+import org.bbaw.pdr.allies.error.PDRAlliesClientException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -211,6 +213,9 @@ public class RepositoryUpdateManager implements IUpdateManager
 	private Validator userXMLValidator;
 
 	private Validator referenceXMLValidator;
+
+	/** instance of PDRObjectDisplayNameProcessor. */
+	private PDRObjectDisplayNameProcessor _pdrDisplayNameProc = new PDRObjectDisplayNameProcessor();
 	/**
 	 * checks ids.
 	 * @param objects updated objects.
@@ -393,7 +398,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 	 */
 	private void getModifiedConfig() throws Exception
 	{
-		Vector<String> providers = null;
+		List<String> providers = null;
 		try {
 			providers = Utilities.getCategoryProviders();
 		} catch (Exception e2) {
@@ -648,12 +653,13 @@ public class RepositoryUpdateManager implements IUpdateManager
 									is = new ByteArrayInputStream(s.getBytes("UTF-8"));
 									saxParser.parse(is, handler);
 									oConflict = new PDRObjectsConflict();
-									_parsedAspect = (Aspect) handler.getResultObject();
-									if (_parsedAspect != null)
+									Aspect parsedAspect = (Aspect) handler.getResultObject();
+									if (parsedAspect != null)
 									{
-										oConflict.setRepositoryObject(_parsedAspect);
+										_pdrDisplayNameProc.processDisplayName(parsedAspect);
+										oConflict.setRepositoryObject(parsedAspect);
 									}
-									_parsedAspect = null;
+									parsedAspect = null;
 									oConflict.setLocalObject(_facade.getAspect(new PdrId(id)));
 									conAspects.add(oConflict);
 								}
@@ -693,12 +699,26 @@ public class RepositoryUpdateManager implements IUpdateManager
 									is = new ByteArrayInputStream(s.getBytes("UTF-8"));
 									saxParser.parse(is, handler);
 									oConflict = new PDRObjectsConflict();
-									_parsedPerson = (Person) handler.getResultObject();
-									if (_parsedPerson != null)
+									Object o = handler.getResultObject();
+									Person parsedPerson = null;
+									if (o instanceof Person) parsedPerson = (Person) o;
+									else
 									{
-										oConflict.setRepositoryObject(_parsedPerson);
+										Map<PdrId, Person> persons = (Map<PdrId, Person>) o;
+										for (Person p : persons.values())
+										{
+											parsedPerson = p;
+											break;
+										}
 									}
-									_parsedPerson = null;
+									 
+									
+									if (parsedPerson != null)
+									{
+										_pdrDisplayNameProc.processDisplayName(parsedPerson);
+										oConflict.setRepositoryObject(parsedPerson);
+									}
+									parsedPerson = null;
 									oConflict.setLocalObject(_facade.getPdrObject(new PdrId(id)));
 									conPersons.add(oConflict);
 								}
@@ -738,12 +758,14 @@ public class RepositoryUpdateManager implements IUpdateManager
 									is = new ByteArrayInputStream(s.getBytes("UTF-8"));
 									saxParser.parse(is, handler);
 									oConflict = new PDRObjectsConflict();
-									_parsedReference = (ReferenceMods) handler.getResultObject();
-									if (_parsedReference != null)
+									ReferenceMods parsedReference = (ReferenceMods) handler.getResultObject();
+									if (parsedReference != null)
 									{
-										oConflict.setRepositoryObject(_parsedReference);
+										_pdrDisplayNameProc.processDisplayName(parsedReference);
+										_pdrDisplayNameProc.processDisplayNameLong(parsedReference);
+										oConflict.setRepositoryObject(parsedReference);
 									}
-									_parsedReference = null;
+									parsedReference = null;
 									oConflict.setLocalObject(_facade.getReference(new PdrId(id)));
 									conReferences.add(oConflict);
 								}
@@ -888,8 +910,8 @@ public class RepositoryUpdateManager implements IUpdateManager
 		synchronized (_dbCon)
 		{
 			_conflictingRepAspects = new Vector<String>();
-			Vector<String> subConflRepAspects = new Vector<String>();
-			Vector<String> aspects = getModifiedAspects();
+			List<String> subConflRepAspects = new Vector<String>();
+			List<String> aspects = getModifiedAspects();
 			if (aspects.size() == 0)
 			{
 				return;
@@ -907,7 +929,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 			{
 				end = aspects.size();
 			}
-			Vector<String> subAspects = new Vector<String>(end);
+			List<String> subAspects = new Vector<String>(end);
 			for (int i = begin; i < end; i++)
 			{
 				String xml = aspects.get(i);
@@ -1009,8 +1031,8 @@ public class RepositoryUpdateManager implements IUpdateManager
 		synchronized (_dbCon)
 		{
 			_conflictingRepPersons = new Vector<String>();
-			Vector<String> subConflictingPersons = new Vector<String>();
-			Vector<String> persons = getModifiedPersons();
+			List<String> subConflictingPersons = new Vector<String>();
+			List<String> persons = getModifiedPersons();
 			if (persons.size() == 0)
 			{
 				return;
@@ -1099,8 +1121,8 @@ public class RepositoryUpdateManager implements IUpdateManager
 		{
 			_conflictingRepReferences = new Vector<String>();
 
-			Vector<String> subConflictingRefs = new Vector<String>();
-			Vector<String> references = getModifiedReferences();
+			List<String> subConflictingRefs = new Vector<String>();
+			List<String> references = getModifiedReferences();
 			if (references.size() == 0)
 			{
 				return;
@@ -1118,7 +1140,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 			{
 				end = references.size();
 			}
-			Vector<String> subReferences = new Vector<String>(end);
+			List<String> subReferences = new Vector<String>(end);
 			String ref;
 			for (int i = begin; i < end; i++)
 			{
@@ -2193,7 +2215,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 	 * @param size the size
 	 * @throws Exception
 	 */
-	private void proccessUpdateStates(final Vector<IDRange> idRanges, final int size) throws Exception
+	private void proccessUpdateStates(final List<IDRange> idRanges, final int size) throws Exception
 	{
 		if (!idRanges.isEmpty())
 		{
@@ -2209,7 +2231,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 			String type = null;
 			HashMap<String, Integer> updateState = null;
 			PdrId id;
-			if (idRanges.firstElement().getType() == PDRType.ASPECT)
+			if (idRanges.get(0).getType() == PDRType.ASPECT)
 			{
 				type = "pdrAo";
 				try
@@ -2221,7 +2243,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 					log = new Status(IStatus.INFO, Activator.PLUGIN_ID, "Exception ", e);
 					iLogger.log(log);				}
 			}
-			else if (idRanges.firstElement().getType() == PDRType.PERSON)
+			else if (idRanges.get(0).getType() == PDRType.PERSON)
 			{
 				type = "pdrPo";
 				try
@@ -2235,7 +2257,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 				}
 
 			}
-			else if (idRanges.firstElement().getType() == PDRType.REFERENCE)
+			else if (idRanges.get(0).getType() == PDRType.REFERENCE)
 			{
 				type = "pdrRo";
 				try
@@ -3007,9 +3029,9 @@ public class RepositoryUpdateManager implements IUpdateManager
 		int totalPersons = 0;
 		int totalAspects = 0;
 		int totalReferences = 0;
-		Vector<IDRange> personRanges;
-		Vector<IDRange> aspectRanges;
-		Vector<IDRange> referenceRanges;
+		List<IDRange> personRanges;
+		List<IDRange> aspectRanges;
+		List<IDRange> referenceRanges;
 
 		personRanges = Utilities.getOccupiedObjectIDRanges(PDRType.PERSON, _repositoryId, _projectId, 1,
 				MAX_OBJECT_NUMBER);
@@ -3289,7 +3311,7 @@ public class RepositoryUpdateManager implements IUpdateManager
 		String col = "util";
 		String name;
 		monitor.subTask("Connecting to Repository...");
-		Vector<String> modObjs = Repository.getModifiedObjects(_repositoryId, _projectId,
+		List<String> modObjs = Repository.getModifiedObjects(_repositoryId, _projectId,
 				AEConstants.ADMINDATE_FORMAT.format(date));
 		// calculate total work
 
@@ -3413,12 +3435,20 @@ public class RepositoryUpdateManager implements IUpdateManager
 		String name;
 		Configuration.getInstance().setAxis2BaseURL(url.toString());
 		//FIXME nur als default
-		Configuration.getInstance().setPDRUser("pdrUo." + String.format("%03d", _repositoryId) + ".002.000000001", "pdrrdp");
+		if (userID != null && password != null)
+		{
+			Configuration.getInstance().setPDRUser(userID, password);
+
+		}
+		else
+		{
+			Configuration.getInstance().setPDRUser("pdrUo." + String.format("%03d", _repositoryId) + ".002.000000001", "pdrrdp");
+		}
 
 		
 		injestNewUsers(userID, password);
 		
-		Vector<IDRange> ranges = Utilities.getOccupiedObjectIDRanges(PDRType.USER, _repositoryId, _projectId, 1,
+		List<IDRange> ranges = Utilities.getOccupiedObjectIDRanges(PDRType.USER, _repositoryId, _projectId, 1,
 				MAX_OBJECT_NUMBER);
 		String col = "users";
 		int lowerBound = 1;
@@ -3782,6 +3812,90 @@ public class RepositoryUpdateManager implements IUpdateManager
 				AEConstants.REPOSITORY_URL, null);
 		Configuration.getInstance().setAxis2BaseURL(url.toString());
 		return Repository.getUserID(userName, projectID);
+	}
+
+	@Override
+	public void loadInitialUsers(String userID, String password,
+			IProgressMonitor monitor) throws Exception {
+		String url = Platform.getPreferencesService().getString(CommonActivator.PLUGIN_ID, "REPOSITORY_URL",
+				AEConstants.REPOSITORY_URL, null);
+		_repositoryId = Platform.getPreferencesService().getInt(CommonActivator.PLUGIN_ID, "REPOSITORY_ID",
+				AEConstants.REPOSITORY_ID, null);
+		_projectId = Platform.getPreferencesService().getInt(CommonActivator.PLUGIN_ID, "PROJECT_ID",
+				AEConstants.PROJECT_ID, null);
+		String name;
+		Configuration.getInstance().setAxis2BaseURL(url.toString());
+		//FIXME nur als default
+		if (userID != null && password != null)
+		{
+			Configuration.getInstance().setPDRUser(userID, password);
+
+		}
+		else
+		{
+			Configuration.getInstance().setPDRUser("pdrUo." + String.format("%03d", _repositoryId) + ".002.000000001", "pdrrdp");
+		}
+
+		
+		List<IDRange> ranges = Utilities.getOccupiedObjectIDRanges(PDRType.USER, _repositoryId, _projectId, 1,
+				MAX_OBJECT_NUMBER);
+		String col = "users";
+		int lowerBound = 1;
+		int upperBound = 1;
+		synchronized (_dbCon)
+		{
+			_dbCon.openCollection(col);
+			for (IDRange range : ranges)
+			{
+				log = new Status(IStatus.INFO, Activator.PLUGIN_ID, "user range " + range.getLowerBound() + " upper b "
+						+ range.getUpperBound());
+				iLogger.log(log);
+				lowerBound = range.getLowerBound();
+
+				while (upperBound < range.getUpperBound())
+				{
+					if (range.getUpperBound() - lowerBound <= PACKAGE_SIZE)
+					{
+						upperBound = range.getUpperBound();
+					}
+					else
+					{
+						upperBound = lowerBound + PACKAGE_SIZE;
+					}
+
+					Vector<String> objs = Utilities.getObjects(PDRType.USER, _repositoryId, _projectId, lowerBound,
+							upperBound);
+					for (String s : objs)
+					{
+						name = extractPdrId(s) + ".xml";
+						log = new Status(IStatus.INFO, Activator.PLUGIN_ID, "update user  " + name );
+						iLogger.log(log);
+						if (isValidUser(s))
+						{
+							_dbCon.delete(name, col);
+							_dbCon.store2DB(addUserPrefix(s), col, name, false);
+						}
+						else
+						{
+							String us = addUserPrefix(s);
+							if (isValidUser(us))
+							{
+								_dbCon.delete(name, col);
+								_dbCon.store2DB(us, col, name, false);
+							}
+						}
+					}
+					lowerBound = Math.min(lowerBound + PACKAGE_SIZE, range.getUpperBound());
+				}
+			}
+			_dbCon.optimize(col);
+			_dbCon.openCollection(col);
+			_dbCon.closeDB(col);
+			_idService.clearUserUpdateStates();
+			Configuration.getInstance().setPDRUser(userID, password);
+
+		}
+		
 	}
 
 }

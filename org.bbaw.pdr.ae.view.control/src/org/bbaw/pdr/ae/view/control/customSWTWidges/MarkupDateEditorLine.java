@@ -371,12 +371,12 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 		_date1TypeCombo.setEnabled(selection);
 		if (_date1Editor != null)
 		{
-			_date1Editor.setSelected(selection, _isValid);
+			_date1Editor.setSelected(selection && _activationButton.getSelection(), _isValid);
 		}
 		if (_date2Editor != null)
 		{
-			_date2Editor.setSelected(selection && !_pointOfTime && _date2Type.trim().length() > 0,  _isValid);
-			_date2TypeCombo.setEnabled(selection && !_pointOfTime);
+			_date2Editor.setSelected(selection && !_pointOfTime && _date2Type.trim().length() > 0  && _activationButton.getSelection(),  _isValid);
+			_date2TypeCombo.setEnabled(selection && !_pointOfTime && _activationButton.getSelection());
 
 		}
 
@@ -473,7 +473,13 @@ public class MarkupDateEditorLine extends Composite implements IAEBasicEditor
 	{
 		this._isSelected = selected;
 		_activationButton.setEnabled(_isSelected);
-		
+		_date1TypeCombo.setEnabled(_isSelected  && _activationButton.getSelection());
+		_date1Editor.setSelected(_isSelected  && _activationButton.getSelection(), contextIsValid);
+		if (_date2TypeCombo != null   && _activationButton.getSelection() && !_pointOfTime)
+		{
+			_date2TypeCombo.setEnabled(_isSelected);
+			_date2Editor.setSelected(_isSelected, contextIsValid);
+		}
 		if (selected && contextIsValid)
 		{
 			setBackground(AEVIEWConstants.VIEW_BACKGROUND_SELECTED_COLOR);

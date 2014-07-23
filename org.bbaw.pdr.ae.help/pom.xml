@@ -4,11 +4,27 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.bbaw.pdr.ae</groupId>
-    <artifactId>github-ae2</artifactId>
+    <artifactId>org.bbaw.pdr.ae</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>org.bbaw.pdr.ae</groupId>
   <artifactId>org.bbaw.pdr.ae.help</artifactId>
   <version>2.0.0</version>
   <packaging>eclipse-plugin</packaging>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>0.20.0</version>
+        <extensions>true</extensions>
+		<configuration>
+			<dependency-resolution>
+				<optionalDependencies>ignore</optionalDependencies>
+			</dependency-resolution>
+		</configuration>
+      </plugin>
+      </plugins>
+      </build>
 </project>

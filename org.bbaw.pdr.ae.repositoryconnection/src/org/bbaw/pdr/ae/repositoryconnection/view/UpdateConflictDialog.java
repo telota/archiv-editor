@@ -1972,7 +1972,14 @@ public class UpdateConflictDialog extends TitleAreaDialog
 		text.setData("id", cr.getPdrId().toString()); //$NON-NLS-1$
 
 		text.append("\n"); //$NON-NLS-1$
-		text.append(cr.getDisplayNameLong());
+		if (cr.getDisplayNameLong() != null)
+		{
+			text.append(cr.getDisplayNameLong());
+		}
+		else if (cr.getDisplayName() != null)
+		{
+			text.append(cr.getDisplayName());
+		}
 		text.append("\n" + cr.getPdrId().toString()); //$NON-NLS-1$ //$NON-NLS-2$
 		text.append("\n"); //$NON-NLS-1$
 		if (cr.getRecord() != null && cr.getRecord().getRevisions() != null

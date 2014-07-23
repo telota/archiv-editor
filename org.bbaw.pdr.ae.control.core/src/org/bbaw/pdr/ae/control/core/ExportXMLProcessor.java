@@ -256,7 +256,18 @@ public class ExportXMLProcessor implements XMLProcessorInterface
 			eventWriter.add(eventFactory.createEndElement("", "", "namePart"));
 			eventWriter.add(end);
 		}
+		if (nameMods.getAffiliation() != null)
+		{
+			StartElement sE = eventFactory.createStartElement("", "", "affiliation");
+			eventWriter.add(tab);
+			eventWriter.add(sE);
 
+			Characters characters = eventFactory.createCharacters(nameMods.getAffiliation());
+			eventWriter.add(characters);
+
+			eventWriter.add(eventFactory.createEndElement("", "", "affiliation"));
+			eventWriter.add(end);
+		}
 		if (nameMods.getRoleMods() != null)
 		{
 			StartElement sE = eventFactory.createStartElement("", "", "role");
@@ -292,18 +303,7 @@ public class ExportXMLProcessor implements XMLProcessorInterface
 			eventWriter.add(end);
 		}
 
-		if (nameMods.getAffiliation() != null)
-		{
-			StartElement sE = eventFactory.createStartElement("", "", "affiliation");
-			eventWriter.add(tab);
-			eventWriter.add(sE);
 
-			Characters characters = eventFactory.createCharacters(nameMods.getAffiliation());
-			eventWriter.add(characters);
-
-			eventWriter.add(eventFactory.createEndElement("", "", "affiliation"));
-			eventWriter.add(end);
-		}
 
 		if (nameMods.getDescription() != null)
 		{

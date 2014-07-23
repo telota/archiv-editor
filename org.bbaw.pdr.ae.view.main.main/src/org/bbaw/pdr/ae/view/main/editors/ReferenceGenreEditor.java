@@ -303,8 +303,9 @@ public class ReferenceGenreEditor extends TitleAreaDialog
 				else
 				{
 					setMessage(""); //$NON-NLS-1$
-					_newButton.setEnabled(true);
+					_newButton.setEnabled(_genreText.getText().trim().length() > 0);
 				}
+				
 
 			}
 
@@ -322,6 +323,7 @@ public class ReferenceGenreEditor extends TitleAreaDialog
 			}
 		});
 		_newButton.pack();
+		_newButton.setEnabled(false);
 		upperComposite.layout();
 		upperComposite.pack();
 

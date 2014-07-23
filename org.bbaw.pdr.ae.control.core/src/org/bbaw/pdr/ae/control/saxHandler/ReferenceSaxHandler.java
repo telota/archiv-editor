@@ -1004,6 +1004,7 @@ public class ReferenceSaxHandler extends DefaultHandler // implements
 				if (atts.getQName(i).equals("id"))
 				{
 					_ref = new ReferenceMods(atts.getValue(i));
+					break;
 				}
 			}
 			_relatedItems = new Vector<RelatedItem>(1);
@@ -1023,9 +1024,23 @@ public class ReferenceSaxHandler extends DefaultHandler // implements
 			_ref = new ReferenceMods(new Genre());
 		}
 		else if ((localName.equals("mods") || qName.equals("mods") || localName.equals("mods:mods") || qName
-				.equals("mods:mods")) && _template)
+				.equals("mods:mods")) && (_template || _ref == null))
 		{
-			_ref = new ReferenceMods(new Genre());
+			if (_template)
+			{
+				_ref = new ReferenceMods(new Genre());
+			}
+			else
+			{
+				for (int i = 0; i < atts.getLength(); i++)
+				{
+					if (atts.getQName(i).equals("ID"))
+					{
+						_ref = new ReferenceMods(atts.getValue(i));
+						break;
+					}
+				}
+			}
 		}
 
 		else if (localName.equals("titleInfo") || qName.equals("titleInfo") || localName.equals("mods:titleInfo")

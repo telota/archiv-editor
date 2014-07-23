@@ -29,8 +29,11 @@
  */
 package org.bbaw.pdr.ae.config.editor.view;
 
+import java.util.HashMap;
+
 import org.bbaw.pdr.ae.config.model.ConfigData;
 import org.bbaw.pdr.ae.config.model.ConfigTreeNode;
+import org.bbaw.pdr.ae.config.model.DataType;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
@@ -40,7 +43,19 @@ import org.eclipse.jface.viewers.ViewerSorter;
  */
 public class ConfigTreeSorter extends ViewerSorter
 {
-
+	private static final String[] DATATYPES = new String[]{
+		"personIdentifiers",
+		"aodl:semanticStm",
+		"aodl:relation",
+		"aodl:persName",
+		"aodl:orgName",
+		"aodl:placeName",
+		"aodl:name",
+		"aodl:date",
+		"aspectTemplates"
+	};
+	private HashMap<String, Integer> map;
+	
 	@Override
 	public final int compare(final Viewer viewer, final Object e1, final Object e2)
 	{
@@ -48,7 +63,34 @@ public class ConfigTreeSorter extends ViewerSorter
 		ConfigData c1 = t1.getConfigData();
 		ConfigTreeNode t2 = (ConfigTreeNode) e2;
 		ConfigData c2 = t2.getConfigData();
-		return c1.getPriority() - c2.getPriority();
+		if (c1 instanceof DataType && c2 instanceof DataType)
+		{
+			int i1 = getIndex(c1.getValue());
+			int i2 = getIndex(c2.getValue());
+			return i1 - i2;
+		}
+		else
+		{
+			return c1.getPriority() - c2.getPriority();
+		}
 
 	}
+
+	private int getIndex(String value) {
+		if (map == null)
+		{
+			map = new HashMap<String, Integer>(9);
+			for (int i = 0; i< DATATYPES.length; i++)
+			{
+				String s = DATATYPES[i];
+				map.put(s, i);
+			}
+		}
+		if (map.containsKey(value))
+		{
+			return map.get(value);
+		}
+		return 10;
+	}
+
 }

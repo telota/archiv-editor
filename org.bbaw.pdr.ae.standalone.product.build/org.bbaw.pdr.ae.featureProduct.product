@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Archiv-Editor" id="org.bbaw.pdr.ae.standalone.product2" application="org.bbaw.pdr.ae.standalone.application" version="2.3.9" useFeatures="true" includeLaunchers="true">
+<product name="Archiv-Editor" id="org.bbaw.pdr.ae.standalone.product2" application="org.bbaw.pdr.ae.standalone.application" version="2.3.10" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="/org.bbaw.pdr.ae.standalone/icons/logo_bbaw.gif"/>
+      <image path="/org.bbaw.pdr.ae.standalone.product.build/icons/logo_bbaw.gif"/>
       <text>
          %property.aboutText
       </text>
@@ -20,10 +20,10 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/org.bbaw.pdr.ae.standalone/icons/icon_ae_16.gif" i32="/org.bbaw.pdr.ae.standalone/icons/icon_ae_32.gif" i48="/org.bbaw.pdr.ae.standalone/icons/icon_ae_48.gif" i64="/org.bbaw.pdr.ae.standalone/icons/icon_ae_64.gif" i128="/org.bbaw.pdr.ae.standalone/icons/icon_ae_128.gif"/>
+   <windowImages i16="/org.bbaw.pdr.ae.standalone.product.build/icons/icon_ae_16.gif" i32="/org.bbaw.pdr.ae.standalone.product.build/icons/icon_ae_32.gif" i48="/org.bbaw.pdr.ae.standalone.product.build/icons/icon_ae_48.gif" i64="/org.bbaw.pdr.ae.standalone.product.build/icons/icon_ae_64.gif" i128="/org.bbaw.pdr.ae.standalone.product.build/icons/icon_ae_128.gif"/>
 
    <splash
-      location="org.bbaw.pdr.ae.standalone"
+      location="org.bbaw.pdr.ae.standalone.product.build"
       startupProgressRect="74,285,250,15"
       startupMessageRect="170,273,445,20"
       startupForegroundColor="FF0000" />
@@ -980,7 +980,7 @@ Public License instead of this License.  But first, please read
    </plugins>
 
    <features>
-      <feature id="org.bbaw.pdr.ae.standalone.feature" version="2.3.5.qualifier"/>
+      <feature id="org.bbaw.pdr.ae.standalone.feature" version="2.3.10.qualifier"/>
    </features>
 
    <configurations>

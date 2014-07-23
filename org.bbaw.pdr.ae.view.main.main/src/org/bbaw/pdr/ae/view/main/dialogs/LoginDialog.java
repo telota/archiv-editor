@@ -29,6 +29,7 @@
  */
 package org.bbaw.pdr.ae.view.main.dialogs;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observer;
@@ -41,13 +42,17 @@ import org.bbaw.pdr.ae.control.facade.Facade;
 import org.bbaw.pdr.ae.control.interfaces.IUpdateManager;
 import org.bbaw.pdr.ae.control.interfaces.IUserManager;
 import org.bbaw.pdr.ae.model.User;
+import org.bbaw.pdr.ae.view.control.dialogs.TimeoutProgressMonitorDialog;
 import org.bbaw.pdr.ae.view.main.internal.Activator;
 import org.eclipse.core.runtime.ILog;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.IMessageProvider;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -63,6 +68,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
  * Class creates login dialog for entering the user name. TODO it has to be
@@ -108,6 +114,13 @@ public class LoginDialog extends TitleAreaDialog
 	private boolean _addUserToStore = true;
 
 	private Button _OKButton;
+
+	private String _userID;
+
+
+	private int _projectId;
+
+	private boolean usersInitialized;
 	/** Logger. */
 	private static ILog iLogger = AEConstants.ILOGGER;
 
@@ -467,6 +480,8 @@ public class LoginDialog extends TitleAreaDialog
 	 */
 	private boolean isValidInput()
 	{
+		_projectId = Platform.getPreferencesService().getInt(CommonActivator.PLUGIN_ID, "PROJECT_ID",
+				AEConstants.PROJECT_ID, null);
 		boolean valid = true;
 		_userName = _userNameCombo.getText();
 		_userPassword = _userPasswordText.getText();
@@ -484,7 +499,49 @@ public class LoginDialog extends TitleAreaDialog
 			return valid;
 
 		}
-		else if (_onStart)
+		if (!usersInitialized)
+		{
+			TimeoutProgressMonitorDialog dialog = new TimeoutProgressMonitorDialog(this.getShell(), 10000);
+			dialog.setCancelable(false);
+
+			try
+			{
+				dialog.run(true, true, new IRunnableWithProgress()
+				{
+					private Object _updateStatus;
+
+					@Override
+					public void run(final IProgressMonitor monitor)
+					{
+						try {
+							IUpdateManager[] rums = Facade.getInstanz().getUpdateManagers();
+							for (IUpdateManager rum : rums) {
+								try {
+									_userID = rum.getUserId(_userName, _projectId);
+									monitor.setTaskName("Update Users from Repository");
+									rum.loadInitialUsers(_userID, _userPassword, null);
+									usersInitialized = true;
+								} catch (Exception e) {
+									_userManager.verifyOrCreateUsers();
+									e.printStackTrace();
+								}
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				});
+			} catch (InvocationTargetException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally{}
+		}
+		if (_onStart)
 		{
 			User u = null;
 			try
