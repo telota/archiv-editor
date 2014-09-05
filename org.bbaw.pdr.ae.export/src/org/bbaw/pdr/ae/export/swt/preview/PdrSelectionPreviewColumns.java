@@ -76,6 +76,11 @@ public class PdrSelectionPreviewColumns {
 		icons.put("markup", imgReg.get(IconsInternal.MARKUP));
 	}
 	
+	// ########## Column Label Providers ###########
+	/**
+	 * Label provider for first column of PDR objects preview, displaying PDR objects selection.
+	 * @author jakobh
+	 */
 	private class PdrObjectsLblProv extends ColumnLabelProvider {
 		@Override
 		public String getText(Object element) {
@@ -110,6 +115,10 @@ public class PdrSelectionPreviewColumns {
 			super.update(cell);			
 		}
 	}
+	/**
+	 * Label Provider for temporal information in PDR objects.
+	 * @author jakobh
+	 */
 	private class ChronoLblProv extends ColumnLabelProvider {
 		@Override
 		public String getText(Object element) {
@@ -136,6 +145,10 @@ public class PdrSelectionPreviewColumns {
 			return "";
 		}
 	}
+	/**
+	 * Label Provider for PDR repo categories ({@link SemanticStm}).
+	 * @author jakobh
+	 */
 	private class CategoryLblProv extends ColumnLabelProvider {
 		@Override
 		public String getText(Object element) {
@@ -149,6 +162,10 @@ public class PdrSelectionPreviewColumns {
 			return "";
 		}
 	}
+	/**
+	 * Label Provider for time of latest changes column.
+	 * @author jakobh
+	 */
 	private class RecentChgLblProv extends ColumnLabelProvider {
 		private Date time;
 		private DateFormat df;
@@ -183,6 +200,10 @@ public class PdrSelectionPreviewColumns {
 			return "";
 		}
 	}
+	/**
+	 * Label Provider for PDR object validating sources ({@link ValidationStm}).
+	 * @author jakobh
+	 */
 	private class ReferenceLblProv extends ColumnLabelProvider {
 		@Override
 		public String getText(Object element) {
@@ -197,6 +218,10 @@ public class PdrSelectionPreviewColumns {
 			return "";
 		};
 	}
+	/**
+	 * Label Provider for authoring user column.
+	 * @author jakobh
+	 */
 	private class CreatorLblProv extends ColumnLabelProvider {
 		@Override
 		public String getText(Object element) {

@@ -219,7 +219,7 @@ public class FileSelectionGroup extends ContentViewer
 	 * that wishes to use this template 
 	 */
 	public FileSelectionGroup(String plugin, WizardPage page, Composite parent, int style) {
-		container = new Group(parent, style);
+		container = new Group(parent, style | SWT.SHADOW_ETCHED_IN);
 		container.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false));
 		container.setLayout(new GridLayout(3, false));
 		

@@ -549,7 +549,17 @@ public class PdrObjectsPreviewStructure implements ITreeContentProvider, ICheckS
 				"Sorting criteria: "+sortedBy+", ascending: "+asc));
 		if (comp != null) {
 			provider.setComparator(comp);
-			buildTree();
+			// TODO: experiment: rather than rebuilding the entire thing, we just sort 
+			// the structnodes children lists
+			//buildTree(); 
+			Vector<StructNode> nodes = new Vector<StructNode>();
+			NodeComparator ncomp = new NodeComparator(comp);
+			nodes = this.getExpandableNodes();
+			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID, 
+					"Nodes to sort: "+nodes.size()));
+			for (StructNode n : nodes)
+				n.sort(ncomp);
+			
 			log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID, 
 					" > "+comp.getClass().getName()+"\n"+
 					(asc ? "ascending" : "descending")));
@@ -662,6 +672,15 @@ public class PdrObjectsPreviewStructure implements ITreeContentProvider, ICheckS
 		}
 		return res;
 	}
+	
+	
+	public Vector<StructNode> getExpandableNodes() {
+		HashSet<StructNode> res = new HashSet<StructNode>();
+		for (Vector<StructNode> nds : this.nodes.values())
+			res.addAll(nds);
+		return new Vector<StructNode>(res);
+	}
+
 	
 	/**
 	 * When given a {@link StructNode} whose content is an {@link OrderingHead}, return a list

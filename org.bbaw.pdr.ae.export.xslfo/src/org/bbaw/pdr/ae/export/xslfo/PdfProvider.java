@@ -29,9 +29,11 @@
  */
 package org.bbaw.pdr.ae.export.xslfo;
 
+import java.awt.Desktop;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.xml.transform.Result;
@@ -48,6 +50,7 @@ import org.bbaw.pdr.ae.export.swt.PdrObjectsPreview;
 import org.bbaw.pdr.ae.export.xml.utils.XMLContainer;
 import org.bbaw.pdr.ae.export.xslt.util.XSLTProcessor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.ui.IExportWizard;
 import org.osgi.framework.FrameworkUtil;
 
@@ -62,6 +65,7 @@ public class PdfProvider extends AeExportUtilities {
 	public PdrObjectsPreview preview;
 	public FileSelectionGroup outputSelector;
 	public FileSelectionGroup styleSelector;
+	public Button opnExtBtn;
 
 	
 	public PdfProvider() {
@@ -134,6 +138,16 @@ public class PdfProvider extends AeExportUtilities {
 		} else 
 			return false;
 		log(IStatus.OK, "PDF export to file "+file.getAbsolutePath()+"complete!");
+		// open in external appl
+		if (opnExtBtn.getSelection())
+			try {
+				Desktop.getDesktop().open( file );
+			} catch (IOException e) {
+				log(IStatus.ERROR, "Could not open system PDF viewer or sth.");
+				log(IStatus.WARNING, e.getMessage());
+				e.printStackTrace();
+			}
+		this.getSettings().put("open_ext_viewer", opnExtBtn.getSelection());
 		super.terminateWidgets();
 		return true;
 	}

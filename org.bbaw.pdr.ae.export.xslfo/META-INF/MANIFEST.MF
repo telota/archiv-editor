@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: AE Export XSLFO Plugin for PDF files
 Bundle-SymbolicName: org.bbaw.pdr.ae.export.xslfo;singleton:=true
-Bundle-Version: 0.2.0
+Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: org.bbaw.pdr.ae.export.xslfo.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -11,8 +11,7 @@ Require-Bundle: org.eclipse.ui,
  org.bbaw.pdr.ae.export.xml,
  org.bbaw.pdr.ae.export.xslt
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
- JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.bbaw.pdr.ae.model
 Bundle-ClassPath: .,
  lib/avalon-framework-4.2.0.jar,

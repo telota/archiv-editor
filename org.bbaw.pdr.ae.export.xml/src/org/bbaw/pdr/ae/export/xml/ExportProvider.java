@@ -32,6 +32,7 @@ package org.bbaw.pdr.ae.export.xml;
 import org.bbaw.pdr.ae.export.pluggable.AeExportUtilities;
 import org.bbaw.pdr.ae.export.xml.utils.XMLContainer;
 import org.bbaw.pdr.ae.model.PdrObject;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.ui.IExportWizard;
 import org.osgi.framework.FrameworkUtil;
@@ -46,8 +47,8 @@ public class ExportProvider extends AeExportUtilities {
 	String pluginId;
 	
 	public ExportProvider() {
-		System.out.println("creating utility provider for XML export");
 		setPluginId();
+		log(IStatus.INFO, "creating utility provider for XML export");
 	}
 	
 	@Override
@@ -57,7 +58,8 @@ public class ExportProvider extends AeExportUtilities {
 
 	@Override
 	public void setWizard(IExportWizard wizard) {
-		System.out.println(" telling utility provider about wizard: "+wizard.getClass().getCanonicalName());
+		log(IStatus.INFO, " telling utility provider about wizard: "+
+			wizard.getClass().getCanonicalName());
 		super.setWizard(wizard);
 		this.wizard = wizard;
 	}

@@ -48,14 +48,17 @@ import org.bbaw.pdr.ae.export.swt.FileSelectionGroup;
 import org.bbaw.pdr.ae.export.swt.PdrObjectsPreview;
 import org.bbaw.pdr.ae.export.xml.utils.XMLContainer;
 import org.bbaw.pdr.ae.export.xslt.util.XSLTProcessor;
+//import org.eclipse.core.internal.content.ContentType;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 
 public class HtmlExportWizard extends Wizard implements IExportWizard {
 
@@ -64,6 +67,7 @@ public class HtmlExportWizard extends Wizard implements IExportWizard {
 	PdrObjectsPreview preview;
 	FileSelectionGroup outputSelector;
 	FileSelectionGroup stylesheetSelector;
+	Button opnExtBtn;
 	
 	private ILog log = AEConstants.ILOGGER;
 	
@@ -123,14 +127,27 @@ public class HtmlExportWizard extends Wizard implements IExportWizard {
 				writer.write(xslt.result().toString());
 				writer.close();
 				log.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
-						"Succesfully saved HTML to file " + filename));			
+						"Succesfully saved HTML to file " + filename));
 			} catch (Exception e) {
 				log.log(new Status(IStatus.ERROR, CommonActivator.PLUGIN_ID,
 					"Saving file failed!\n"+filename));
 				e.printStackTrace();
 				return false;
 			}
+			// Open in external Browser
+			if (this.opnExtBtn.getSelection())
+				try {
+					PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(
+							file.toURI().toURL());
+					//
+					PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(filename, null);
+					provider.log(IStatus.INFO, "Opening Result in Browser instance: "+
+							PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().getId());
+				} catch (Exception e) {
+					provider.log(IStatus.ERROR, "Could not open export result in system default browser somehow");
+				}
 		}
+		provider.getSettings().put("open_ext_browser", this.opnExtBtn.getSelection());
 		provider.terminateWidgets();
 		return true;
 	}

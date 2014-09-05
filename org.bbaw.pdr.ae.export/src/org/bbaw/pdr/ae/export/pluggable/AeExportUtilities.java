@@ -34,6 +34,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Vector;
 
 import org.bbaw.pdr.ae.common.AEConstants;
@@ -42,8 +44,11 @@ import org.bbaw.pdr.ae.export.swt.FileSelectionGroup;
 import org.bbaw.pdr.ae.export.swt.IPdrWidgetStructure;
 import org.bbaw.pdr.ae.export.swt.preview.PdrSelectionFilterPreview;
 import org.bbaw.pdr.ae.model.PdrObject;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.wizard.IWizard;
@@ -51,6 +56,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IExportWizard;
 import org.eclipse.ui.IWorkbenchWizard;
+import org.osgi.framework.Bundle;
 
 //FIXME: change from interface to abstract class 
 //TODO: doc
@@ -225,34 +231,66 @@ public abstract class AeExportUtilities {
 	 */
 	public String staticResource(String path) throws IOException {
 		// http://www.eclipse.org/forums/index.php/mv/msg/45047/146049/#msg_146049
-		//TODO: test
-		String extendedPath = AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets" + AEConstants.FS +path;
+		//// hilfe evtl unter:
+		//// http://stackoverflow.com/questions/4720214/how-to-get-the-eclipse-installation-plugins-directory-or-path
+		//// http://stackoverflow.com/questions/5622789/how-to-refer-a-file-from-jar-file-in-eclipse-plugin/5660242#5660242
+		// villeicht ueber getBundle und FileLocator.openStream?
+		// http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/api/org/eclipse/core/runtime/IPluginDescriptor.html
+		// https://wiki.eclipse.org/Eclipse_Plug-in_Development_FAQ#How_do_I_read_from_a_file_that_I.27ve_included_in_my_bundle.2Fplug-in.3F
+		// scheint zu klappen!
+		Bundle bundle = Platform.getBundle(pluginId());
+		log(IStatus.INFO, "Bundle rel stylesheet: "+bundle.getEntry(path)
+				+" == "+bundle.getEntry(path).getFile());
+		log(IStatus.INFO, "Bundle rel resource: "+bundle.getResource(path));
+		URL url = FileLocator.find(bundle, 
+				new Path(path), null);
+		log(IStatus.INFO, "Bundle rel url: "+url);
+		try { log(IStatus.INFO, "Bundle rel uri: "+url.toURI()); } 
+		catch (URISyntaxException e){}
+		log(IStatus.INFO, "Bundle rel url ext: "+url.toExternalForm());
+		// create inputstream from bundle internal resource
+		InputStream stm = FileLocator.openStream(bundle, new Path(path), false);
+		// change slashes in case of running on windows fs
+		path.replaceAll("/", AEConstants.FS);
+		// assemble file local location for bundle resource [e.g. style sheet] installation
+		String extendedPath = AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets" 
+				+ AEConstants.FS +path;
+		logger.log(new Status(IStatus.INFO, pluginId(), 
+				"export stylesheet location: "+extendedPath));
+		// look at installation location for bundle resource in question
 		File file = new File(extendedPath);
-		if (!file.exists())
-		{
+		if (!file.exists())	{
+			// prepare for resource installation in case it's not present at local path
+			logger.log(new Status(IStatus.INFO, pluginId(), 
+					"stylesheet not present at expected location"));
 			InputStream stream = this.getClass().getClassLoader().getResourceAsStream(path);
-			File dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets");
-			if (!dir.exists())
-			{
-				dir.mkdir();
+			File dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets"+ AEConstants.FS + "resources");
+			if (!dir.exists()) {
+				logger.log(new Status(IStatus.INFO, pluginId(), 
+						"create stylesheet directory "+dir));
+				dir.mkdirs();
 			}
-			dir = new File(AEConstants.AE_HOME + AEConstants.FS + "export-stylesheets"+ AEConstants.FS + "resources");
-			if (!dir.exists())
-			{
-				dir.mkdir();
-			}
+			// set up stream to local file
 			OutputStream out = new FileOutputStream(file);
-
+			logger.log(new Status(IStatus.INFO, pluginId(), 
+					"copy file "+path+" from plugin scope to stylesheet directory."));
 			// Transfer bytes from in to out
 			byte[] buf = new byte[1024];
 			int len;
-			while ((len = stream.read(buf)) > 0) {
+			int total = 0;
+			while ((len = stm.read(buf)) > 0) {
 				out.write(buf, 0, len);
+				total += len;
 			}
 			stream.close();
 			out.close();
+			logger.log(new Status(IStatus.INFO, pluginId(),
+					"copied "+total+" bytes into export stylesheet directory."));
 		}
-		
+		logger.log(new Status(IStatus.INFO, pluginId(),
+				"Stylesheet location seems ok."));
+		return extendedPath;
+				
 //		Bundle bundle = Platform.getBundle(pluginId());
 //		iLogger.log(new Status(IStatus.INFO, CommonActivator.PLUGIN_ID,
 //				"Retrieving locator for resource '"+path+"' of plugin "+pluginId()));
@@ -293,9 +331,9 @@ public abstract class AeExportUtilities {
 		// load via classloader
 		ResourceLocator locator = new ResourceLocator();
 		InputStream in = locator.getClass().getClassLoader().getResourceAsStream(path);*/ 
-		logger.log(new Status(IStatus.WARNING, CommonActivator.PLUGIN_ID,
+		/*logger.log(new Status(IStatus.WARNING, CommonActivator.PLUGIN_ID,
 				"Failed to resolve resource path. Returning "+extendedPath));
-		return extendedPath;
+		return extendedPath;*/
 	}
 	
 	/**

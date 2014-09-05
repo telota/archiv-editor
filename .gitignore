@@ -2,18 +2,6 @@
 bin/
 .svn/
 .metadata/org.bbaw.pdr.ae.common/baseXHOME
-/org.bbaw.pdr.ae/.settings
+.settings/
+org.bbaw.pdr.ae.standalone/org.bbaw.pdr.ae.featureProduct.product.launch
 
-/org.bbaw.pdr.ae.aeimport/.settings
-
-/org.bbaw.pdr.ae.backup/.settings
-
-/org.bbaw.pdr.ae.base.feature/.settings
-
-/org.bbaw.pdr.ae.collections/.settings
-
-/org.bbaw.pdr.ae.collections/.settings
-
-/org.bbaw.pdr.ae.collections/.settings
-
-/*/.settings

@@ -50,11 +50,12 @@ public class Activator extends AbstractUIPlugin {
 	private static final String extensionPoint = "org.bbaw.pdr.ae.export.core";
 	// export utilities singleton
 	AeExportCoreProvider coreProvider;
-	private ILog log = AEConstants.ILOGGER;
+	private ILog log;
 
 	public Activator() {
 		super();
 		coreProvider = AeExportCoreProvider.getInstance();
+		log =  AEConstants.ILOGGER;
 		//provider.loadSettings();
 		
 		// retrieve extension registry in order to prepare export wizard/utility provider pairs

@@ -5,7 +5,7 @@
          point="org.eclipse.ui.exportWizards">
       <wizard
             category="org.bbaw.pdr.ae.export.category.markup"
-            class="org.bbaw.pdr.ae.export.xml.ExportWizard"
+            class="org.bbaw.pdr.ae.export.xml.XmlExportWizard"
             icon="resources/markup.png"
             id="org.bbaw.pdr.ae.export.xml.exportwizard"
             name="XML">
